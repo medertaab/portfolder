@@ -8,9 +8,17 @@ import { doc, setDoc, deleteField } from "firebase/firestore";
 import { db } from "../firebase";
 import useFetchImages from "../hooks/fetchImages";
 
-export default function UserDashboard() {
+export default function Portfolio(props) {
+  const { username } = props
   const { currentUser } = useAuth();
   const { images, loading, error } = useFetchImages();
+
+  const [pageOwner, setPageOwner] = useState(false)
+  useEffect(() => {
+    if (currentUser && username == currentUser.displayName) {
+      setPageOwner(true)
+    }
+  }, [])
 
   return (
     <div className="w-full max-w-screen-xl min-h-full flex flex-col m-auto bg-neutral-400">

@@ -5,8 +5,6 @@ import {db} from '../firebase'
 
 export default function Settings() {
   const { userInfo, currentUser } = useAuth();
-
-  console.log(currentUser)
   return (
     <div>settings</div>
   )

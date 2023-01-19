@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
+import { useRouter } from "next/router";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -9,6 +10,7 @@ export default function Login() {
 
   const { login, signup, currentUser } = useAuth();
 
+  const router = useRouter();
 
   async function submitHandler() {
     if (!email || !password) {
@@ -21,8 +23,15 @@ export default function Login() {
           setError("Incorrect email or password");
         }
         return;
+      } else {
+        try {
+          await signup(email, password);
+        } catch {
+          setError("Error");
+        } finally {
+          router.push("/setup");
+        }
       }
-      await signup(email, password);
     }
   }
 
@@ -35,7 +44,9 @@ export default function Login() {
       </h2>
 
       <form className="flex flex-col w-full max-w-xs">
-        <label for="signup-input-email" className="text-left">Email</label>
+        <label for="signup-input-email" className="text-left">
+          Email
+        </label>
         <input
           id="signup-input-email"
           type="email"
@@ -45,16 +56,19 @@ export default function Login() {
           className="outline-nine text-slate-900 p-2 w-full mb-5 rounded"
         />
 
-        <label for="signup-input-password" className="text-left">Password</label>
+        <label for="signup-input-password" className="text-left">
+          Password
+        </label>
         <input
-        id="signup-input-password"
+          id="signup-input-password"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
+          autoComplete="new-password"
           className="outline-nine text-slate-900 p-2 w-full mb-5 rounded"
         ></input>
-        
+
         <button
           onClick={submitHandler}
           type="button"
@@ -63,12 +77,17 @@ export default function Login() {
           {isLoggingIn ? "Login" : "Sign up"}
         </button>
 
-        <h2 onClick={() => setIsLoggingIn(!isLoggingIn)} className="py-2 cursor-pointer hover:underline  rounded">
-          {!isLoggingIn ? "Already registered? Log in" : "Not registered? Sign up"}
+        <h2
+          onClick={() => setIsLoggingIn(!isLoggingIn)}
+          className="py-2 cursor-pointer hover:underline  rounded"
+        >
+          {!isLoggingIn
+            ? "Already registered? Log in"
+            : "Not registered? Sign up"}
         </h2>
       </form>
 
-      {error && <div>{error}</div>}
+      {error && <div className="bg-red-400 px-2 py-1">{error}</div>}
     </div>
   );
 }

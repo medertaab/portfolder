@@ -3,10 +3,10 @@ import { doc, getDoc} from 'firebase/firestore'
 import { db } from '../firebase'
 import { useAuth } from '../context/AuthContext'
 
-export default function useFetchImages() {
+export default function useFetchMainData() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-  const [images, setImages] = useState(null)
+  const [mainData, setMainData] = useState(null)
 
   const { currentUser } = useAuth()
 
@@ -15,13 +15,13 @@ export default function useFetchImages() {
       try {
         const docRef = doc(db, 'users', currentUser.uid)
         const docSnap = await getDoc(docRef)
-        if (docSnap.data().images) {
-          setImages(docSnap.data().images)
+        if (docSnap.data().mainData) {
+          setMainData(docSnap.data().mainData)
         } else {
-          setImages({})
+          setMainData({})
         }
       } catch (err) {
-        setError('Failed to load images')
+        setError('Failed to load main data')
       } finally {
         setLoading(false)
       }
@@ -29,5 +29,5 @@ export default function useFetchImages() {
     fetchData()
   }, [])
 
-  return {loading, error, images, setImages}
+  return {loading, error, mainData}
 }

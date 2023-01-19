@@ -1,15 +1,21 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import Login from '../components/Login'
 import { useAuth } from '../context/AuthContext'
+import { useRouter } from 'next/router'
 import UserDashboard from '../components/UserDashboard'
 
-const inter = Inter({ subsets: ['latin'] })
-
 export default function Home() {
-  const {currentUser} = useAuth()
-  
+
+  const {userInfo, currentUser} = useAuth()
+  const router = useRouter()
+
+  if (!currentUser) {
+    router.push("/login")
+  }
+
+  if (currentUser && !currentUser.displayName) {
+    router.push("/setup")
+  }
+
   return (
     <div className='bg-gray-500 h-screen'>
       <Head>
@@ -18,8 +24,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {!currentUser && <Login />}
-      {currentUser && <UserDashboard/>}
+      {currentUser && currentUser.displayName && <UserDashboard/>}
     </div>
   )
 }
