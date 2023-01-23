@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Header from "./Header";
-import Information from "./Information";
+import Header from "../components/Header";
+import InfoBlock from "../components/InfoBlock";
 import Layout from "../components/Layout";
 import { useAuth } from "../context/AuthContext";
-import Gallery from "./Gallery";
+import Gallery from "../components/Gallery";
 import { doc, setDoc, deleteField } from "firebase/firestore";
 import { db } from "../firebase";
 import useFetchImages from "../hooks/fetchImages";
@@ -24,7 +24,7 @@ export default function UserDashboard() {
             </div>
           )}
         </main>
-        <Information />
+        <InfoBlock />
       </Layout>
     </div>
   );

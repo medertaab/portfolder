@@ -31,11 +31,19 @@ export default function FirstSetup() {
       return;
     }
     updateMainData();
-    updateUsername();
   }
 
-  async function updateUsername() {
+  async function updateMainData() {
     try {
+      const userRef = doc(db, "users", currentUser.uid);
+      await setDoc(
+        userRef,
+        {
+          username: username,
+          mainData: mainData,
+        },
+        { merge: true }
+      );
       await updateProfile(currentUser, {
         displayName: username,
       });
@@ -44,32 +52,13 @@ export default function FirstSetup() {
     } finally {
       router.push("/");
     }
-    
-    const userRef = doc(db, "users", currentUser.uid);
-    await setDoc(
-      userRef,
-      {
-        username: username,
-      }
-    );
-  }
-
-  async function updateMainData() {
-    const userRef = doc(db, "users", currentUser.uid);
-    await setDoc(
-      userRef,
-      {
-        mainData: mainData,
-      },
-      { merge: true }
-    );
   }
 
   return (
     <div className="bg-gray-500 h-screen text-sx sm:text-sm flex flex-1 flex-col items-center place-items-center justify-center gap-2 sm:gap-4 text-white">
       <h1 className="text-3xl py-5">Welcome to your portfolio! 💌</h1>
       <form className="flex flex-col w-full max-w-xs">
-        <label for="signup-username" className="text-center text-lg">
+        <label for="username" className="text-center text-lg">
           Please choose a username:
         </label>
         <input
@@ -85,39 +74,39 @@ export default function FirstSetup() {
         />
 
         <h2 className="text-center text-lg pt-6">
-          Add your display information:
+          Add your display InfoBlock:
         </h2>
         <p className="text-center pb-6">
           (This is optional and can be added and edited later)
         </p>
 
-        <label for="signup-username" className="text-left">
+        <label for="name" className="text-left">
           Full name
         </label>
         <input
           id="name"
           type="text"
-          value={mainData.username}
+          value={mainData.name}
           onChange={handleInput}
           placeholder="Full name"
           className="outline-nine text-slate-900 p-2 w-full mb-5 rounded"
           maxLength={50}
         />
 
-        <label for="signup-username" className="text-left">
+        <label for="title" className="text-left">
           Occupation
         </label>
         <input
-          id="name"
+          id="title"
           type="text"
-          value={mainData.username}
+          value={mainData.title}
           onChange={handleInput}
           placeholder="'Illustration/concept art', 'Animator', etc"
           className="outline-nine text-slate-900 p-2 w-full mb-5 rounded"
           maxLength={50}
         />
 
-        <label for="signup-username" className="text-left">
+        <label for="email" className="text-left">
           Contact email
         </label>
         <input
@@ -129,7 +118,7 @@ export default function FirstSetup() {
           className="outline-nine text-slate-900 p-2 w-full mb-5 rounded"
         />
 
-        <label for="signup-username" className="text-left">
+        <label for="icon" className="text-left">
           Icon URL
         </label>
         <input

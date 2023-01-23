@@ -31,5 +31,5 @@ export default function useFetchPortfolioData(username) {
     fetchData()
   }, [])
 
-  return {loading, error, portfolioData}
+  return {setPortfolioData, loading, error, portfolioData}
 }

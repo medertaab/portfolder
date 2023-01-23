@@ -38,7 +38,19 @@ export function AuthProvider({children}) {
     return unsubscribe
   }, [])
 
-  const value = {currentUser, login, signup, logout}
+  const [theme, setTheme] = useState('light')
+
+  function toggleTheme() {
+    if (theme == 'light') {
+      setTheme('dark')
+      localStorage.setItem('theme', 'dark')
+    } else if (theme == 'dark') {
+      setTheme('light')
+      localStorage.setItem('theme', 'light')
+    }
+  }
+
+  const value = {currentUser, login, signup, logout, theme, toggleTheme, setTheme}
 
   return (
     <AuthContext.Provider value={value}>

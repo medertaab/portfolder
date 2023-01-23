@@ -6,10 +6,61 @@
   font-family: 'Figtree', sans-serif;
 }
 
-.icon-shadow {
-  -webkit-filter: drop-shadow( 0px 0px 2px #000 );
+@layer base {
+  :root {
+    --color-text-primary: 34 37 37;
+    --color-text-accent: 122 49 218;
+    
+    --color-bg-primary: 248 245 242;
+    --color-bg-secondary: 248 245 242;
+    --color-bg-accent: 244 93 72;
+  }
+
 }
 
+.theme-dark {
+  --color-text-primary: 248 245 242;
+  --color-text-accent: 122 49 218;
+  
+  --color-bg-primary: 31 31 32;
+  --color-bg-secondary: 48 47 51;
+  --color-bg-accent: 244 93 72;
+}
+
+.menu-modal {
+  padding: 10rem 0;
+}
+
+.menu-modal *:not(:first-child) {
+  position: relative;
+  width: fit-content;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.menu-modal *:not(:first-child)::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--color-bg-accent);
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.menu-modal *:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.settings-form input {
+  border: 1px solid gray;
+  border-radius: 5px;
+  width: 100%;
+}
 /* :root {
   --max-width: 1100px;
   --border-radius: 12px;

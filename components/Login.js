@@ -66,6 +66,11 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
           autoComplete="new-password"
+          minLength={6}
+          maxLength={16}
+          alphabet="A-Za-z0-9+_%@!$*~-"
+          requiredclasses="[A-Z] [a-z] [0-9] [+_%@!$*~-]"
+          requiredclasscount="3"
           className="outline-nine text-slate-900 p-2 w-full mb-5 rounded"
         ></input>
 

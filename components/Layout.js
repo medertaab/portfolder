@@ -1,7 +1,7 @@
 import React from 'react'
 import Gallery from './Gallery'
 import Header from './Header'
-import Information from './Information'
+import InfoBlock from './InfoBlock'
 
 export default function Layout({children}) {
   return (
@@ -9,7 +9,6 @@ export default function Layout({children}) {
       <main className="flex-1">
         {children}
       </main>
-      
     </div>
   )
 }

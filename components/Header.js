@@ -1,62 +1,77 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import SocialLinks from "./SocialLinks";
-import Modal from "./Modal";
-import { useAuth } from "../context/AuthContext";
-import useFetchMainData from "../hooks/fetchMainData";
 import Link from "next/link";
 
-export default function Header() {
-  const [openModal, setOpenModal] = useState(false);
+export default function Header(props) {
+  const { pageOwner, portfolioData } = props;
+  const { mainData } = portfolioData
 
-  const { currentUser } = useAuth();
-
-  const { loading, error, mainData } = useFetchMainData();
-
-  if (loading || !mainData) {
-    return <div>LOADING</div>
-  }
+  const gridStyle = "grid relative w-fit m-auto justify-center items-center sm:grid-cols-[200px_minmax(150px,_250px)]"
+  const soloStyle = ""
 
   return (
     <div className="relative w-full">
-      {/* Modal menu button */}
-      {openModal && <Modal setOpenModal={setOpenModal} />}
-      <h3 className="text-2xl" onClick={() => setOpenModal(true)}>
-        <i className="fa-solid fa-bars absolute left-0 text-white py-2 px-2"></i>
-      </h3>
+      <div className={`${mainData.icon ? gridStyle : soloStyle}`}>
+        
+        {/* Edit button if owner */}
+        {pageOwner && (
+          <Link
+            href={"/settings"}
+            className="absolute top-0 right-0 p-2 opacity-50 hover:opacity-100 duration-150 cursor-pointer"
+          >
+            <i className="fa-solid fa-user-pen 0"></i>
+          </Link>
+        )}
 
-      {/* Dark mode button */}
-      <button className="absolute text-2xl top-0 right-0 text-white py-2 px-4">
-        <i className="fa-solid fa-moon"></i>
-      </button>
+        {
+          mainData.icon && 
+          <Image
+            src={mainData.icon}
+            alt=""
+            width={200}
+            height={200}
+            className="m-auto py-3"
+          ></Image>
+        }
 
-      {/* Header grid */}
-      <div className="grid relative w-fit m-auto justify-center items-center sm:grid-cols-[200px_minmax(150px,_250px)] border-2 border-solid border-blue-600">
-        <Link href={"/settings"} className="absolute top-0 right-0 p-2 opacity-50 hover:opacity-100 duration-150 cursor-pointer">
-          <i className="fa-solid fa-user-pen 0"></i>
-        </Link>
-
-        <Image
-          src="https://pbs.twimg.com/profile_images/1526986928335331329/Asm6HDlT_400x400.jpg"
-          alt=""
-          width={200}
-          height={200}
-          className="m-auto py-3 border-2 border-solid border-blue-600"
-        ></Image>
-
-        <div className="border-2 border-solid border-blue-600">
-          {!mainData.name && <h1 className="text-3xl">{currentUser.displayName}</h1>}
-          {mainData.name && <h1 className="text-3xl">{mainData.name}</h1>}
+        <div className="">
+          <p className="opacity-50 text-sm">{`@${portfolioData.username}`}</p>
+          <h1 className="text-3xl text-textPrimary">{mainData.name}</h1>
           {mainData.title && <h2>{mainData.title}</h2>}
           {mainData.email && (
-            <a href={`mailto:${mainData.email}`}>
-              <i className="fa-solid fa-envelope"></i>Contact email
-            </a>
+            <button className="text-sm border-2 border-bgAccent w-24 px-2 py-1 rounded m-1 hover:bg-bgAccent duration-150">
+              <Link href={`mailto:${mainData.email}`}>
+                <i className="fa-solid fa-envelope"></i> Email
+              </Link>
+            </button>
+          )}
+          {!mainData.email && pageOwner && (
+            <button className="text-sm border-2 border-textPrimary border-dashed w-24 px-1 py-1 rounded m-1 duration-150 opacity-50 hover:opacity-100 hover:before:content-['Add_']">
+              <Link href="/manage">
+                Email
+              </Link>
+            </button>
+          )}
+
+          {mainData.resume && (
+            <button className="text-sm border-2 border-bgAccent w-24 px-2 py-1 rounded m-1 hover:bg-bgAccent duration-150">
+              <Link href={mainData.resume}>
+                <i class="fa-solid fa-file"></i> Resume
+              </Link>
+            </button>
+          )}
+          {!mainData.resume && pageOwner && (
+            <button className="text-sm border-2 border-textPrimary border-dashed w-24 px-1 py-1 rounded m-1 duration-150 opacity-50 hover:opacity-100 hover:before:content-['Add_']">
+              <Link href={'/manage'}>
+                Resume
+              </Link>
+            </button>
           )}
         </div>
       </div>
 
-      <SocialLinks />
+      <SocialLinks pageOwner={pageOwner} portfolioData={portfolioData}/>
     </div>
   );
 }
