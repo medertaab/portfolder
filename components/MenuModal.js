@@ -7,6 +7,7 @@ export default function MenuModal(props) {
   const {currentUser, logout} = useAuth()
   const {setOpenModal} = props
   const router = useRouter()
+  console.log(router)
 
 
   function logoutHandler() {
@@ -21,6 +22,7 @@ export default function MenuModal(props) {
 
       <Link href="/" className="hover:text-orange-400 duration-150 ">Home</Link>
       <Link href={`/${currentUser.displayName}`}>Your page</Link>
+      <Link href={`${router.asPath}/public`}>Public mode</Link>
       <Link href="/manage">Manage profile</Link>
       <Link href="/settings">Settings</Link>
       <h2 onClick={logoutHandler}>Logout</h2>

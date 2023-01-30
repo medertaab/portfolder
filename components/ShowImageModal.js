@@ -4,31 +4,21 @@ import LoaderAnimation from './LoaderAnimation'
 
 export default function ShowImageModal(props) {
   const {openImage, setOpenImage} = props
-  const [isImageReady, setIsImageReady] = useState(false)
 
-  function handleLoading(e) {
-    setIsImageReady(true)
+  function handleClick(e) {
+    setOpenImage(null)
   }
 
   return (
-    <div className='fixed z-30 inset-0 bg-bgPrimary flex flex-col'>
-      <button onClick={() => setOpenImage(null)} className="absolute top-0 z-30 right-0 p-3 cursor-pointer">
-        <i  className="fa-solid fa-xmark text-2xl text-text"></i>
+    <div onClick={handleClick} className='fixed z-30 inset-0 max-h-full max-w-full bg-bgPrimary bg-opacity-80 backdrop-blur-md flex flex-col items-center justify-center'>
+      <button onClick={() => setOpenImage(null)} className="absolute top-0 z-30 right-0 p-5 cursor-pointer">
+        <i  className="fa-solid fa-xmark text-3xl hover:text-bgAccent"></i>
       </button>
 
-      <div className='h-full border-2'>
-        {!isImageReady && <LoaderAnimation />}
-        <div className='relative h-5/6'>
-          <Image
-            alt={openImage.title}
-            src={openImage.link}
-            fill
-            className="object-contain"
-            onLoad={handleLoading}
-          />
-        </div>
-        <h2 className='text-xl p-4'>{openImage.title}</h2>
+      <div className="h-fit sm:h-3/4" onClick={e => e.stopPropagation()}>
+        <img alt={openImage.title} src={openImage.link} className="h-full object-contain"/>
       </div>
+      <h2 className='text-xl p-4'>{openImage.title}</h2>
     </div>
   )
 }

@@ -1,27 +1,24 @@
-import React, {useState, useEffect, useRef} from 'react'
-import { doc, getDoc} from 'firebase/firestore'
-import { db } from '../firebase'
-import { useAuth } from '../context/AuthContext'
+import React, {useState, useEffect} from 'react'
+import { getDocs, collection, query, where, limit } from 'firebase/firestore'
 
-export default function useFetchImages() {
+import { db } from '../firebase'
+
+export default function useFetchImages(username) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [images, setImages] = useState(null)
 
-  const { currentUser } = useAuth()
-
   useEffect(() => {
     async function fetchData() {
       try {
-        const docRef = doc(db, 'users', currentUser.uid)
-        const docSnap = await getDoc(docRef)
-        if (docSnap.data().images) {
-          setImages(docSnap.data().images)
-        } else {
-          setImages({})
+        const usersRef = collection(db, "users");
+        const dataQuery = query(usersRef, where("username", "==", username), limit(1));
+        const querySnapshot = await getDocs(dataQuery);
+        if ( querySnapshot.docs[0]) {
+          setImages(querySnapshot.docs[0].data().images)
         }
       } catch (err) {
-        setError('Failed to load images')
+        setError(err)
       } finally {
         setLoading(false)
       }

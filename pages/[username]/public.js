@@ -10,7 +10,7 @@ export default function PortfolioPage() {
 
   return (
     <div className={`theme-${theme} bg-bgPrimary`}>
-      <Portfolio username={username}/>
+      <Portfolio username={username} publicMode={true}/>
     </div>
   );
 }

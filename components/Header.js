@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function Header(props) {
   const { pageOwner, portfolioData } = props;
-  const { mainData } = portfolioData
+  const mainData = portfolioData.mainData
 
   const gridStyle = "grid relative w-fit m-auto justify-center items-center sm:grid-cols-[200px_minmax(150px,_250px)]"
   const soloStyle = ""
@@ -57,7 +57,7 @@ export default function Header(props) {
           {mainData.resume && (
             <button className="text-sm border-2 border-bgAccent w-24 px-2 py-1 rounded m-1 hover:bg-bgAccent duration-150">
               <Link href={mainData.resume}>
-                <i class="fa-solid fa-file"></i> Resume
+                <i className="fa-solid fa-file"></i> Resume
               </Link>
             </button>
           )}

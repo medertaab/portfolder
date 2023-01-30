@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/router";
+import LoaderAnimation from './LoaderAnimation'
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [isLoggingIn, setIsLoggingIn] = useState(true);
+  const [loading, setLoading] = useState(false)
 
-  const { login, signup, currentUser } = useAuth();
+  const { login, signup, currentUser, theme } = useAuth();
 
   const router = useRouter();
 
@@ -18,15 +20,20 @@ export default function Login() {
     } else {
       if (isLoggingIn) {
         try {
+          setLoading(true)
           await login(email, password);
         } catch {
+          setLoading(false)
           setError("Incorrect email or password");
         }
+        setLoading(false)
         return;
       } else {
         try {
+          setLoading(true)
           await signup(email, password);
         } catch {
+          setLoading(false)
           setError("Error");
         } finally {
           router.push("/setup");
@@ -36,8 +43,9 @@ export default function Login() {
   }
 
   return (
-    <div className="flex-1 h-full text-sx sm:text-sm flex flex-col items-center place-items-center justify-center gap-2 sm:gap-4  text-white">
-      <h2 className="text-2xl mb-5">🖼️ portfolder</h2>
+    <div className={`bg-bgPrimary h-full flex-1 text-sx sm:text-sm flex flex-col items-center place-items-center justify-center gap-2 sm:gap-4 text-textPrimary`}>
+      
+      <h2 className="text-2xl mb-5 text-textAccent">🖼️ portfolder</h2>
 
       <h2 className="font-bold text-3xl">
         {isLoggingIn ? "Log in" : "Sign Up"}
@@ -53,7 +61,7 @@ export default function Login() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="E-mail address"
-          className="outline-nine text-slate-900 p-2 w-full mb-5 rounded"
+          className="outline-none bg-bgSecondary p-2 w-full mb-5 border-b-2 border-bgAccent"
         />
 
         <label for="signup-input-password" className="text-left">
@@ -71,7 +79,7 @@ export default function Login() {
           alphabet="A-Za-z0-9+_%@!$*~-"
           requiredclasses="[A-Z] [a-z] [0-9] [+_%@!$*~-]"
           requiredclasscount="3"
-          className="outline-nine text-slate-900 p-2 w-full mb-5 rounded"
+          className="outline-none bg-bgSecondary p-2 w-full mb-5 border-b-2 border-bgAccent"
         ></input>
 
         <button
@@ -93,6 +101,7 @@ export default function Login() {
       </form>
 
       {error && <div className="bg-red-400 px-2 py-1">{error}</div>}
+      {loading && <LoaderAnimation />}
     </div>
   );
 }

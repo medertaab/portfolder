@@ -5,18 +5,23 @@ export default function Thumbnail(props) {
   const {
     image,
     setEdit,
-    edit,
-    index,
-    handleAddEdit,
     pageOwner,
     setOpenImage,
+    setUpdatingImage,
+    setUpdatingNum,
+    num
   } = props;
 
   const [hover, setHover] = useState(false);
 
-  function handleEdit(e) {
+  function handleOpenImage() {
+    setOpenImage(image)
+  }
+
+  function handleUpdateImage(e) {
     e.stopPropagation()
-    console.log('hoi')
+    setUpdatingImage(image)
+    setUpdatingNum(num)
   }
 
   function handleMouseEnter(e) {
@@ -24,22 +29,19 @@ export default function Thumbnail(props) {
   }
 
   return (
-    <div onClick={() => setOpenImage(image)} className="relative h-[400px] cursor-pointer border-2 border-blue-500" onMouseOver={handleMouseEnter} onMouseLeave={() => setHover(false)}>
-      
+    <div 
+      onClick={handleOpenImage} onMouseOver={handleMouseEnter} onMouseLeave={() => setHover(false)}
+      className="relative w-[minmax(200px,1fr)] cursor-pointer" 
+    >      
       {pageOwner && (
-        <i onClick={handleEdit} className={`fa-solid fa-pen-to-square absolute right-0 p-2 text-2xl cursor-pointer opacity-${hover ? 100 : 0} hover:text-bgAccent z-20`}></i>
+        <i onClick={handleUpdateImage} className={`fa-solid fa-pen-to-square absolute right-0 p-2 text-2xl cursor-pointer opacity-${hover ? 100 : 0} hover:text-bgAccent z-20`}></i>
       )}
 
-      <div className={`absolute w-full h-full z-10 opacity-${hover ? '100' : '0'} bg-bgPrimary bg-opacity-30 flex justify-center items-center duration-150`}>
-        <h3 className="text-lg bottom-0 font-bold">{image.title}</h3>
+      <div className={`h-full w-full absolute z-10 opacity-${hover ? '100' : '0'} bg-bgPrimary bg-opacity-30 flex justify-center items-center duration-150`}>
+        <h3 className="text-lg bottom-0 font-bold drop-shadow-2xl text-shadow">{image.title}</h3>
       </div>  
       
-      <Image
-        src={image.link}
-        alt=""
-        fill
-        className="object-contain"
-      />
+      <img src={image.link} alt="" className="w-full h-auto"/>
     </div>
   );
 }

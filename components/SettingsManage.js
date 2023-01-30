@@ -3,44 +3,52 @@ import { useAuth } from "../context/AuthContext";
 import {doc, setDoc, deleteField} from 'firebase/firestore'
 import {db} from '../firebase'
 import { useRouter } from "next/router";
-
+import LoaderAnimation from './LoaderAnimation'
 import useFetchPortfolioData from "../hooks/fetchPortfolioData";
 
+// Header: icon, username, display name, occupation, contact email, resume
+// Socials: Twitter, instagram, facebook, youtube, linkedin, custom
+// Info: image, text (markup), layout
 
 
-export default function SettingsManage() {
+export default function SettingsManage(props) {
   const {currentUser} = useAuth()
-  const {portfolioData, setPortfolioData, loading, error} = useFetchPortfolioData(currentUser.displayName);
+  const {portfolioData, setPortfolioData, error} = props;
+  const [newData, setNewData] = useState(null)
+
   const socialSites = ['twitter', 'instagram', 'facebook', 'youtube', 'linkedin']
   
-  // Header: icon, username, display name, occupation, contact email, resume
-  // Socials: Twitter, instagram, facebook, youtube, linkedin, custom
-  // Info: image, text (markup), layout
+  useEffect(() => {
+    setNewData(portfolioData)
+  }, [])
 
-  return (
-    <div className="">
-      <form className="settings-form border-2 border-red-500 flex flex-col p-10">
+  if (!newData) {
+    return <LoaderAnimation />
+  } else return (
+    <div className="w-full min-h-screen">
+      <form className="settings-form flex flex-col p-10 [&_input]:px-2 [&_input]:h-10">
         <section className="py-6">
           <h2 className="text-xl pb-5">Display information:</h2>
           
           <label for="username">Username*</label>
-          <input type='text' id='username'></input>
+          <input type='text' id='username' value={newData.username}></input>
 
           <label for="name">Display name*</label>
-          <input type='text' id='name'></input>
+          <input type='text' id='name' value={newData.mainData.name}></input>
           
           <label for="iconURL">Icon URL</label>
-          <input type='URL' id='iconURL'></input>
+          <input type='URL' id='iconURL' value={newData.mainData.icon}></input>
 
           <label for="title">Occupation or field</label>
-          <input type='text' id='title'></input>
+          <input type='text' id='title' value={newData.mainData.title}></input>
 
           <label for="email">Contact email</label>
-          <input type='email' id='email'></input>
+          <input type='email' id='email' value={newData.mainData.email}></input>
 
           <label for="resume">Link to resume file</label>
-          <input type='URL' id='resume'></input>
+          <input type='URL' id='resume' value={newData.mainData.resume}></input>
         </section>
+
         <section>
           <h2 className="text-xl py-5">Social links</h2>
 
@@ -73,4 +81,8 @@ export default function SettingsManage() {
       </form>
     </div>
   )
+}
+
+export function getServerSideProps() {
+  return
 }

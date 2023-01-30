@@ -9,8 +9,8 @@ export default function Navbar() {
 
 
   return (
-    <div className="w-full h-10 sticky top-0 z-10 bg-bgPrimary flex items-center p-2 shadow-sm">
-      <Link className="text-3xl grid place-content-center p-2" href='/'>
+    <div className="w-full h-10 sticky top-0 z-30 bg-bgPrimary flex items-center p-2 shadow-sm">
+      <Link className="text-3xl grid place-content-center p-2 text-textPrimary" href='/'>
         <button >🖼️</button>
       </Link>
 
@@ -19,10 +19,10 @@ export default function Navbar() {
       </h3>
 
       {/* Dark mode button */}
-      <button onClick={toggleTheme} className="relative bg-textPrimary w-14 rounded-full h-full">
-        <div className={`bg-bgPrimary z-10 h-full p-0.5 bg-clip-content aspect-square rounded-full absolute top-0 ${theme === 'light' ? 'left' : 'right'}-0 duration-150`}></div>
-        <span className="absolute top-0 left-0 w-full px-[5px] flex justify-between text-bgPrimary text-lg">
-          <i className="ri-moon-clear-fill"></i>
+      <button onClick={toggleTheme} className="relative bg-textPrimary w-16 max-w-[48px] rounded-full h-full border-2 border-textPrimary">
+        <div className={`bg-bgPrimary z-10 h-full aspect-square rounded-full absolute top-0 ${theme === 'light' ? 'left' : 'right'}-0 duration-150`}></div>
+        <span className="absolute inset-0 max-w-[2.7rem] m-auto px-0.5 flex justify-between items-center text-bgPrimary text-lg">
+          <i className="ri-moon-clear-fill ml-[-1px]"></i>
           <i className="ri-sun-fill"></i>
         </span>
       </button>

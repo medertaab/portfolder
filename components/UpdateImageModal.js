@@ -1,22 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import Image from "next/image";
 import LoaderAnimation from "./LoaderAnimation";
-import { imageConfigDefault } from "next/dist/shared/lib/image-config";
 
-export default function AddImageModal(props) {
-  const { handleAddImage, setAddingImage, submitLoading } = props;
+export default function UpdateImageModal(props) {
+  const { updatingImage, setUpdatingImage, handleUpdateImage, submitLoading, handleDeleteImage } = props;
 
-  const [newImage, setNewImage] = useState({ title: "", link: "" }); 
+  const [newImage, setNewImage] = useState({}); 
   const [loading, setLoading] = useState(false) 
-  const [testImage, setTestImage] = useState('')
+  const [testImage, setTestImage] = useState(updatingImage.link)
   const [valid, setValid] = useState(null) 
   const [error, setError] = useState('')
   const [submitError, setSubmitError] = useState('')
+  const [deleting, setDeleting] = useState(false)
 
   function handleInput(e) {
     setError('')
     setLoading(true)
-    
     if (e.target.id == "link") {
       setValid(false)
       setTestImage(e.target.value)
@@ -32,10 +31,16 @@ export default function AddImageModal(props) {
   }
 
   useEffect(() => {
+    setNewImage({ title: updatingImage.title, link: updatingImage.link })
+  }, [])
+
+  
+  useEffect(() => {
     setTimeout(() => {
       handleCheckImage()
     }, 500)
   }, [testImage])
+
 
   function handleSubmit() {
     setError('')
@@ -52,7 +57,12 @@ export default function AddImageModal(props) {
       }, 300)
       return
     }
-    handleAddImage(newImage)
+    handleUpdateImage(newImage)
+    setUpdatingImage(false)
+  }
+
+  function handleDelete() {
+    handleDeleteImage()
   }
 
   async function handleCheckImage() {
@@ -77,11 +87,34 @@ export default function AddImageModal(props) {
       })
   }
 
+  if (deleting) {
+    return (
+      <div onClick={() => setUpdatingImage(null)} className="fixed z-30 top-0 left-0 bg-textPrimary bg-opacity-40 backdrop-blur-sm h-full w-full flex flex-col justify-center items-center">
+        <button onClick={() => setUpdatingImage(null)} className="absolute top-0 z-30 right-0 p-5 cursor-pointer text-bgPrimary hover:text-bgAccent">
+          <i  className="fa-solid fa-xmark text-3xl"></i>
+        </button>
+        <div onClick={(e) => e.stopPropagation()} className="text-lg max-w-2xl max-h-screen sm:w-4/5 w-[90%] bg-bgPrimary p-3 border-2 border-bgAccent rounded-xl shadow-2xl">
+          <p className="p-3">
+            Are you sure you want to delete the image? This cannot be undone
+          </p>
+          <div>
+            <button type="button" onClick={() => setDeleting(false)} className="text-xl box-border border-2 border-bgAccent w-fit m-auto px-4 py-1 rounded mx-2 hover:bg-bgAccent hover:bg-opacity-50 duration-150">
+              Cancel
+            </button>
+
+            <button type="button" onClick={handleDelete} className="text-xl bg-bgAccent bg-opacity-50 border-2 border-bgAccent w-fit m-auto px-4 py-1 rounded mx-2 hover:bg-opacity-100 duration-150">
+              Delete image
+            </button>
+          </div>
+          {submitLoading && <LoaderAnimation />}
+        </div>
 
 
-  return (
-    <div className="fixed z-30 top-0 left-0 bg-textPrimary bg-opacity-40 backdrop-blur-sm h-full w-full flex flex-col justify-center items-center">
-      <button onClick={() => setAddingImage(false)} className="absolute top-0 z-30 right-0 p-5 cursor-pointer text-bgPrimary hover:text-bgAccent">
+    </div>
+    )
+  } else return (
+    <div onClick={() => setUpdatingImage(null)} className="fixed z-30 top-0 left-0 bg-textPrimary bg-opacity-40 backdrop-blur-sm h-full w-full flex flex-col justify-center items-center">
+      <button onClick={() => setUpdatingImage(null)} className="absolute top-0 z-30 right-0 p-5 cursor-pointer text-bgPrimary hover:text-bgAccent">
         <i  className="fa-solid fa-xmark text-3xl"></i>
       </button>
       <div onClick={(e) => e.stopPropagation()} className="max-w-2xl max-h-screen sm:w-4/5 w-[90%] bg-bgPrimary p-3 border-2 border-bgAccent rounded-xl shadow-2xl">
@@ -101,7 +134,7 @@ export default function AddImageModal(props) {
         )}
 
         <form className="p-5 w-full bg-bgPrimary text-lg text-textPrimary grid content-center" >
-          <span className="text-2xl p-2">Add image</span>
+          <span className="text-2xl p-2">Edit image</span>
 
           <label for="link" className="text-left font-bold">Paste URL of image *</label>
           <input
@@ -112,32 +145,34 @@ export default function AddImageModal(props) {
             className="outline-none w-full m-auto bg-transparent mb-4 border-b-2 border-orange-500 px-2 text-textPrimary"
           ></input>
 
-          <label for="title" className="text-left font-bold">Title of work *</label>
-            <input id="title" type="text" placeholder="Add title..."
-              value={newImage.title} onChange={handleInput} className="outline-none w-full m-auto bg-transparent mb-4 border-b-2 border-orange-500 px-2 text-textPrimary"
-              maxLength={50} inLength={5} required
-            ></input>
-
-
           {error && <span className="pt-5">{error}</span>}
 
           {valid && !loading && !error && (
             <>
+              <label for="title" className="text-left font-bold">Title of work *</label>
+              <input id="title" type="text" placeholder="Add title..."
+                value={newImage.title} onChange={handleInput} className="outline-none w-full m-auto bg-transparent mb-4 border-b-2 border-orange-500 px-2 text-textPrimary"
+                maxLength={50} inLength={5} required
+              ></input>
 
               <div>
-                <button type="button" onClick={() => setAddingImage(false)} className="text-xl box-border border-2 border-bgAccent w-fit m-auto px-4 py-1 rounded mx-2 hover:bg-bgAccent hover:bg-opacity-50 duration-150">
+                <button type="button" onClick={() => setUpdatingImage(false)} className="text-xl box-border border-2 border-bgAccent w-fit m-auto px-4 py-1 rounded mx-2 hover:bg-bgAccent hover:bg-opacity-50 duration-150">
                   Cancel
                 </button>
 
                 <button type="button" onClick={handleSubmit} className="text-xl bg-bgAccent bg-opacity-50 border-2 border-bgAccent w-fit m-auto px-4 py-1 rounded mx-2 hover:bg-opacity-100 duration-150">
-                  Submit
+                  Update
                 </button>
               </div>
             </>
           )}
 
+          <button type="button" onClick={() => setDeleting(true)} className="justify-self-end text-lg border-2 border-transparent w-fit m-auto px-4 py-1 rounded mx-2 hover:text-bgAccent duration-150">
+            <i class="fa-solid fa-trash"></i> Delete image
+          </button>
+
           {submitLoading && <LoaderAnimation />}
-          {!submitLoading && submitError && <span className="pt-5">{submitError}</span>}
+          {submitError && <span className="pt-5">{submitError}</span>}
 
         </form>
       </div>
