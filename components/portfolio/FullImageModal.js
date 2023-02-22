@@ -1,8 +1,6 @@
 import React, {useState} from 'react'
-import Image from 'next/image'
-import LoaderAnimation from './LoaderAnimation'
 
-export default function ShowImageModal(props) {
+export default function FullImageModal(props) {
   const {openImage, setOpenImage} = props
 
   function handleClick(e) {

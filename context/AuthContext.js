@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
-import {auth, db, updateProfile } from '../firebase'
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
-import {doc, getDoc} from 'firebase/firestore'
+import { auth } from '../firebase'
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile } from "firebase/auth";
 
 const AuthContext = React.createContext()
 
@@ -14,8 +13,8 @@ export function AuthProvider({children}) {
   const [loading, setLoading] = useState(true)
 
   function signup(email, password) {
-    createUserWithEmailAndPassword(auth, email, password)
-    return
+    return createUserWithEmailAndPassword(auth, email, password)
+    
   }
 
   function login(email, password) {
@@ -26,8 +25,8 @@ export function AuthProvider({children}) {
     return signOut(auth)
   }
 
-  function updateUser(currentUser) {
-    return updateProfile(currentUser, {})
+  function updateUser(data) {
+    return updateProfile(currentUser, data)
   }
 
   useEffect(() => {
@@ -38,19 +37,7 @@ export function AuthProvider({children}) {
     return unsubscribe
   }, [])
 
-  const [theme, setTheme] = useState('light')
-
-  function toggleTheme() {
-    if (theme == 'light') {
-      setTheme('dark')
-      localStorage.setItem('theme', 'dark')
-    } else if (theme == 'dark') {
-      setTheme('light')
-      localStorage.setItem('theme', 'light')
-    }
-  }
-
-  const value = {currentUser, login, signup, logout, theme, toggleTheme, setTheme}
+  const value = {currentUser, login, signup, logout, updateUser}
 
   return (
     <AuthContext.Provider value={value}>

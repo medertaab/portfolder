@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import LoaderAnimation from "./LoaderAnimation";
+import LoaderAnimation from "../LoaderAnimation";
 import { imageConfigDefault } from "next/dist/shared/lib/image-config";
 
 export default function AddImageModal(props) {
@@ -84,8 +84,8 @@ export default function AddImageModal(props) {
       <button onClick={() => setAddingImage(false)} className="absolute top-0 z-30 right-0 p-5 cursor-pointer text-bgPrimary hover:text-bgAccent">
         <i  className="fa-solid fa-xmark text-3xl"></i>
       </button>
-      <div onClick={(e) => e.stopPropagation()} className="max-w-2xl max-h-screen sm:w-4/5 w-[90%] bg-bgPrimary p-3 border-2 border-bgAccent rounded-xl shadow-2xl">
 
+      <div onClick={(e) => e.stopPropagation()} className="max-w-2xl max-h-screen sm:w-4/5 w-[90%] bg-bgPrimary p-3 rounded-xl shadow-2xl">
         {newImage && (
           <div className="h-56 mt-5">
 

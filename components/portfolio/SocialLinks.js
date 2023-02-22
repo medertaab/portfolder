@@ -6,19 +6,20 @@ export default function SocialLinks(props) {
   const { socials } = portfolioData
   
   function icon(site, link, active, id) {
+    const style = `h-9 w-9 text-xl rounded-full mx-1 hover:bg-bgAccent duration-150 ${!active ? 'border-2 border-textPrimary border-dashed' : 'bg-textPrimary text-bgPrimary'}`
     if (site == "custom") {
       return (
-        <button className={`h-7 w-7 rounded-full mx-1 ${!active ? 'border-2 border-textPrimary border-dashed' : 'bg-textPrimary text-bgPrimary'}`} key={id}>
+        <button className={style} key={id}>
           <Link href={link} title={site}>
-            <i className="ri-links-line text-lg"></i>
+            <i className="ri-links-line"></i>
           </Link>
         </button>
       );
     } else {
       return (
-        <button className={`h-7 w-7 rounded-full mx-1 ${!active ? 'border-2 border-textPrimary border-dashed' : 'bg-textPrimary text-bgPrimary'}`} key={id}>
+        <button className={style} key={id}>
           <Link href={link} title={`${site} page`}>
-            <i className={`ri-${site}-fill text-lg ${['facebook', 'youtube', 'linkedin'].includes(site) && 'pr-0.5'}`}></i>
+            <i className={`ri-${site}-fill`}></i>
           </Link>
         </button>
       );
@@ -51,14 +52,14 @@ export default function SocialLinks(props) {
     <div className="relative m-auto flex w-fit h-fit gap-2 justify-center pt-2 pb-3">
       {/* Primary socials first */}
       {Object.keys(socials).map((site, id) => {
-        if (!site.startsWith("custom")) {
+        if (socials[site] && !site.startsWith("custom")) {
           return icon(site, `http://${site}.com/${socials[site]}`, true, id)
         }
       })}
       
       {/* Custom links at the end */}
       {Object.keys(socials).map((site, id) => {
-        if (site.startsWith("custom")) {
+        if (socials[site].link && site.startsWith("custom")) {
           return icon('custom', socials[site].link, true, id)
         }
       })}

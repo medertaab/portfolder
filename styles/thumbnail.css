@@ -1,0 +1,5 @@
+@media (min-width: 640px) {
+  .landscape {
+    grid-column: span 2;
+  }
+}

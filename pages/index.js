@@ -3,7 +3,7 @@ import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/router";
 
 export default function Home() {
-  const { currentUser, theme } = useAuth();
+  const { currentUser } = useAuth();
   const router = useRouter();
 
   // If not signed up -> login page

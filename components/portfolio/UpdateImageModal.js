@@ -1,6 +1,6 @@
 import React, { use, useEffect, useState } from "react";
 import Image from "next/image";
-import LoaderAnimation from "./LoaderAnimation";
+import LoaderAnimation from "../LoaderAnimation";
 
 export default function UpdateImageModal(props) {
   const { updatingImage, setUpdatingImage, handleUpdateImage, submitLoading, handleDeleteImage } = props;

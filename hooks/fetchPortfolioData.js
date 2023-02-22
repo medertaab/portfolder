@@ -1,7 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react'
 import { doc, getDoc, getDocs, collection, query, where, limit } from 'firebase/firestore'
 import { db } from '../firebase'
-import { useAuth } from '../context/AuthContext'
 import { useRouter } from 'next/router'
 
 export default function useFetchPortfolioData(username) {

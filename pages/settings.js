@@ -1,53 +1,49 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
-import {doc, setDoc, deleteField} from 'firebase/firestore'
-import {db} from '../firebase'
-import { useRouter } from "next/router";
-import SettingsManage from "../components/SettingsManage";
-import Link from "next/link";
-import Navbar from '../components/Navbar'
+import Router, { useRouter } from "next/router";
+import PageSettings from "../components/settings/pageSettings/PageSettings";
+import Navbar from "../components/Navbar";
 import useFetchPortfolioData from "../hooks/fetchPortfolioData";
+import { useTheme } from "../context/ThemeContext";
+import LoaderAnimation from "../components/LoaderAnimation";
+import SettingsLayout from "../components/settings/SettingsLayout";
+import AccountSettings from "../components/settings/accountSettings/AccountSettings"; 
+import UsernameSettings from "../components/settings/accountSettings/UsernameSettings";
+import EmailSettings from "../components/settings/accountSettings/EmailSettings";
+import PasswordSettings from "../components/settings/accountSettings/PasswordSettings";
+import DeleteAccount from "../components/settings/accountSettings/DeleteAccount";
 
 export default function SettingsPage() {
-  const { currentUser, theme } = useAuth();
+  const { currentUser, logout } = useAuth();
+  const { theme } = useTheme();
+  const [page, setPage] = useState('main')
+  const { portfolioData, loading, error } = useFetchPortfolioData(currentUser?.displayName);
+
   const router = useRouter()
-
-  // Header: icon, username, display name, occupation, contact email, resume
-  // Socials: Twitter, instagram, facebook, youtube, linkedin, custom
-  // Info: image, text (markup), layout
-
-  const {setPortfolioData, loading, error, portfolioData} = useFetchPortfolioData(currentUser.displayName)
-
   if (!currentUser) {
-    router.push('/login')
-    return
-  }  
+    router.push('/')
+    return 
+  }
+
+  if (loading) {
+    return (
+      <div className={`theme-${theme} theme-${portfolioData?.settings?.theme} bg-bgPrimary text-textPrimary`}>
+        <SettingsLayout>
+          <LoaderAnimation />
+        </SettingsLayout>
+      </div>
+    )
+  }
 
   return (
-    <div className={`theme-${theme} bg-bgPrimary text-textPrimary`}>
-      <Navbar />
-
-      <div className="grid grid-cols-[200px_1fr] max-w-5xl m-auto divide-x-4">
-        <ul className="flex flex-col gap-2 p-5 text-lg [&>*]:py-1">
-          <li>
-            <Link href="/">
-              <i className="fa-solid fa-house"></i> Your page
-            </Link>
-          </li>
-          <li>
-            <i className="fa-solid fa-palette"></i> <button>Manage page</button>
-          </li>
-          <li>
-            <i className="fa-solid fa-gear"></i> <button>Settings</button>
-          </li>
-        </ul>
-
-        {
-          !loading && <SettingsManage portfolioData={portfolioData} setPortfolioData={setPortfolioData} loading={loading}/>
-        }
-      </div>
-
+    <div className={`theme-${theme} theme-${portfolioData?.settings?.theme} bg-bgPrimary text-textPrimary`}>
+      <SettingsLayout>
+        {page === "main" && <AccountSettings setPage={setPage}/>}
+        {page === "username" && <UsernameSettings setPage={setPage}/>}
+        {page === "email" && <EmailSettings setPage={setPage}/>}
+        {page === "password" && <PasswordSettings setPage={setPage}/>}
+        {page === "deleteAccount" && <DeleteAccount setPage={setPage}/>}
+      </SettingsLayout>
     </div>
-
   )
 }

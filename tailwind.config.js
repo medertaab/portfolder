@@ -12,8 +12,10 @@ module.exports = {
         bgPrimary: 'rgb(var(--color-bg-primary) / <alpha-value>)',
         bgSecondary: 'rgb(var(--color-bg-secondary) / <alpha-value>)',
         bgAccent: 'rgb(var(--color-bg-accent) / <alpha-value>)',
+      },
+      animation: {
+        'spin-slow': 'spin 1.3s linear infinite',
       }
-
     },
   },
   plugins: [],

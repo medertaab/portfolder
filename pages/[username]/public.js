@@ -1,12 +1,13 @@
 import React, { useState} from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "../../context/AuthContext";
-import Portfolio from "../../components/Portfolio";
+import Portfolio from "../../components/portfolio/Portfolio";
+import { useTheme } from "../../context/ThemeContext";
 
 export default function PortfolioPage() {
   const router = useRouter();
   const username = router.query.username;
-  const {theme} = useAuth()
+  const { theme } = useTheme()
 
   return (
     <div className={`theme-${theme} bg-bgPrimary`}>
