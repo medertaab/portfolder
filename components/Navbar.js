@@ -10,21 +10,13 @@ export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <div className="w-full h-10 sticky top-0 z-40 bg-bgPrimary flex items-center p-2 shadow-sm">
+    <div className="w-full h-10 sticky top-0 z-40 bg-bgPrimary flex items-center p-2 border-b-[1px] border-bg">
       <Link
         className="sm:text-3xl text-xl grid place-content-center p-2 text-textPrimary"
         href={currentUser ? `/${currentUser.displayName}` : "/"}
       >
         🖼️
       </Link>
-
-      {/* <h3 className="w-full text-right px-1 text-sm">
-        {currentUser && (
-          <Link href={`/${currentUser.displayName}`}>
-            {`@${currentUser.displayName}`}
-          </Link>
-        )}
-      </h3> */}
 
       {/* Dark mode button */}
       <button
@@ -36,9 +28,9 @@ export default function Navbar() {
             theme === "light" ? "left" : "right"
           }-0 duration-150`}
         ></div>
-        <span className="absolute inset-0 max-w-[2.7rem] m-auto px-0.5 flex justify-between items-center text-bgPrimary text-lg">
-          <i className="ri-moon-clear-fill ml-[-1px]"></i>
-          <i className="ri-sun-fill"></i>
+        <span className="absolute inset-0 max-w-[2.7rem] m-auto px-0.5 flex justify-between items-center text-lg">
+          <i className={`ri-moon-clear-fill ml-[-2px] ${theme === 'light' ? "text-textPrimary" : "text-bgPrimary"}`}></i>
+          <i className={`ri-sun-fill ${theme === 'dark' ? "text-textPrimary" : "text-bgPrimary"}`}></i>
         </span>
       </button>
 

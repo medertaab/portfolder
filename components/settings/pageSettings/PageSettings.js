@@ -73,7 +73,7 @@ export default function PageSettings(props) {
             Theme
           </button>
           <div
-            className={`w-[25%] absolute bg-bgAccent bottom-0 h-1 duration-150 translate-x-[${currentId*100}%]`}
+            className={`w-[25%] absolute bg-bgAccent bottom-0 h-1 duration-150 transform translate-x-[${currentId*100}%]`}
           ></div>
         </div>
 
