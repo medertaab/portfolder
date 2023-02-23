@@ -19,7 +19,7 @@ export default function Header(props) {
         {pageOwner && (
           <Link
             href={"/manage"}
-            className="absolute z-30 top-0 right-0 opacity-50 hover:opacity-100 duration-150 cursor-pointer"
+            className="absolute z-30 top-0 right-[-1rem] opacity-50 hover:opacity-100 duration-150 cursor-pointer"
           >
             <i className="fa-solid fa-user-pen 0"></i>
           </Link>

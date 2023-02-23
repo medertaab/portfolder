@@ -47,7 +47,7 @@ export default function ThemeForm(props) {
       <div className="divider"></div>
 
       <label>Portfolio view</label>
-      <fieldset className="pt-2 flex w-[500px] justify-between m-auto">
+      <fieldset className="pt-2 flex justify-between m-auto">
         <label className="cursor-pointer flex flex-col items-center grow shrink basis-0">
           <div className="scale-y-[1.12]">
             <i className="ri-layout-grid-fill text-5xl text-gray-400"></i>

@@ -20,9 +20,9 @@ export default function LoginPage() {
     <div className={`theme-${theme} h-screen fade-in`}>
       <Navbar />
       <div
-        className={`theme-orange bg-bgPrimary h-[calc(100%-2.5rem)] flex-1 text-sx sm:text-sm flex flex-col items-center place-items-center justify-center gap-2 sm:gap-4 text-textPrimary`}
+        className={`border-2 border-red-500 theme-orange bg-bgPrimary h-[calc(100%-2.5rem)] flex-1 text-sx sm:text-sm flex flex-col items-center place-items-center justify-center gap-2 sm:gap-4 text-textPrimary`}
       >
-        <h2 className="text-2xl mb-5 text-textAccent">🖼️ portfolder</h2>
+        <h2 className="text-2xl mb-5 text-textAccent align-middle">🖼️ portfolder</h2>
 
         {isLoggingIn && <Login />}
         {!isLoggingIn && <SignUp />}
