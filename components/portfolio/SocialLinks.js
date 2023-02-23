@@ -11,7 +11,7 @@ export default function SocialLinks(props) {
       return (
         <button className={style} key={id}>
           <Link href={link} title={site}>
-            <i className="ri-links-line"></i>
+            <i className="ri-links-line self-center align-middle text-2xl"></i>
           </Link>
         </button>
       );
@@ -19,7 +19,7 @@ export default function SocialLinks(props) {
       return (
         <button className={style} key={id}>
           <Link href={link} title={`${site} page`}>
-            <i className={`ri-${site}-fill`}></i>
+            <i className={`ri-${site}-fill align-middle text-2xl`}></i>
           </Link>
         </button>
       );

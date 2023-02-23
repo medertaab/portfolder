@@ -41,6 +41,8 @@ export default function Thumbnail(props) {
     }
   }
 
+  const blurPlaceholder = <div className="w-full h-full animate-pulse"></div>
+
   return (
     <figure 
       onClick={handleOpenImage} onMouseOver={handleMouseEnter} onMouseLeave={() => setHover(false)}

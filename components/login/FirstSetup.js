@@ -7,7 +7,7 @@ import { db } from "../../firebase";
 import { useForm } from "react-hook-form";
 import useCheckImage from "../../hooks/useCheckImage";
 import useFilterUsername from "../../hooks/useFilterUsername";
-import SubmitButton from "./../SubmitButton"
+import SubmitButton from "./SubmitButton"
 import LoaderAnimation from "../LoaderAnimation";
 
 export default function FirstSetup() {

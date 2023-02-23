@@ -4,8 +4,8 @@ export default function LoaderAnimation(props) {
   const {small} = props
   if (small) {
     return (
-      <div className="animate-spin text-xl flex justify-center">
-        <i className="ri-loader-4-line"></i>
+      <div className="text-xl flex justify-center">
+        <i className="animate-spin ri-loader-4-line"></i>
       </div>
     )
   } else return (

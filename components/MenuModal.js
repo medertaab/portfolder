@@ -17,7 +17,7 @@ export default function MenuModal(props) {
   }
 
   return (
-    <div className="shadowy py-48 fixed z-40 h-full w-full max-w-[20rem] right-0 top-0 bg-bgPrimary border-l-bgSecondary border-l-2 [&_*]:w-fit">
+    <div className="shadowy py-48 fixed h-full w-full max-w-[20rem] right-0 top-0 bg-bgPrimary border-l-bgSecondary border-l-2 [&_*]:w-fit">
       <i
         onClick={() => setOpenModal(false)}
         className="fa-solid fa-xmark absolute top-0 right-0 text-2xl p-5 cursor-pointer hover:text-bgAccent duration-150 "
@@ -55,7 +55,7 @@ export default function MenuModal(props) {
           <div className="min-w-[2rem] inline-block">
             <i className="fa-solid fa-palette"></i>
           </div>
-          Manage profile
+          Manage page
         </Link>
 
         <Link href="/settings" className="hover:text-bgAccent duration-150">

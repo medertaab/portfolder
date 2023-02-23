@@ -43,13 +43,13 @@ export default function PageSettings(props) {
           <button onClick={() => setCurrentForm('socials')} className="p-2 hover:text-bgAccent duration-150">Socials</button>
           <button onClick={() => setCurrentForm('description')} className="p-2 hover:text-bgAccent duration-150">Bio</button>
           <button onClick={() => setCurrentForm('theme')} className="p-2 hover:text-bgAccent duration-150">Theme</button>
-          <div className={`absolute bg-bgAccent bottom-0 h-1 w-[25%] duration-150 translate-x-[${currentId * 100}%]`}></div>
+          <div className={`absolute bg-bgAccent bottom-0 h-1 w-[25%] duration-150 translate-x-[${currentId*100}%]`}></div>
         </div>
 
         <form className="settings-form relative flex flex-col sm:p-10 p-3">
           {
             currentForm === 'display' &&
-            <DisplayForm title="display" register={register} watch={watch} errors={errors}/>
+            <DisplayForm title="display" register={register} watch={watch} errors={errors} setValue={setValue}/>
           }
           {
             currentForm === 'socials' &&

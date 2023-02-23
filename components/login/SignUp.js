@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
-import SubmitButton from '../SubmitButton'
+import SubmitButton from './SubmitButton'
 
 export default function SignUp() {
   const [error, setError] = useState(null);

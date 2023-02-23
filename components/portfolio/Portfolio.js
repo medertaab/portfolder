@@ -47,7 +47,7 @@ export default function Portfolio(props) {
   ) 
 
   return (
-    <div className={`theme-${theme} theme-${portfolioData?.settings.theme} text-center flex-1 relative w-full max-w-screen-xl min-h-screen flex flex-col m-auto bg-bgPrimary text-textPrimary duration-100 grid-flow-dense`}>
+    <div className={`theme-${theme} theme-${portfolioData?.settings.theme} text-center flex-1 relative w-full max-w-screen-2xl min-h-screen flex flex-col m-auto bg-bgPrimary text-textPrimary duration-100 grid-flow-dense`}>
       <Navbar />
       {error && <h1>Something went wrong ({error}). Please try reloading.</h1>}
       {portfolioData && (

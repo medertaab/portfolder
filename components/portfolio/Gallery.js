@@ -102,9 +102,11 @@ export default function Gallery(props) {
   }
 
   const addButton = (
-    <button onClick={() => setAddingImage(true)} className="py-2 px-4 border-2 border-bgAccent w-fit rounded m-5 mr-auto hover:bg-bgAccent duration-150">
-      + Add image
-    </button>
+    <div className="text-start mx-2">
+      <button onClick={() => setAddingImage(true)} type="button" className="justify-self-start py-2 px-4 border-2 border-bgAccent w-fit rounded hover:bg-bgAccent duration-150">
+        + Add image
+      </button>
+    </div>
   );
 
   function gridLayout() {
@@ -131,7 +133,7 @@ export default function Gallery(props) {
       {!loading && (
         
         // Gallery grid
-        <div className={gridLayout()}>
+        <main className={gridLayout()}>
           {images && Object.keys(images).map((num) => {
             return (
               <Thumbnail
@@ -146,7 +148,7 @@ export default function Gallery(props) {
               />
             );
           })}
-        </div>
+        </main>
       )}
     </>
   );

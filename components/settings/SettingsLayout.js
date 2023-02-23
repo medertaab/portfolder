@@ -2,9 +2,13 @@ import React from "react";
 import Link from "next/link";
 import Navbar from "../Navbar";
 import { useAuth } from "../../context/AuthContext";
+import { useRouter } from "next/router";
 
 export default function SettingsLayout({ children }) {
   const { currentUser } = useAuth()
+  const currentPage = useRouter().asPath
+
+  
   return (
     <>
       <Navbar />
@@ -15,12 +19,12 @@ export default function SettingsLayout({ children }) {
               <i className="fa-solid fa-house"></i> Your page
             </Link>
           </li>
-          <li className="hover:text-bgAccent duration-150">
+          <li className={`${currentPage === "/manage" ? "text-bgAccent" : "hover:text-bgAccent"} duration-150`}>
             <Link href="/manage">
               <i className="fa-solid fa-palette"></i> Manage page
             </Link>
           </li>
-          <li className="hover:text-bgAccent duration-150">
+          <li className={`${currentPage === "/settings" ? "text-bgAccent" : "hover:text-bgAccent"} duration-150`}>
             <Link href="/settings">
               <i className="fa-solid fa-gear"></i> Settings
             </Link>

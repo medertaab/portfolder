@@ -15,7 +15,7 @@ export default function Setup() {
   } else {
     return (
       <div className={`theme-${theme} theme-orange`}>
-        <Navbar small/>
+        <Navbar/>
         <FirstSetup />
       </div>
     );

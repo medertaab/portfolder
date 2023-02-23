@@ -7,28 +7,23 @@ import sanitizeUrl from "../../hooks/useSanitizeUrl"
 export default function Header(props) {
   const { pageOwner, portfolioData } = props;
   const mainData = portfolioData.mainData
-  const [hovering, setHovering] = useState(false)
 
-  const gridStyle = "grid relative w-fit m-auto justify-center items-center sm:grid-cols-[200px_minmax(150px,_250px)]"
-  const soloStyle = "w-fit m-auto relative"
+  const gridStyle = "p-2 grid relative w-fit m-auto justify-center items-center sm:grid-cols-[200px_minmax(150px,_250px)]"
+  const soloStyle = "p-2 w-fit m-auto relative flex items-center justify-center"
 
   return (
-    <div className="relative w-full">
+    <header className="relative w-full">
       <div className={`${mainData.icon ? gridStyle : soloStyle}`}>
         
         {/* Edit button if owner */}
         {pageOwner && (
           <Link
             href={"/manage"}
-            className="absolute z-30 top-0 right-0 opacity-50 hover:opacity-100 duration-150 cursor-pointer p-2"
-            onMouseEnter={() => setHovering(true)}
-            onMouseLeave={() => setHovering(false)}
+            className="absolute z-30 top-0 right-0 opacity-50 hover:opacity-100 duration-150 cursor-pointer"
           >
             <i className="fa-solid fa-user-pen 0"></i>
           </Link>
         )}
-
-        <div className={`absolute h-full w-full z-20 bg-textPrimary ${hovering ? "opacity-10" : "hidden"} duration-150 rounded`}></div>
 
         {
           mainData.icon && 
@@ -82,6 +77,6 @@ export default function Header(props) {
       </div>
 
       <SocialLinks pageOwner={pageOwner} portfolioData={portfolioData}/>
-    </div>
+    </header>
   );
 }
