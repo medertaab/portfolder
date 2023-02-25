@@ -22,7 +22,7 @@ export default function Portfolio(props) {
       return
     }
     
-    if (currentUser && username == currentUser.displayName) {
+    if (currentUser && username == currentUser.displayName.toLowerCase()) {
       setPageOwner(true);
     } else {
       return
