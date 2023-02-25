@@ -6,7 +6,7 @@ import { useTheme } from "../../context/ThemeContext";
 
 export default function PortfolioPage() {
   const router = useRouter();
-  const username = router.query.username;
+  const username = router.query.username.toLowerCase();
   const { theme } = useTheme()
 
   return (
