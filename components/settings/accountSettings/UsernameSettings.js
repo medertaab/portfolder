@@ -40,12 +40,12 @@ export default function UsernameSettings(props) {
   async function handleUpdateUsername(data){
     setLoading(true)
       setIsTaken(false)
-      if (await isUsernameTaken(data.username)) {
+      if (await isUsernameTaken(data.username.toLowerCase())) {
         setIsTaken(true)
         setLoading(false)
         return
       } else {
-        await updateUser({displayName: data.username})
+        await updateUser({displayName: data.username.toLowerCase()})
         await updateData(data)
         setSuccess(true)
         setTimeout(() => {

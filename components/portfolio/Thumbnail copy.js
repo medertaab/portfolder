@@ -46,7 +46,7 @@ export default function Thumbnail(props) {
   return (
     <figure 
       onClick={handleOpenImage} onMouseOver={handleMouseEnter} onMouseLeave={() => setHover(false)}
-      className={`grow m-[2px] basis-40`} 
+      className={`relative w-full ${grid === "static" ? "aspect-square" : "h-full"} cursor-pointer ${landscape && 'landscape'}`} 
     >      
       {pageOwner && (
         <i onClick={handleUpdateImage} className={`fa-solid fa-pen-to-square absolute right-0 p-2 text-2xl cursor-pointer opacity-${hover ? 100 : 0} hover:text-bgAccent z-20`}></i>
@@ -57,7 +57,7 @@ export default function Thumbnail(props) {
       </figcaption>  
       
       {/* <img src={image.link} alt="" fill className={`w-full h-full object-cover`} onLoad={handleLoad}/> */}
-      <div className="relative pt-[100%]">
+      <div className="h-80">
         <Image src={image.link} alt="" fill className={`w-full h-full object-cover`} onLoad={handleLoad}/>
       </div>
     </figure>

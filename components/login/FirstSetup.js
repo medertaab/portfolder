@@ -39,7 +39,7 @@ export default function FirstSetup() {
     await setDoc(
       userRef,
       {
-        username: data.username,
+        username: data.username.toLowerCase(),
         mainData: data.mainData,
         settings: {
           theme: "orange",
@@ -70,7 +70,7 @@ export default function FirstSetup() {
     }
 
     setLoading(true)
-    const isTaken = await isUsernameTaken(data.username)
+    const isTaken = await isUsernameTaken(data.username.toLowerCase())
     if (isTaken) {
       setError("Username is already in use")
     } else {

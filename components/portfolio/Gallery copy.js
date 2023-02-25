@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import Thumbnail from "./Thumbnail";
 import { doc, setDoc, updateDoc, deleteField } from "firebase/firestore";
 import { db } from "../../firebase";
@@ -26,8 +26,6 @@ export default function Gallery(props) {
   useEffect(() => {
     setImages(images)
   }, [loading, images, setImages])
-
-  console.log('images', images)
 
   async function handleAddImage(image) {
     if (!image) return;
@@ -119,35 +117,6 @@ export default function Gallery(props) {
     }
   }
 
-  const [galleryWidth, setGalleryWidth] = useState(0);
-  const [galleryHeight, setGalleryHeight] = useState(0);
-
-  useEffect(() => {
-    if (images) {
-      const newimages = Object.values(images);
-      const numImages = newimages.length;
-      const aspectRatios = newimages.map((image) => image.link.height ? image.link.width / image.link.height : 1);
-      const totalAspectRatios = aspectRatios.reduce((acc, ratio) => acc + ratio, 0);
-      const numRows = Math.ceil(numImages / Math.floor(totalAspectRatios));
-  
-      const calculateGallerySize = () => {
-        const width = galleryRef.current.clientWidth;
-        const height = (width / totalAspectRatios) * numRows;
-  
-        setGalleryWidth(width);
-        setGalleryHeight(height);
-        console.log(galleryHeight)
-      };
-  
-      calculateGallerySize();
-      window.addEventListener('resize', calculateGallerySize);
-      return () => window.removeEventListener('resize', calculateGallerySize);
-    }
-  }, [images])
-
-    const galleryRef = useRef(null)
-
-
   // If there are no images
   if (!images && !pageOwner) {
     return 
@@ -164,7 +133,7 @@ export default function Gallery(props) {
       {!loading && (
         
         // Gallery grid
-        <main className={`flex flex-wrap max-w-full h-[${galleryHeight}px]`} ref={galleryRef}>
+        <main className={gridLayout()}>
           {images && Object.keys(images).map((num) => {
             return (
               <Thumbnail
