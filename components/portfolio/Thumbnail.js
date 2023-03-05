@@ -5,18 +5,18 @@ export default function Thumbnail(props) {
   const {
     image,
     pageOwner,
-    setOpenImage,
     setUpdatingImage,
     setUpdatingNum,
     num,
-    grid
+    grid,
+    setImageIndex
   } = props;
 
   const [hover, setHover] = useState(false);
   const [landscape, setLandscape] = useState(false)
 
   function handleOpenImage() {
-    setOpenImage(image)
+    setImageIndex(num)
   }
 
   function handleUpdateImage(e) {
@@ -28,7 +28,7 @@ export default function Thumbnail(props) {
   function handleMouseEnter(e) {
     setHover(true)
   }
-  
+
   // Handle landscape images
   function handleLoad(e){
     if (grid === 'static') {
@@ -41,12 +41,10 @@ export default function Thumbnail(props) {
     }
   }
 
-  const blurPlaceholder = <div className="w-full h-full animate-pulse"></div>
-
   return (
     <figure 
       onClick={handleOpenImage} onMouseOver={handleMouseEnter} onMouseLeave={() => setHover(false)}
-      className={`grow m-[2px] basis-40`} 
+      className={`relative w-full ${grid === "static" ? "aspect-square" : "h-full"} cursor-pointer ${landscape && 'landscape'}`} 
     >      
       {pageOwner && (
         <i onClick={handleUpdateImage} className={`fa-solid fa-pen-to-square absolute right-0 p-2 text-2xl cursor-pointer opacity-${hover ? 100 : 0} hover:text-bgAccent z-20`}></i>
@@ -55,9 +53,8 @@ export default function Thumbnail(props) {
       <figcaption className={`h-full w-full absolute z-10 opacity-${hover ? '100' : '0'} bg-bgPrimary bg-opacity-30 flex justify-center items-center duration-150`}>
         <h3 className="text-xl bottom-0 font-bold drop-shadow-2xl text-shadow box-border object-contain">{image.title}</h3>
       </figcaption>  
-      
-      {/* <img src={image.link} alt="" fill className={`w-full h-full object-cover`} onLoad={handleLoad}/> */}
-      <div className="relative pt-[100%]">
+
+      <div className={`${grid === "static" ? "h-[350px]" : "h-[450px]"}`}>
         <Image src={image.link} alt="" fill className={`w-full h-full object-cover`} onLoad={handleLoad}/>
       </div>
     </figure>

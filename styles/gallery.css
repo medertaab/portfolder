@@ -1,0 +1,29 @@
+.sliding-right {
+  animation: slide-right ease-out 300ms;
+}
+
+.sliding-left {
+  animation: slide-left ease-out 300ms;
+}
+
+@keyframes slide-right {
+  0% {
+    transform: translateX(0);
+    opacity: 100%;
+  }
+  100% {
+    transform: translateX(-100%);
+    opacity: 0%;
+  }
+}
+
+@keyframes slide-left {
+  0% {
+    transform: translateX(0);
+    opacity: 100%;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0%;
+  }
+}

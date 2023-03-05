@@ -14,7 +14,7 @@ import PasswordSettings from "../components/settings/accountSettings/PasswordSet
 import DeleteAccount from "../components/settings/accountSettings/DeleteAccount";
 
 export default function SettingsPage() {
-  const { currentUser, logout } = useAuth();
+  const { currentUser } = useAuth();
   const { theme } = useTheme();
   const [page, setPage] = useState('main')
   const { portfolioData, loading, error } = useFetchPortfolioData(currentUser?.displayName);

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import Description from "./Description";
 import Gallery from "./Gallery";
-import LoaderAnimation from "../LoaderAnimation";
 import Navbar from "../Navbar";
 import { useAuth } from "../../context/AuthContext";
 import useFetchPortfolioData from "../../hooks/fetchPortfolioData";
@@ -22,7 +21,7 @@ export default function Portfolio(props) {
       return
     }
     
-    if (currentUser && username == currentUser.displayName.toLowerCase()) {
+    if (currentUser && username == currentUser.displayName) {
       setPageOwner(true);
     } else {
       return

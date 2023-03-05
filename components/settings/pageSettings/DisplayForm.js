@@ -1,22 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import useCheckImage from "../../../hooks/useCheckImage";
-import LoaderAnimation from "../../LoaderAnimation";
 import { sanitizeUrl } from "../../../hooks/useSanitizeUrl";
 
 export default function DisplayForm(props) {
   const { register, watch, errors } = props;
-  const {
-    checkImage,
-    isValid,
-    isValidLoading,
-    setIsValidLoading,
-    isValidError,
-    isEmpty,
-  } = useCheckImage();
+  const { checkImage, isValid, setIsValidLoading, imageBox } = useCheckImage();
 
+  // Load profile picture on load
   useEffect(() => {
-    checkImage(watch("mainData.icon"))
-  }, [])
+    checkImage(watch("mainData.icon"));
+  }, []);
 
   function handleIconChange(e) {
     setIsValidLoading(true);
@@ -59,30 +52,7 @@ export default function DisplayForm(props) {
       />
 
       {/* Profile picture preview */}
-      <div>
-        {isEmpty && !isValidLoading && (
-          <div className="my-10 border-2 rounded border-dashed border-textPrimary border-opacity-70 m-auto h-56 w-[10rem] flex items-center text-center">
-            <p className="m-auto">No profile picture</p>
-          </div>
-        )}
-        {isValid && !isValidLoading && !isEmpty && (
-          <img
-            src={watch("mainData.icon")}
-            alt="user icon"
-            className="h-56 mx-auto my-10"
-          />
-        )}
-        {isValidLoading && (
-          <div className="my-10 border-2 rounded border-dashed border-textPrimary m-auto h-56 w-[10rem] flex items-center">
-            {<LoaderAnimation />}
-          </div>
-        )}
-        {!isValidLoading && !isValid && !isEmpty && (
-          <div className="my-10 border-2 rounded border-dashed border-red-400 m-auto h-56 w-[10rem] flex items-center">
-            <p className="text-center p-5">Could not get image :( </p>
-          </div>
-        )}
-      </div>
+      {imageBox(watch("mainData.icon"))}
 
       <div className="divider"></div>
 
@@ -116,13 +86,19 @@ export default function DisplayForm(props) {
         id="emailInput"
         type="email"
         {...register("mainData.email", {
-          maxLength: {value: 200, message: "(Please enter a valid email address)"},
-          minLength: {value: 5, message: "(Please enter a valid email address)"},
+          maxLength: {
+            value: 200,
+            message: "(Please enter a valid email address)",
+          },
+          minLength: {
+            value: 5,
+            message: "(Please enter a valid email address)",
+          },
           pattern: {
             value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-            message: "(Please enter a valid email address)"
+            message: "(Please enter a valid email address)",
           },
-          required: false
+          required: false,
         })}
       />
 
@@ -133,15 +109,20 @@ export default function DisplayForm(props) {
         {errors.mainData?.resume?.message}
       </span>
 
-      <input id="resumeInput" type="URL" {...register("mainData.resume", {
-        pattern: {
-          value: /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/,
-          message: "(Please enter a valid URL that starts with HTTP/HTTPS)"
-        },
-        validate: {
-          sanitize: (url) => (sanitizeUrl(url) !== "about:blank")
-        }
-      })} />
+      <input
+        id="resumeInput"
+        type="URL"
+        {...register("mainData.resume", {
+          pattern: {
+            value:
+              /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/,
+            message: "(Please enter a valid URL that starts with HTTP/HTTPS)",
+          },
+          validate: {
+            sanitize: (url) => sanitizeUrl(url) !== "about:blank",
+          },
+        })}
+      />
     </section>
   );
 }

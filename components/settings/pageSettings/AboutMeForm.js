@@ -1,12 +1,13 @@
 import React, { useCallback } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
+import { sanitizeUrl } from '../../../hooks/useSanitizeUrl'
 import StarterKit from "@tiptap/starter-kit";
 import Link from "@tiptap/extension-link";
 import CharacterCount from "@tiptap/extension-character-count";
-import { sanitizeUrl } from '../../../hooks/useSanitizeUrl'
 
 export default function AboutMeForm(props) {
-  const { watch, register, setValue } = props;
+  const { watch, setValue } = props;
+  
   const limit = 500;
   const editor = useEditor({
     extensions: [

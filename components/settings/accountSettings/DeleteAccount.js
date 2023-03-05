@@ -1,21 +1,20 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useAuth } from '../../../context/AuthContext'
 import { useForm } from "react-hook-form";
 import LoaderAnimation from "../../LoaderAnimation"
-import { getAuth, deleteUser, reauthenticateWithCredential, EmailAuthProvider } from "firebase/auth";
+import { deleteUser, reauthenticateWithCredential, EmailAuthProvider } from "firebase/auth";
 
 import { useRouter } from 'next/router'
 
 export default function DeleteAccount(props) {
   const {setPage} = props
+  const router = useRouter()
   const { currentUser } = useAuth()
+  const { register, handleSubmit } = useForm();
+
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState('')
-  const { register, handleSubmit, formState: { errors }, reset } = useForm();
-
-
-  const router = useRouter()
 
   function onSubmit(e) {
     e.preventDefault()
@@ -50,6 +49,7 @@ export default function DeleteAccount(props) {
 
   return (
     <div className="sm:p-10 p-3 py-6 [&_label]:font-semibold">
+
       <button className="block py-2 text-2xl" onClick={() => setPage("main")}>
         <i className="fa-solid fa-arrow-left"></i>
       </button>
@@ -76,6 +76,7 @@ export default function DeleteAccount(props) {
           {error && <span className="text-red-500 ml-2">{error}</span>}
         </div>
       </form>
+
     </div>
   )
 }

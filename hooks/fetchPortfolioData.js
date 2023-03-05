@@ -21,8 +21,8 @@ export default function useFetchPortfolioData(username) {
           router.push('/404')
           return
         }
-      } catch (err) {
-        setError('Failed to load main data')
+      } catch (error) {
+        setError(error.message)
       } finally {
         setLoading(false)
       }

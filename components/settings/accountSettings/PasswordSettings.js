@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { useAuth } from "../../../context/AuthContext";
 import { useForm } from "react-hook-form";
-import LoaderAnimation from "../../LoaderAnimation";
 import { updatePassword } from "firebase/auth";
 import { reauthenticateWithCredential, EmailAuthProvider } from "firebase/auth";
-
+import LoaderAnimation from "../../LoaderAnimation";
 
 export default function PasswordSettings(props) {
   const {setPage} = props
   const { currentUser } = useAuth()
   const { register, handleSubmit, formState: { errors } } = useForm();
+  
   const [loading, setLoading] = useState(false)
   const [didUpload, setDidUpload] = useState(false)
   const [error, setError] = useState('')

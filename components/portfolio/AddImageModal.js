@@ -1,88 +1,82 @@
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 import LoaderAnimation from "../LoaderAnimation";
-import { imageConfigDefault } from "next/dist/shared/lib/image-config";
+import { doc, setDoc} from "firebase/firestore";
+import { db } from "../../firebase";
+import { useAuth } from "../../context/AuthContext";
+import { useForm } from "react-hook-form";
+import useCheckImage from "../../hooks/useCheckImage";
 
 export default function AddImageModal(props) {
-  const { handleAddImage, setAddingImage, submitLoading } = props;
-
-  const [newImage, setNewImage] = useState({ title: "", link: "" });
+  const { images, setImages, setMode } = props;
   const [loading, setLoading] = useState(false);
-  const [testImage, setTestImage] = useState("");
-  const [valid, setValid] = useState(null);
+  const [buttonContent, setButtonContent] = useState("Submit")
   const [error, setError] = useState("");
-  const [submitError, setSubmitError] = useState("");
+  const { currentUser } = useAuth();
+  const { register, handleSubmit, watch, formState: { errors } } = useForm(); 
 
-  function handleInput(e) {
-    setError("");
-    setLoading(true);
+  const { checkImage, isValid, isValidLoading, 
+    setIsValidLoading, isEmpty, imageBox 
+  } = useCheckImage();
 
-    if (e.target.id == "link") {
-      setValid(false);
-      setTestImage(e.target.value);
-    }
-    setNewImage((prev) => {
-      return { ...prev, [e.target.id]: e.target.value };
-    });
-    setLoading(false);
-  }
-
-  async function handlePaste(e) {
-    setTestImage(e.target.value);
-  }
-
+  // Set image to empty on load
   useEffect(() => {
-    setTimeout(() => {
-      handleCheckImage();
-    }, 500);
-  }, [testImage]);
+    checkImage(watch("link"));
+  }, []);
 
-  function handleSubmit() {
-    setError("");
-    if (!valid || loading) return;
-    if (!newImage.link || !newImage.title) {
-      setTimeout(() => {
-        setSubmitError("Please fill all fields");
-      }, 300);
-      return;
-    }
-    if (newImage.title.length > 50) {
-      setTimeout(() => {
-        setSubmitError("Title cannot be longer than 50 characters");
-      }, 300);
-      return;
-    }
-    handleAddImage(newImage);
+  // Image checking upon input change
+  function handleImageChange() {
+    setError("")
+    setIsValidLoading(true);
+    setTimeout(() => {
+      checkImage(watch("link"));
+    }, 700);
   }
 
-  async function handleCheckImage() {
+  function onSubmit(e) {
+    e.preventDefault();
+    setError("");
+    handleSubmit(handleAddImage)();
+  }
+
+  async function handleAddImage(image) {
     setLoading(true);
-    setSubmitError("");
-    await fetch(testImage, { method: "HEAD" })
-      .then((res) => {
-        return res.headers.get("Content-type").startsWith("image");
-      })
-      .then((res) => {
-        setValid(res);
-        setLoading(false);
-        if (!res && testImage !== "") {
-          setError("Could not get image");
-          return;
-        }
-        setNewImage((prev) => {
-          return { ...prev, link: testImage };
-        });
-      })
-      .catch((error) => {
-        setError("Could not get image");
-        setLoading(false);
+    if (Object.keys(images).length > 49) return;
+    const newKey =
+      Object.keys(images).length === 0
+        ? 1
+        : Math.max(...Object.keys(images)) + 1;
+    setImages({ ...images, [newKey]: image });
+    const userRef = doc(db, "users", currentUser.uid);
+    try {
+      await setDoc(
+        userRef,
+        {
+          images: { [newKey]: image },
+        },
+        { merge: true }
+      ).then(() => {
+        // If success
+        setButtonContent("✓")
+        setTimeout(() => {
+          setMode("");
+        }, 1000)
       });
+    } catch (error) {
+      setLoading(false)
+      setError(error);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
-    <div className="fixed z-30 top-[2.5rem] left-0 bg-textPrimary bg-opacity-40 backdrop-blur-sm h-full w-full flex flex-col justify-center items-center" onClick={() => setAddingImage(false)}>
+    <div
+      className="fixed z-30 top-[2.5rem] left-0 bg-textPrimary bg-opacity-40 backdrop-blur-sm h-full w-full flex flex-col justify-center items-center"
+      onClick={() => setMode("")}
+    >
+      {/* Exit button */}
       <button
-        onClick={() => setAddingImage(false)}
+        onClick={() => setMode("")}
         className="absolute top-0 z-30 right-0 p-5 cursor-pointer text-bgPrimary hover:text-bgAccent"
       >
         <i className="fa-solid fa-xmark text-3xl"></i>
@@ -92,80 +86,79 @@ export default function AddImageModal(props) {
         onClick={(e) => e.stopPropagation()}
         className="max-w-2xl max-h-screen sm:w-4/5 w-[90%] bg-bgPrimary p-3 rounded-xl shadow-2xl"
       >
-        {newImage && (
-          <div className="h-56 mt-5">
-            <div className="relative">
-              <div className="absolute inset-0 top-[4.5rem]">
-                {loading && <LoaderAnimation />}
-              </div>
-              {!valid && (
-                <div className="border-2 rounded border-dashed m-auto h-56 w-[10rem]"></div>
-              )}
-            </div>
+        {/* Image preview */}
+        {imageBox(watch("link"))}
 
-            {valid && (
-              <img src={testImage} alt="" className="h-56 m-auto"></img>
-            )}
-          </div>
-        )}
-
-        <form className="p-5 w-full bg-bgPrimary text-lg text-textPrimary grid content-center">
+        {/* Input form */}
+        <form className="p-5 pt-0 w-full bg-bgPrimary text-lg text-textPrimary grid content-center">
           <span className="text-2xl p-2">Add image</span>
-
           <label for="link" className="text-left font-bold">
             Paste URL of image *
           </label>
+          {errors?.link?.message && (
+            <span className="text-red-500 text-sm">{errors.link.message}</span>
+          )}
           <input
             id="link"
-            type="text"
+            type="URL"
             placeholder="http://..."
-            required
-            value={testImage}
-            onPaste={handlePaste}
-            onChange={handleInput}
+            {...register("link", {
+              required: "Please enter a valid image URL",
+              onChange: () => handleImageChange(),
+            })}
             className="outline-none w-full m-auto mb-4 px-2 bg-bgSecondary p-2 rounded text-textPrimary"
           ></input>
 
           <label for="title" className="text-left font-bold">
             Title of work *
           </label>
+          {errors?.title?.message && (
+            <span className="text-red-500 text-sm">{errors.title.message}</span>
+          )}
           <input
             id="title"
             type="text"
             placeholder="Add title..."
-            value={newImage.title}
-            onChange={handleInput}
+            {...register("title", {
+              required: "Please enter this work's title",
+              maxLength: {
+                value: 50,
+                message: "Title should be under 50 characters",
+              },
+            })}
             className="outline-none w-full m-auto mb-4 px-2 bg-bgSecondary p-2 rounded text-textPrimary"
-            maxLength={50}
-            inLength={5}
-            required
           ></input>
 
           {error && <span className="pt-5">{error}</span>}
 
-          {valid && !loading && !error && (
-            <div className="flex justify-center items-center gap-2 mt-2">
-              <button
-                type="button"
-                onClick={() => setAddingImage(false)}
-                className="w-24 h-11 text-xl rounded hover:bg-bgSecondary duration-150"
-              >
-                Cancel
-              </button>
+          {/* BUTTONS */}
+          <div className="flex justify-center items-center gap-2 mt-2">
+            <button
+              type="button"
+              onClick={() => setMode("")}
+              className="w-24 h-11 text-xl rounded hover:bg-bgSecondary duration-150"
+            >
+              Cancel
+            </button>
 
+            {/* Active Submit button only if image is valid */}
+            {isValid && !isEmpty && !isValidLoading && !error ? (
               <button
-                type="button"
-                onClick={handleSubmit}
+                type="submit"
+                onClick={onSubmit}
                 className="w-24 h-11 text-xl bg-bgAccent rounded hover:shadow-sm hover:bg-opacity-80 duration-150"
               >
-                {submitLoading ? <LoaderAnimation small /> : "Submit"}
+                {loading ? <LoaderAnimation small /> : buttonContent}
               </button>
-            </div>
-          )}
-
-          {!submitLoading && submitError && (
-            <span className="pt-5">{submitError}</span>
-          )}
+            ) : (
+              <button
+                type="button"
+                className="w-24 h-11 text-xl border-2 border-gray-500 rounded cursor-auto"
+              >
+                Submit
+              </button>
+            )}
+          </div>
         </form>
       </div>
     </div>

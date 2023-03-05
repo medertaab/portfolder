@@ -9,6 +9,7 @@ export default function SocialsForm(props) {
     "facebook",
     "youtube",
     "linkedin",
+    "patreon"
   ];
 
   function removeLink(i) {

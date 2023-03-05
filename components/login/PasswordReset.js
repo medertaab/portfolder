@@ -1,19 +1,13 @@
 import React, { useState } from "react";
+import Link from "next/link";
+import SubmitButton from "./SubmitButton";
 import { useForm } from "react-hook-form";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
-import SubmitButton from "./SubmitButton";
-import Link from "next/link";
 
 export default function PaswordReset() {
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const auth = getAuth();
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
 
-  const [buttonContent, setButtonContent] = useState("Send reset email");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
@@ -43,7 +37,7 @@ export default function PaswordReset() {
 
   return (
     <div
-      className={` h-full text-sx sm:text-sm flex flex-col items-center justify-center p-5`}
+      className={`w-full text-sx sm:text-sm flex flex-col items-center justify-center p-5`}
     >
       <Link href="/login" className="p-2 mx-auto text-2xl">
         <i className="fa-solid fa-arrow-left"></i>

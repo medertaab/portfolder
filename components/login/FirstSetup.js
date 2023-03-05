@@ -8,20 +8,19 @@ import { useForm } from "react-hook-form";
 import useCheckImage from "../../hooks/useCheckImage";
 import useFilterUsername from "../../hooks/useFilterUsername";
 import SubmitButton from "./SubmitButton"
-import LoaderAnimation from "../LoaderAnimation";
 
 export default function FirstSetup() {
   const [emailRepeat, setEmailRepeat] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("");
 
-  const { currentUser } = useAuth();
-  const { isUsernameTaken  } = useFilterUsername()
-  const { register, handleSubmit, watch, formState: { errors }, setValue } = useForm();
-  const {checkImage, isValid, isValidLoading, setIsValidLoading, isEmpty} = useCheckImage()
-
   const router = useRouter();
+  const { currentUser, logout } = useAuth();
+  const { isUsernameTaken  } = useFilterUsername()
+  const {checkImage, isValid, setIsValidLoading, imageBox} = useCheckImage()
+  const { register, handleSubmit, watch, formState: { errors }, setValue } = useForm();
 
+  // Handle "same as account email" checkbox
   useEffect(() => {
     if (emailRepeat) {
       setValue("mainData.email", currentUser.email)
@@ -29,56 +28,8 @@ export default function FirstSetup() {
       setValue("mainData.email", watch("mainData.email"))
     }
   }, [emailRepeat])
-
-  useEffect(() => {
-    checkImage('')
-  }, [])
-
-  async function updateData(data) {
-    const userRef = doc(db, "users", currentUser.uid);
-    await setDoc(
-      userRef,
-      {
-        username: data.username.toLowerCase(),
-        mainData: data.mainData,
-        settings: {
-          theme: "orange",
-          grid: "dynamic"
-        },
-        description: {},
-        images: {},
-        socials: {}        
-      },
-      { merge: true }
-    ).then(async () => {
-      await updateProfile(currentUser, {
-        displayName: data.username,
-      }).catch((error) => {
-        setError(error.message)
-      })
-    }).then(() => {
-      router.push('/')
-    }).catch((error) => {
-      setError(error.message)
-    })
-  }
-
-  async function onSubmit(data) {
-    setError('')
-    if (!currentUser) {
-      return;
-    }
-
-    setLoading(true)
-    const isTaken = await isUsernameTaken(data.username.toLowerCase())
-    if (isTaken) {
-      setError("Username is already in use")
-    } else {
-      updateData(data)
-    }
-    setLoading(false)
-  }
-
+  
+  // Handle image input change
   function handleIconChange(e) {
     setIsValidLoading(true)
     setTimeout(() => {
@@ -86,11 +37,56 @@ export default function FirstSetup() {
     }, 700)
   }
 
+  async function onSubmit(e) {
+    e.preventDefault()
+    setError('')
+    setLoading(true)
+    handleSubmit(updateData)()
+  }
+
+  async function updateData(data) {
+    // Check username
+    const isTaken = await isUsernameTaken(data.username.toLowerCase())
+    if (isTaken) {
+      setError("Username is already in use")
+      return
+    }
+    // Update data
+    const userRef = doc(db, "users", currentUser.uid);
+      await setDoc(
+        userRef,
+        {
+          username: data.username.toLowerCase(),
+          mainData: data.mainData,
+          settings: {
+            theme: "orange",
+            grid: "dynamic"
+          },
+          description: {},
+          images: {},
+          socials: {}        
+        },
+        { merge: true }
+      ).then(async () => {
+        await updateProfile(currentUser, {
+          displayName: data.username,
+        }).catch((error) => {
+          setError(error.message)
+        })
+      }).then(() => {
+        router.push('/')
+      }).catch((error) => {
+        setError(error.message)
+      }).finally(() => {
+        setLoading(false)
+      })
+  }
+
   return (
-    <div className="bg-bgPrimary text-textPrimary min-h-[calc(100vh-2.5rem)] text-sm flex flex-col items-center place-items-center justify-center gap-2 fade-in">
+    <div className="w-full py-4 text-sm flex flex-col items-center place-items-center justify-center gap-2 fade-in">
       <h1 className="text-3xl py-5">Welcome to your portfolio! 💌</h1>
 
-      <form className="flex flex-col w-full max-w-sm">
+      <form className="flex flex-col w-full max-w-lg px-4">
         <label for="username" className="text-center text-lg">
           Please choose a username:
           <p className="text-sm">(Your portfolio will be available at portfolder.com/{watch("username") || <i>username</i>})</p>
@@ -108,6 +104,7 @@ export default function FirstSetup() {
             onChange: () => setError('')
           })}
         />
+        {errors?.username && <span className="text-red-500 text-sm">{errors.username?.message}</span>}
 
         <h2 className="text-center text-lg pt-6">
           Add some information about yourself:
@@ -124,14 +121,12 @@ export default function FirstSetup() {
           id="name"
           type="text"
           placeholder="Your real or display name"
-          className="outline-none text-base border-b-2 border-textPrimary border-opacity-70 p-2 pb-1 w-full mb-5 bg-bgSecondary"
+          className="outline-none text-base border-b-2 border-textPrimary border-opacity-70 p-2 pb-1 w-full mb-1 bg-bgSecondary"
           maxLength={50}
-          {...register("mainData.name", {
-            maxLength: 50
-          })}
+          {...register("mainData.name")}
         />
 
-        <label for="title" className="text-left">
+        <label for="title" className="text-left mt-4">
           Occupation
           <span className="float-right">{watch('mainData.title')?.length || 0}/50</span>
         </label>
@@ -139,14 +134,12 @@ export default function FirstSetup() {
           id="title"
           type="text"
           placeholder="'Illustration/concept art', 'Designer', etc"
-          className="outline-none text-base border-b-2 border-textPrimary border-opacity-70 p-2 pb-1 w-full mb-5 bg-bgSecondary"
+          className="outline-none text-base border-b-2 border-textPrimary border-opacity-70 p-2 pb-1 w-full mb-1 bg-bgSecondary"
           maxLength={50}
-          {...register("mainData.title", {
-            maxLength: 50
-          })}
+          {...register("mainData.title")}
         />
 
-        <label for="email" className="text-left flex items-center">
+        <label for="email" className="text-left mt-4 flex items-center">
           Contact email
           <span className="w-fit float-right flex items-center ml-auto">
             <label for="emailRepeat">Same as account email</label>
@@ -157,16 +150,20 @@ export default function FirstSetup() {
           id="email"
           type="email"
           placeholder="Contact email for clients, recruiters etc."
-          className="outline-none text-base border-b-2 border-textPrimary border-opacity-70 p-2 pb-1 w-full mb-5 bg-bgSecondary"
+          className="outline-none text-base border-b-2 border-textPrimary border-opacity-70 p-2 pb-1 w-full mb-1 bg-bgSecondary"
           value={watch("mainData.email")}
           {...register("mainData.email", {
-            maxLength: 200,
-            onChange: () => setEmailRepeat(false)
+            maxLength: {value: 200, message: "Please enter a valid email address"},
+            minLength: {value: 5, message: "Please enter a valid email address"},
+            pattern: {
+              value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+              message: "Please enter a valid email address"
+            }
           })}
-          
         />
-        
-        <label for="icon" className="text-left">
+        {errors?.mainData?.email && <span className="text-red-500 text-sm">{errors.mainData?.email?.message}</span>}
+
+        <label for="icon" className="text-left mt-4">
           Icon URL
         </label>
         <input
@@ -177,40 +174,20 @@ export default function FirstSetup() {
             onChange: e => handleIconChange(e)
           })}
           placeholder="Link to your icon image"
-          className="outline-none text-base border-b-2 border-textPrimary border-opacity-70 p-2 pb-1 w-full mb-5 bg-bgSecondary"
+          className="outline-none text-base border-b-2 border-textPrimary border-opacity-70 p-2 pb-1 w-full bg-bgSecondary"
         />
 
-
-      <div>
-        {isEmpty && !isValidLoading && (
-          <div className="my-10 border-2 rounded border-dashed border-textPrimary m-auto h-56 w-[10rem] flex items-center text-center">
-            <p className='m-auto'>No profile picture</p>
-          </div>
-        )}
-        {isValid && !isValidLoading && !isEmpty  && (
-          <img src={watch("mainData.icon")} alt="user icon" className='h-56 mx-auto my-10'/>
-        )}
-        {isValidLoading && (
-          <div className="my-10 border-2 rounded border-dashed border-textPrimary m-auto h-56 w-[10rem] flex items-center">
-            {<LoaderAnimation />}
-          </div>
-        )}
-        {!isValidLoading && !isValid && !isEmpty && (
-          <div className="my-10 border-2 rounded border-dashed border-red-400 m-auto h-56 w-[10rem] flex items-center">
-            <p className='text-center p-5'>Could not get image :( </p>
-          </div>
-        )}
-      </div>
-
+        {/* Image checker */}
+        {imageBox(watch("mainData.icon"))}
 
         <SubmitButton
-          onClick={handleSubmit(onSubmit)}
+          onClick={onSubmit}
           loading={loading}
           disabled={!watch("username")}
           text="Submit"
         />
+        <button type="button" onClick={logout} className="ml-auto mt-5 opacity-70">Log out</button>
       </form>
-
       {error && <div className="bg-red-400 px-2 py-1">{error}</div>}
     </div>
   );

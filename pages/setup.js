@@ -3,21 +3,21 @@ import { useAuth } from "../context/AuthContext";
 import { useTheme } from "../context/ThemeContext"
 import { useRouter } from "next/router";
 import FirstSetup from "../components/login/FirstSetup";
-import Navbar from '../components/Navbar'
+import PageLayout from "../components/PageLayout";
 
 export default function Setup() {
   const {currentUser} = useAuth()
   const router = useRouter()
-  const {theme} = useTheme()
-  
-  if (currentUser && currentUser.displayName) {
-    router.push(`/${currentUser.displayName}`)
+
+  if (!currentUser) {
+    router.push('/');
+  } else if (currentUser && currentUser.displayName) {
+    router.push(`/manage`)
   } else {
     return (
-      <div className={`theme-${theme} theme-orange`}>
-        <Navbar/>
+      <PageLayout>
         <FirstSetup />
-      </div>
+      </PageLayout>
     );
   }
 }

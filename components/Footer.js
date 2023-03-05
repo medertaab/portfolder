@@ -1,6 +1,6 @@
 import React from 'react'
-import { useAuth } from '../context/AuthContext'
 import Link from 'next/link'
+import { useAuth } from '../context/AuthContext'
 import { useTheme } from '../context/ThemeContext'
 import { useRouter } from 'next/router'
 

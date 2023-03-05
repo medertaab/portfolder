@@ -5,9 +5,8 @@ import { useAuth } from "../../context/AuthContext";
 import { useRouter } from "next/router";
 
 export default function SettingsLayout({ children }) {
-  const { currentUser } = useAuth()
+  const { currentUser, logout } = useAuth()
   const currentPage = useRouter().asPath
-
   
   return (
     <>
@@ -21,12 +20,12 @@ export default function SettingsLayout({ children }) {
           </li>
           <li className={`${currentPage === "/manage" ? "text-bgAccent" : "hover:text-bgAccent"} duration-150`}>
             <Link href="/manage">
-              <i className="fa-solid fa-palette"></i> Manage page
+              <i className="fa-solid fa-palette"></i> Manage page look
             </Link>
           </li>
           <li className={`${currentPage === "/settings" ? "text-bgAccent" : "hover:text-bgAccent"} duration-150`}>
             <Link href="/settings">
-              <i className="fa-solid fa-gear"></i> Settings
+              <i className="fa-solid fa-gear"></i> Account settings
             </Link>
           </li>
           <li className="hover:text-bgAccent duration-150 mt-auto">

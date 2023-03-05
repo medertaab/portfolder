@@ -11,7 +11,7 @@ export default function ThemeForm(props) {
           <div className="w-10 h-10 theme-orange bg-bgAccent"></div>
           <input
             {...register("settings.theme")}
-            className="max-w-5 max-h-5"
+            className="max-w-5 max-h-5 m-auto"
             type="radio"
             id="orangeTheme"
             value="orange"
@@ -23,7 +23,7 @@ export default function ThemeForm(props) {
           <div className="w-10 h-10 theme-purple bg-textAccent"></div>
           <input
             {...register("settings.theme")}
-            className="max-w-5 max-h-5"
+            className="max-w-5 max-h-5 m-auto"
             type="radio"
             id="purpleTheme"
             value="purple"
@@ -35,7 +35,7 @@ export default function ThemeForm(props) {
           <div className="w-10 h-10 theme-gray bg-bgAccent"></div>
           <input
             {...register("settings.theme")}
-            className="max-w-5 max-h-5"
+            className="max-w-5 max-h-5 m-auto"
             type="radio"
             id="grayTheme"
             value="gray"
@@ -56,7 +56,7 @@ export default function ThemeForm(props) {
           <p className="text-xs text-center text-textPrimary text-opacity-80">(All thumbnails will be square)</p>
           <input
             {...register("settings.grid")}
-            className="max-w-5 max-h-5"
+            className="max-w-5 max-h-5 m-auto"
             type="radio"
             id="staticGrid"
             value="static"
@@ -73,7 +73,7 @@ export default function ThemeForm(props) {
           <p className="text-xs w-[60%] text-center text-textPrimary text-opacity-80">(Thumbnails will adapt to image orientation, which might shuffle gallery order)</p>
           <input
             {...register("settings.grid")}
-            className="max-w-5 max-h-5"
+            className="max-w-5 max-h-5 m-auto"
             type="radio"
             id="dynamiGrid"
             value="dynamic"

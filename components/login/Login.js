@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { useAuth } from "../../context/AuthContext";
-import { useForm } from "react-hook-form";
 import Link from "next/link";
 import SubmitButton from './SubmitButton'
+import { useAuth } from "../../context/AuthContext";
+import { useForm } from "react-hook-form";
 
 export default function Login() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+
   const { login } = useAuth();
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
 

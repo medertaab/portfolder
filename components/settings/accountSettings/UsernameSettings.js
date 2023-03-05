@@ -1,36 +1,29 @@
 import React, { useState, useEffect } from 'react'
+import { useRouter } from 'next/router';
 import { useAuth } from '../../../context/AuthContext'
 import { useForm } from "react-hook-form";
-import LoaderAnimation from "../../LoaderAnimation"
 import useUpdateData from '../../../hooks/useUpdateData';
-import { doc, getDoc, getDocs, collection, query, where, limit } from 'firebase/firestore'
-import { db } from '../../../firebase';
-import { useRouter } from 'next/router';
+import LoaderAnimation from "../../LoaderAnimation"
+import useFilterUsername from "../../../hooks/useFilterUsername";
 
 export default function UsernameSettings(props) {
   const {setPage} = props
+  
+  const router = useRouter()
   const { currentUser, updateUser } = useAuth()
+  const { isUsernameTaken  } = useFilterUsername()
   const {updateData, updateLoading, updateError} = useUpdateData()
   const { register, handleSubmit, watch, formState: { errors }, reset } = useForm();
-  const router = useRouter()
+
+
   const [loading, setLoading] = useState(false)
   const [isTaken, setIsTaken] = useState(false)
   const [success, setSuccess] = useState(false)
 
+  // Display current username
   useEffect(() => {
     reset({username: currentUser.displayName})
   }, [])
-
-  async function isUsernameTaken(username) {
-    const usersRef = collection(db, "users");
-      const dataQuery = query(usersRef, where("username", "==", username));
-      const querySnapshot = await getDocs(dataQuery);
-      if (querySnapshot.docs[0]) {
-        return true
-      } else {
-        return false
-      }
-  }
 
   function onSubmit(e) {
     e.preventDefault();
@@ -39,20 +32,20 @@ export default function UsernameSettings(props) {
   
   async function handleUpdateUsername(data){
     setLoading(true)
-      setIsTaken(false)
-      if (await isUsernameTaken(data.username.toLowerCase())) {
-        setIsTaken(true)
-        setLoading(false)
-        return
-      } else {
-        await updateUser({displayName: data.username.toLowerCase()})
-        await updateData(data)
-        setSuccess(true)
-        setTimeout(() => {
-          router.reload()
-        }, 1000)
-      }
+    setIsTaken(false)
+    if (await isUsernameTaken(data.username.toLowerCase())) {
+      setIsTaken(true)
       setLoading(false)
+      return
+    } else {
+      await updateUser({displayName: data.username.toLowerCase()})
+      await updateData(data)
+      setSuccess(true)
+      setTimeout(() => {
+        router.reload()
+      }, 1000)
+    }
+    setLoading(false)
   }
 
   return (
@@ -72,7 +65,8 @@ export default function UsernameSettings(props) {
             pattern: {value: /^[A-Za-z][A-Za-z0-9_-]+$/, message: "Usernames can contain only letters, numbers or the '-'/'_' characters and should start with a letter or number" },
             maxLength: {value: 30, message: "Username should be less than 50 characters long"},
             minLength: {value: 2, message: "Username should be at least 2 characters long"},
-            validate: (value) => (value !== currentUser.displayName)
+            validate: (value) => (value !== currentUser.displayName),
+            onChange: () => setIsTaken(false)
           })}/>
         </div>
         <div className='flex items-center'>
@@ -84,7 +78,11 @@ export default function UsernameSettings(props) {
           >
             {loading ? <LoaderAnimation small={true}/> : (success ? <i className="text-lime-600 fa-solid fa-check"></i> : 'Submit')}
           </button>
-          <span className="text-red-500 ml-1">{errors.username?.message}</span>
+
+          {(errors.username?.message || updateError) && (
+            <span className="text-red-500 ml-1">{errors.username?.message || updateError}</span>
+          )}
+
           <span className="text-red-500 ml-1">{isTaken && "Username is already taken, please choose another one"}</span>
         </div>
       </form>

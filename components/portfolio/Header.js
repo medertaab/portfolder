@@ -12,7 +12,7 @@ export default function Header(props) {
   const soloStyle = "p-2 w-fit m-auto relative flex items-center justify-center"
 
   return (
-    <header className="relative w-full">
+    <header className="relative w-full pt-2">
       <div className={`${mainData.icon ? gridStyle : soloStyle}`}>
         
         {/* Edit button if owner */}

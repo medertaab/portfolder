@@ -45,11 +45,15 @@
 }
 
 /* /////////////////////////// */
-
-.full-screen {
-  height: 100vh;
-  min-height: -webkit-fill-available;
+.image-frame {
+  width: 10rem;
+  height: 14rem;
 }
+
+.h14 {
+  height: 14rem;
+}
+
 
 .divider {
   display: flex;

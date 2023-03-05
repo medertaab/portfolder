@@ -1,14 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useAuth } from "../../../context/AuthContext";
-import { useForm } from "react-hook-form";
-import useUpdateData from "../../../hooks/useUpdateData";
-import { useRouter } from "next/router";
 
 export default function AccountSettings(props) {
   const { setPage } = props;
   const { currentUser } = useAuth();
-  const { updateData, updateLoading, updateError } = useUpdateData();
-  const router = useRouter()
 
   function handleLink(e) {
     setPage(e.target.id);

@@ -17,7 +17,7 @@ export default function LoginPage() {
   return (
     <PageLayout>
       <div
-        className={` h-full text-sx sm:text-sm flex flex-col items-center justify-center`}
+        className={`w-full text-sx sm:text-sm flex flex-col items-center justify-center`}
       >
         <h2 className="text-2xl mb-5 text-textAccent align-middle">
           🖼️ portfolder

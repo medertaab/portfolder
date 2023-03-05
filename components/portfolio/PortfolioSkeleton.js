@@ -8,7 +8,7 @@ export default function PortfolioSkeleton() {
     <button className="h-9 w-9 text-xl rounded-full mx-1 bg-textPrimary"></button>
   );
   return (
-    <div className="animate-pulse">
+    <div className="animate-pulse pt-2">
       <div className="opacity-20">
 
         {/* Header */}

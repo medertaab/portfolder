@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../../context/AuthContext";
 import { useForm } from "react-hook-form";
-import LoaderAnimation from "../../LoaderAnimation";
 import { updateEmail} from "firebase/auth";
 import useReauthenticate from "../../../hooks/useReauthenticate"
+import LoaderAnimation from "../../LoaderAnimation";
 
 export default function EmailSettings(props) {
   const {setPage} = props
   const { currentUser } = useAuth()
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
+  const {reauthenticateUser, isReauthenticated, authError} = useReauthenticate()
+
+  const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const [didUpload, setDidUpload] = useState(false)
   const [isReauthenticating, setIsReauthenticating] = useState(false)
   const [password, setPassword] = useState('')
-  const {reauthenticateUser, isReauthenticated, authError} = useReauthenticate()
-  const [error, setError] = useState('')
 
+  // Set input to user email
   useEffect(() => {
     reset({email: currentUser.email})
   }, [])

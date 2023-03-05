@@ -21,22 +21,17 @@ export default function PageSettings(props) {
     formState: { errors, isDirty },
     setValue,
   } = useForm();
+  const titles = ["display", "socials", "description", "theme"];
 
   useEffect(() => {
     setCurrentForm("display");
     reset(portfolioData);
   }, []);
 
-  // For button slider CSS translate value
-  const [currentId, setCurrentId] = useState(0);
-  useEffect(() => {
-    const titles = ["display", "socials", "description", "theme"];
-    setCurrentId(titles.indexOf(currentForm));
-  }, [currentForm]);
-
-  function onSubmit(data) {
+  function onSubmit(e) {
+    e.preventDefault()
     if (isDirty) {
-      updateData(data);
+      handleSubmit(updateData)();
     } else {
       return;
     }
@@ -72,8 +67,12 @@ export default function PageSettings(props) {
           >
             Theme
           </button>
+          {/* Button slider */}
           <div
-            className={`w-[25%] absolute bg-bgAccent bottom-0 h-1 duration-150 transform translate-x-[${currentId*100}%]`}
+            className="w-[25%] absolute bg-bgAccent bottom-0 h-1 duration-150"
+            style={{
+              transform: `translate(${titles.indexOf(currentForm) * 100}%, 0)`
+            }}
           ></div>
         </div>
 
@@ -116,8 +115,8 @@ export default function PageSettings(props) {
           )}
 
           <button
-            onClick={handleSubmit(onSubmit)}
-            type="button"
+            onClick={onSubmit}
+            type="submit"
             className="float-right ml-auto mt-5 border-2 border-bgAccent w-24 h-10 rounded text-lg hover:bg-bgAccent duration-150"
           >
             {updateLoading ? (
