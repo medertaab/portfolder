@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Head from "next/head";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/router";
 import Login from "../components/login/Login";
@@ -15,7 +16,7 @@ export default function LoginPage() {
   }
 
   return (
-    <PageLayout>
+    <PageLayout title={isLoggingIn ? "Log in" : "Sign up"}>
       <div
         className={`w-full text-sx sm:text-sm flex flex-col items-center justify-center`}
       >

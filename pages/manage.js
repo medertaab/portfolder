@@ -23,7 +23,7 @@ export default function ManageSettingsPage() {
   if (loading) {
     return (
       <div className={`theme-${theme} theme-${portfolioData?.settings?.theme} bg-bgPrimary text-textPrimary`}>
-        <SettingsLayout>
+        <SettingsLayout title="Manage page">
           <LoaderAnimation />
         </SettingsLayout>
       </div>
@@ -32,7 +32,7 @@ export default function ManageSettingsPage() {
 
   return (
     <div className={`theme-${theme} theme-${portfolioData?.settings.theme} bg-bgPrimary text-textPrimary`}>
-      <SettingsLayout>
+      <SettingsLayout title="Manage page">
         <PageSettings
           portfolioData={portfolioData}
           setPortfolioData={setPortfolioData}

@@ -15,7 +15,7 @@ export default function Setup() {
     router.push(`/manage`)
   } else {
     return (
-      <PageLayout>
+      <PageLayout title="Welcome!">
         <FirstSetup />
       </PageLayout>
     );

@@ -28,7 +28,7 @@ export default function SettingsPage() {
   if (loading) {
     return (
       <div className={`theme-${theme} theme-${portfolioData?.settings?.theme} bg-bgPrimary text-textPrimary`}>
-        <SettingsLayout>
+        <SettingsLayout title="Account settings">
           <LoaderAnimation />
         </SettingsLayout>
       </div>
@@ -37,7 +37,7 @@ export default function SettingsPage() {
 
   return (
     <div className={`theme-${theme} theme-${portfolioData?.settings?.theme} bg-bgPrimary text-textPrimary`}>
-      <SettingsLayout>
+      <SettingsLayout title="Account settings">
         {page === "main" && <AccountSettings setPage={setPage}/>}
         {page === "username" && <UsernameSettings setPage={setPage}/>}
         {page === "email" && <EmailSettings setPage={setPage}/>}

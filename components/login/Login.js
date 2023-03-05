@@ -46,6 +46,7 @@ export default function Login() {
             value: 200,
             message: "Please enter a valid email address",
           },
+          onChange: () => setError('')
         })}
         className="outline-none bg-bgSecondary text-base p-2 w-full mb-5 border-b-2 border-bgAccent"
       />
@@ -60,6 +61,7 @@ export default function Login() {
         {...register("password", {
           required: true,
           maxLength: 1000,
+          onChange: () => setError('')
         })}
         className="outline-none bg-bgSecondary text-base p-2 w-full mb-5 border-b-2 border-bgAccent"
       ></input>

@@ -1,15 +1,22 @@
 import React from "react";
 import Link from "next/link";
+import Head from "next/head";
 import Navbar from "../Navbar";
 import { useAuth } from "../../context/AuthContext";
 import { useRouter } from "next/router";
 
-export default function SettingsLayout({ children }) {
+
+export default function SettingsLayout(props) {
+  const { children } = props
   const { currentUser, logout } = useAuth()
   const currentPage = useRouter().asPath
   
   return (
     <>
+      <Head>
+        <title>{props.title} | PortFolder</title>
+        <meta name="description" content="Portfolder: Compact portfolio maker" />
+      </Head>
       <Navbar />
       <div className="max-w-5xl min-h-[calc(100vh-2.5rem)] m-auto">
         <ul className="sm:flex sm:fixed h-full w-[250px] bg-bgPrimary hidden p-7 flex-col gap-2 text-lg [&>*]:p-1 basis-[250px] max-h-[calc(100vh-2.5rem)] border-r-2 border-bgSecondary">

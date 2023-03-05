@@ -4,7 +4,7 @@ import PaswordReset from "../components/login/PasswordReset";
 
 export default function passwordreset() {
   return (
-    <PageLayout>
+    <PageLayout title="Reset password">
       <PaswordReset />
     </PageLayout>
   );
