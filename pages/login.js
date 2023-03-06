@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Head from "next/head";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/router";
 import Login from "../components/login/Login";

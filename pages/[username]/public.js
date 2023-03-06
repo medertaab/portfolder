@@ -13,7 +13,7 @@ export default function PortfolioPage() {
   return (
     <div className={`theme-${theme} bg-bgPrimary`}>
       <Head>
-        <title>{`${query}`} | portFolder</title>
+        <title>{`${query}`} | PortFolder</title>
         <meta name="description" content={`${query}'s compact portfolio`} />
       </Head>
       <Portfolio username={username} publicMode={true}/>

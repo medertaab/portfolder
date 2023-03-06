@@ -10,7 +10,7 @@ export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <div className="w-full h-10 sticky top-0 z-40 bg-bgPrimary flex items-center p-2 border-b-[1px] border-bgSecondary">
+    <nav className="w-full h-10 sticky top-0 z-40 bg-bgPrimary flex items-center p-2 border-b-[1px] border-bgSecondary">
       <Link
         className="sm:text-3xl text-xl grid place-content-center p-2 text-textPrimary"
         href={currentUser ? `/${currentUser.displayName}` : "/"}
@@ -44,6 +44,6 @@ export default function Navbar() {
         </button>
       )}
       {openModal && <MenuModal setOpenModal={setOpenModal} />}
-    </div>
+    </nav>
   );
 }

@@ -42,39 +42,40 @@ export default function PageSettings(props) {
   } else
     return (
       <div>
-        <div className="relative flex max-w-[80%] m-auto text-base sm:text-lg font-semibold ">
-          <button
+        {/* Settings navigation */}
+        <ul className="relative flex max-w-[80%] m-auto text-base sm:text-lg font-semibold [&_li]:text-center [&_li]:cursor-pointer">
+          <li
             onClick={() => setCurrentForm("display")}
             className="p-2 hover:text-bgAccent duration-150 w-1/4"
           >
-            Display info
-          </button>
-          <button
+            Your info
+          </li>
+          <li
             onClick={() => setCurrentForm("socials")}
             className="p-2 hover:text-bgAccent duration-150 w-1/4"
           >
             Socials
-          </button>
-          <button
+          </li>
+          <li
             onClick={() => setCurrentForm("description")}
             className="p-2 hover:text-bgAccent duration-150 w-1/4"
           >
             Bio
-          </button>
-          <button
+          </li>
+          <li
             onClick={() => setCurrentForm("theme")}
             className="p-2 hover:text-bgAccent duration-150 w-1/4"
           >
             Theme
-          </button>
-          {/* Button slider */}
+          </li>
+          {/* Setting slider */}
           <div
             className="w-[25%] absolute bg-bgAccent bottom-0 h-1 duration-150"
             style={{
               transform: `translate(${titles.indexOf(currentForm) * 100}%, 0)`
             }}
           ></div>
-        </div>
+        </ul>
 
         <form className="settings-form relative flex flex-col sm:p-10 p-3">
           {currentForm === "display" && (

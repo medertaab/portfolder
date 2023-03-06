@@ -79,7 +79,7 @@ export default function Gallery(props) {
           <button
             onClick={() => setMode("adding")}
             type="button"
-            className="justify-self-start py-2 px-4 text-textPrimary font-semibold bg-bgAccent border-2 border-bgAccent w-fit rounded hover:bg-bgPrimary duration-150"
+            className="justify-self-start py-2 px-4 text-textPrimary font-semibold bg-bgAccent w-fit rounded hover:bg-opacity-80 duration-150"
           >
             + Add image
           </button>
