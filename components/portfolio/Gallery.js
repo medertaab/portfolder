@@ -22,9 +22,9 @@ export default function Gallery(props) {
 
   function gridLayout() {
     if (grid === "dynamic") {
-      return "p-2 grid sm:grid-cols-[repeat(auto-fill,_minmax(350px,1fr))] grid-cols-1 gap-1 justify-between auto-rows-min grid-flow-dense";
+      return "fade-in p-2 grid sm:grid-cols-[repeat(auto-fill,_minmax(350px,1fr))] grid-cols-1 gap-1 justify-between auto-rows-min grid-flow-dense";
     } else if (grid === "static") {
-      return "p-2 grid sm:grid-cols-[repeat(auto-fill,_minmax(350px,1fr))] grid-cols-1 gap-1 justify-between";
+      return "fade-in p-2 grid sm:grid-cols-[repeat(auto-fill,_minmax(350px,1fr))] grid-cols-1 gap-1 justify-between";
     }
   }
 

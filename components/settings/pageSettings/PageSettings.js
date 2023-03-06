@@ -43,7 +43,7 @@ export default function PageSettings(props) {
     return (
       <div>
         {/* Settings navigation */}
-        <ul className="relative flex max-w-[80%] m-auto text-base sm:text-lg font-semibold [&_li]:text-center [&_li]:cursor-pointer">
+        <ul className="relative sm:w-[90%] sm:max-w-2xl flex m-auto text-base sm:text-lg font-semibold [&_li]:text-center [&_li]:cursor-pointer">
           <li
             onClick={() => setCurrentForm("display")}
             className="p-2 hover:text-bgAccent duration-150 w-1/4"

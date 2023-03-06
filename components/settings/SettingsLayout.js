@@ -18,7 +18,7 @@ export default function SettingsLayout(props) {
         <meta name="description" content="Portfolder: Compact portfolio maker" />
       </Head>
       <Navbar />
-      <div className="max-w-5xl min-h-[calc(100vh-2.5rem)] m-auto">
+      <div className=" min-h-[calc(100vh-2.5rem)] m-auto">
         <ul className="sm:flex sm:fixed h-full w-[250px] bg-bgPrimary hidden p-7 flex-col gap-2 text-lg [&>*]:p-1 basis-[250px] max-h-[calc(100vh-2.5rem)] border-r-2 border-bgSecondary">
           <li className="hover:text-bgAccent duration-150">
             <Link href={`/${currentUser.displayName}`}>
