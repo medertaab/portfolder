@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 
-
 const AuthContext = React.createContext()
 
 export function useTheme() {
@@ -23,7 +22,7 @@ export function ThemeProvider({children}) {
   const value = {theme, toggleTheme, setTheme}
 
   return (
-    <AuthContext.Provider value={value}>
+    <AuthContext.Provider value={value} >
       {children}
     </AuthContext.Provider>
   )

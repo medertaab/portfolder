@@ -4,7 +4,8 @@ import Head from "next/head";
 import Navbar from "../Navbar";
 import { useAuth } from "../../context/AuthContext";
 import { useRouter } from "next/router";
-
+import { Figtree } from "next/font/google"
+const figtree = Figtree({ subsets: ["latin"]});
 
 export default function SettingsLayout(props) {
   const { children } = props
@@ -18,7 +19,7 @@ export default function SettingsLayout(props) {
         <meta name="description" content="Portfolder: Compact portfolio maker" />
       </Head>
       <Navbar />
-      <div className=" min-h-[calc(100vh-2.5rem)] m-auto">
+      <div className={`${figtree.className} min-h-[calc(100vh-2.5rem)] m-auto`}>
         <ul className="sm:flex sm:fixed h-full w-[250px] bg-bgPrimary hidden p-7 flex-col gap-2 text-lg [&>*]:p-1 basis-[250px] max-h-[calc(100vh-2.5rem)] border-r-2 border-bgSecondary">
           <li className="hover:text-bgAccent duration-150">
             <Link href={`/${currentUser.displayName}`}>
@@ -27,7 +28,7 @@ export default function SettingsLayout(props) {
           </li>
           <li className={`${currentPage === "/manage" ? "text-bgAccent" : "hover:text-bgAccent"} duration-150`}>
             <Link href="/manage">
-              <i className="fa-solid fa-palette"></i> Manage page look
+              <i className="fa-solid fa-palette"></i> Manage page
             </Link>
           </li>
           <li className={`${currentPage === "/settings" ? "text-bgAccent" : "hover:text-bgAccent"} duration-150`}>

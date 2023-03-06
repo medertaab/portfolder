@@ -3,6 +3,8 @@ import Head from "next/head";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 import { useTheme } from "../context/ThemeContext";
+import { Figtree } from "next/font/google"
+const figtree = Figtree({ subsets: ["latin"]});
 
 export default function PageLayout(props) {
   const { children } = props
@@ -22,7 +24,7 @@ export default function PageLayout(props) {
 
   return (
     <div
-      className={`theme-${theme} theme-orange flex flex-col fade-in bg-bgPrimary text-textPrimary`}
+      className={`${figtree.className} theme-${theme} theme-orange flex flex-col fade-in bg-bgPrimary text-textPrimary`}
     >
        <Head>
         <title>{props.title} | PortFolder</title>

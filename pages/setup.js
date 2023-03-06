@@ -1,6 +1,5 @@
 import React from "react";
 import { useAuth } from "../context/AuthContext";
-import { useTheme } from "../context/ThemeContext"
 import { useRouter } from "next/router";
 import FirstSetup from "../components/login/FirstSetup";
 import PageLayout from "../components/PageLayout";

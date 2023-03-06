@@ -11,7 +11,7 @@ export default function ThemeForm(props) {
           <div className="w-10 h-10 theme-orange bg-bgAccent"></div>
           <input
             {...register("settings.theme")}
-            className="max-w-5 max-h-5 m-auto w-fit"
+            className="max-w-5 max-h-5 m-auto w-min"
             type="radio"
             id="orangeTheme"
             value="orange"
@@ -23,7 +23,7 @@ export default function ThemeForm(props) {
           <div className="w-10 h-10 theme-purple bg-textAccent"></div>
           <input
             {...register("settings.theme")}
-            className="max-w-5 max-h-5 m-auto w-fit"
+            className="max-w-5 max-h-5 m-auto w-min"
             type="radio"
             id="purpleTheme"
             value="purple"
@@ -35,7 +35,7 @@ export default function ThemeForm(props) {
           <div className="w-10 h-10 theme-gray bg-bgAccent"></div>
           <input
             {...register("settings.theme")}
-            className="max-w-5 max-h-5 w-fit"
+            className="max-w-5 max-h-5 w-min"
             type="radio"
             id="grayTheme"
             value="gray"
@@ -58,7 +58,7 @@ export default function ThemeForm(props) {
           </p>
           <input
             {...register("settings.grid")}
-            className="max-w-5 max-h-5 m-auto w-fit"
+            className="max-w-5 max-h-5 m-auto w-min"
             type="radio"
             id="staticGrid"
             value="static"
@@ -78,7 +78,7 @@ export default function ThemeForm(props) {
           </p>
           <input
             {...register("settings.grid")}
-            className="max-w-5 max-h-5 m-auto w-fit"
+            className="max-w-5 max-h-5 m-auto w-min"
             type="radio"
             id="dynamiGrid"
             value="dynamic"

@@ -61,7 +61,7 @@ export default function MenuModal(props) {
           <div className="min-w-[2rem] inline-block">
             <i className="fa-solid fa-palette"></i>
           </div>
-          Manage page look
+          Manage page
         </Link>
 
         <Link href="/settings" className="hover:text-bgAccent duration-150">
