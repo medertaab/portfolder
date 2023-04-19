@@ -33,8 +33,8 @@ export default function SignUp() {
   }
 
   return (
-    <form className="flex flex-col w-full max-w-xs fade-in">
-      <h2 className="font-bold text-3xl m-auto">Sign up</h2>
+    <form className="flex flex-col w-full max-w-xs fade-in m-auto">
+      <h2 className="font-bold text-2xl m-auto">Sign up</h2>
 
       <label for="emailInput" className="max-w-fit text-left">
         Email

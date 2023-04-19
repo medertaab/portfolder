@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function Thumbnail(props) {
   const {
@@ -8,16 +10,12 @@ export default function Thumbnail(props) {
     setUpdatingImage,
     setUpdatingNum,
     num,
-    grid,
-    setImageIndex
+    grid
   } = props;
+  const {asPath} = useRouter()
 
   const [hover, setHover] = useState(false);
   const [landscape, setLandscape] = useState(false)
-
-  function handleOpenImage() {
-    setImageIndex(num)
-  }
 
   function handleUpdateImage(e) {
     e.stopPropagation()
@@ -42,21 +40,23 @@ export default function Thumbnail(props) {
   }
 
   return (
-    <figure 
-      onClick={handleOpenImage} onMouseOver={handleMouseEnter} onMouseLeave={() => setHover(false)}
-      className={`relative w-full ${grid === "static" ? "aspect-square" : "h-full"} cursor-pointer ${landscape && 'landscape'}`} 
-    >      
-      {pageOwner && (
-        <i onClick={handleUpdateImage} className={`fa-solid fa-pen-to-square absolute right-0 p-2 text-2xl cursor-pointer opacity-${hover ? 100 : 0} hover:text-bgAccent z-20`}></i>
-      )}
+    <Link href={{pathname: `${asPath}/${image.title}`, query: {id: num}}} scroll={false}>
+      <figure 
+        onMouseOver={handleMouseEnter} onMouseLeave={() => setHover(false)}
+        className={`relative w-full ${grid === "static" ? "aspect-square" : "h-full"} cursor-pointer ${landscape && 'landscape'}`} 
+      >      
+        {pageOwner && (
+          <i onClick={handleUpdateImage} className={`fa-solid fa-pen-to-square absolute right-0 p-2 text-2xl cursor-pointer opacity-${hover ? 100 : 0} hover:text-bgAccent z-20`}></i>
+        )}
 
-      <figcaption className={`h-full w-full absolute z-10 opacity-${hover ? '100' : '0'} bg-bgPrimary bg-opacity-30 flex justify-center items-center duration-150`}>
-        <h3 className="text-xl bottom-0 font-bold drop-shadow-2xl text-shadow box-border object-contain">{image.title}</h3>
-      </figcaption>  
+        <figcaption className={`h-full w-full absolute z-10 opacity-${hover ? '100' : '0'} bg-bgPrimary bg-opacity-30 flex justify-center items-center duration-150`}>
+          <h3 className="text-xl bottom-0 font-bold drop-shadow-2xl text-shadow box-border object-contain">{image.title}</h3>
+        </figcaption>  
 
-      <div className={`${grid === "static" ? "h-[350px]" : "h-[450px]"}`}>
-        <Image src={image.link} alt="" fill className={`w-full h-full object-cover`} onLoad={handleLoad}/>
-      </div>
-    </figure>
+        <div className={`${grid === "static" ? "h-[350px]" : "h-[450px]"}`}>
+          <Image src={image.link} alt="" fill className={`w-full h-full object-cover`} onLoad={handleLoad}/>
+        </div>
+      </figure>
+    </Link>
   );
 }

@@ -1,7 +1,4 @@
 import React from "react";
-import Header from "./Header";
-import Gallery from "./Gallery";
-import Description from "./Description";
 
 export default function PortfolioSkeleton() {
   const socialButton = (
@@ -24,9 +21,11 @@ export default function PortfolioSkeleton() {
             </div>
           </div>
           <div className="relative m-auto flex w-fit h-fit gap-2 justify-center mt-4">
-            {[1, 2, 3, 4, 5].map((it) => {
-              return socialButton;
-            })}
+            {socialButton}
+            {socialButton}
+            {socialButton}
+            {socialButton}
+            {socialButton}
           </div>
         </div>
 

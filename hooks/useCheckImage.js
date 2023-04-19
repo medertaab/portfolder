@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import LoaderAnimation from "../components/LoaderAnimation";
+import LoaderAnimation from "../components/ui/LoaderAnimation";
 
 export default function useCheckImage() {
   const [isValid, setIsValid] = useState(true);

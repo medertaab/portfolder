@@ -2,7 +2,7 @@ import React from "react";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/router";
 import FirstSetup from "../components/login/FirstSetup";
-import PageLayout from "../components/PageLayout";
+import PageLayout from "../components/ui/PageLayout";
 
 export default function Setup() {
   const {currentUser} = useAuth()

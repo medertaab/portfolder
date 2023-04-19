@@ -1,80 +1,55 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import LoaderAnimation from "../ui/LoaderAnimation"
+import useFetchImages from "../../hooks/fetchImages";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
-export default function FullImageModal(props) {
-  const { images, imageIndex, setImageIndex } = props;
-  const image = images[imageIndex]
+export default function FullImageModal() {
+  const [loading, setLoading] = useState(true)
+  const router = useRouter()
+  const username = router.query.username
+  const [imageIndex, setImageIndex] = useState(router.query.id)
 
-  const [sliding, setSliding] = useState('')
-  const [touchStart, setTouchStart] = useState(null)
-  const [touchEnd, setTouchEnd] = useState(null)
-  
-  const minSwipeDistance = 50 
-
-  const onTouchStart = (e) => {
-    setTouchEnd(null)
-    setTouchStart(e.targetTouches[0].clientX)
-  }
-
-  const onTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX)
-
-  const onTouchEnd = () => {
-    if (!touchStart || !touchEnd) return
-    const distance = touchStart - touchEnd
-    const isLeftSwipe = distance > minSwipeDistance
-    const isRightSwipe = distance < -minSwipeDistance
-    if (isLeftSwipe) nextImage()
-    if (isRightSwipe) prevImage()
-  }
-
-  function nextImage() {
-    const nextIndex = Object.keys(images).indexOf(imageIndex) + 1
-    const nextImageNum = Object.keys(images)[nextIndex]
-    if (images[nextImageNum]) {
-      setSliding("right")
-      setTimeout(() => {
-        setSliding("")
-        setImageIndex(nextImageNum)
-      }, 250)
-    }
-  }
-
-  function prevImage() {
-    const prevIndex = Object.keys(images).indexOf(imageIndex) - 1
-    const prevImageNum = Object.keys(images)[prevIndex]
-    if (images[prevImageNum]) {
-      setSliding("left")
-      setTimeout(() => {
-        setSliding("")
-        setImageIndex(prevImageNum)
-      }, 250)
-    }
-  }
+  const { images } = useFetchImages(username);
+  const image = images?.[imageIndex]
 
   function handleNextClick(e) {
     e.stopPropagation()
-    nextImage()
+    const nextImageIndex = Object.keys(images).indexOf(imageIndex) + 1
+    if (nextImageIndex >= Object.keys(images).length) return
+    const nextImageId = Object.keys(images)[nextImageIndex]
+    setImageIndex(nextImageId)
   }
 
   function handlePrevClick(e) {
     e.stopPropagation()
-    prevImage()
+    const prevImageIndex = Object.keys(images).indexOf(imageIndex) - 1
+    if (prevImageIndex < 0) return
+    const prevImageId = Object.keys(images)[prevImageIndex]
+    setImageIndex(prevImageId)
+  }
+
+  useEffect(() => {
+    if (image) {
+      router.push(`/${username}/${image.title}?id=${imageIndex}`, undefined, {shallow: true})
+    }
+  }, [imageIndex])
+
+  if (!images) {
+    return
   }
 
   return (
     <div
-      onClick={() => setImageIndex(null)}
       className="fixed z-40 inset-0 max-h-full max-w-full bg-bgPrimary bg-opacity-80 backdrop-blur-md flex flex-col items-center justify-center"
-      onTouchStart={onTouchStart} 
-      onTouchMove={onTouchMove} 
-      onTouchEnd={onTouchEnd}
     >
       {/* Close modal button */}
-      <button
-        onClick={() => setImageIndex(null)}
-        className="absolute top-0 z-30 right-0 p-5 cursor-pointer"
+      <Link
+        href={`/${username}`}
+        className="absolute top-8 z-30 right-0 p-5 cursor-pointer "
       >
         <i className="fa-solid fa-xmark text-3xl hover:text-bgAccent"></i>
-      </button>
+      </Link>
 
       {/* Navigation buttons */}
       <div className="absolute flex z-40 justify-between w-full sm:max-w-5xl px-5">
@@ -88,11 +63,14 @@ export default function FullImageModal(props) {
 
       {/* Image (with additional div for even flex center of image*/}
       <div className="mb-4"></div>
-      <div className={`fade-in h-fit sm:h-3/4 flex items-center self-center ${sliding && `sliding-${sliding}`}`} onClick={(e) => e.stopPropagation()}>
+      <div className={`fade-in h-fit sm:h-3/4 flex items-center self-center`} onClick={(e) => e.stopPropagation()}>
+        {loading && <LoaderAnimation />}
         <img
           alt={image.title}
           src={image.link}
-          className="h-full object-contain fade-in"
+          className="fade-in h-full object-contain fade-in"
+          style={{display: loading ? "none" : "block"}}
+          onLoad={() => setLoading(false)}
         />
       </div>
       <h2 className="text-xl mt-4">{image.title}</h2>

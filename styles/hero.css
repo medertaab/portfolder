@@ -1,0 +1,45 @@
+.new-work-1 {
+  animation: new-work 0.3s ease-in-out 1s 1 forwards;
+  transform: scale(0%);
+}
+
+.new-work-2 {
+  animation: new-work 0.3s ease-in-out 2s 1 forwards;
+  transform: scale(0%);
+}
+
+@keyframes new-work {
+  0% {
+    transform: scale(0%);
+  } 80% {
+    transform: scale(120%);
+  } 100% {
+    transform: scale(100%);
+  }
+}
+
+.fade-in {
+  animation: fadeInAnimation ease 250ms;
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.fade-out {
+  animation: fadeOutAnimation 250ms ease 4750ms;
+}
+
+@keyframes fadeOutAnimation {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

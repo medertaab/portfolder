@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Header from "./Header";
-import Description from "./Description";
+import Navbar from "../ui/Navbar";
+import Footer from "../ui/Footer";
 import Gallery from "./Gallery";
-import Navbar from "../Navbar";
-import { useAuth } from "../../context/AuthContext";
-import useFetchPortfolioData from "../../hooks/fetchPortfolioData";
-import Footer from "../Footer";
-import { useTheme } from "../../context/ThemeContext";
+import Description from "./Description";
 import PortfolioSkeleton from "./PortfolioSkeleton";
+import { useAuth } from "../../context/AuthContext";
+import { useTheme } from "../../context/ThemeContext";
+import useFetchPortfolioData from "../../hooks/fetchPortfolioData";
 
 export default function Portfolio(props) {
   const { username, publicMode } = props;

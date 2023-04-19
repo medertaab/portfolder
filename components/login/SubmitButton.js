@@ -1,5 +1,5 @@
 import React from 'react'
-import LoaderAnimation from '../LoaderAnimation';
+import LoaderAnimation from '../ui/LoaderAnimation';
 
 export default function SubmitButton(props) {
   if (props.disabled) {

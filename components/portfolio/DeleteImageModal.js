@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import LoaderAnimation from '../LoaderAnimation';
+import LoaderAnimation from '../ui/LoaderAnimation';
 import { doc, updateDoc, deleteField } from "firebase/firestore";
 import { db } from "../../firebase";
 import { useAuth } from '../../context/AuthContext';

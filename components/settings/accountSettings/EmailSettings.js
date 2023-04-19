@@ -3,10 +3,10 @@ import { useAuth } from "../../../context/AuthContext";
 import { useForm } from "react-hook-form";
 import { updateEmail} from "firebase/auth";
 import useReauthenticate from "../../../hooks/useReauthenticate"
-import LoaderAnimation from "../../LoaderAnimation";
+import LoaderAnimation from "../../ui/LoaderAnimation";
+import Link from "next/link";
 
-export default function EmailSettings(props) {
-  const {setPage} = props
+export default function EmailSettings() {
   const { currentUser } = useAuth()
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
   const {reauthenticateUser, isReauthenticated, authError} = useReauthenticate()
@@ -55,9 +55,9 @@ export default function EmailSettings(props) {
     <div 
       className="sm:p-10 p-3 py-6 [&_label]:font-semibold"
     >
-      <button className="block py-2 text-2xl" onClick={() => setPage("main")} type="button">
+      <Link href="/settings" className="block py-2 text-2xl">
         <i className="fa-solid fa-arrow-left"></i>
-      </button>
+      </Link>
 
       <form>
         <label for="emailInput">Set email address</label>
@@ -94,6 +94,7 @@ export default function EmailSettings(props) {
           >
             {loading ? <LoaderAnimation small={true}/> : (didUpload ? <i className="text-lime-600 fa-solid fa-check"></i> : 'Submit')}
           </button>
+          
           <span className="text-red-500 ml-2">{errors.email?.message}</span>
           {error && <span className="text-red-500 ml-2">{error}</span>}
         </div>

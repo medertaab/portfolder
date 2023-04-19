@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React, { useEffect } from "react";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 import { useRouter } from "next/router";
 
 export default function MenuModal(props) {
@@ -12,29 +12,28 @@ export default function MenuModal(props) {
     logout();
     setOpenModal(false);
     setTimeout(() => {
-      router.reload(window.location.pathname);
+      router.push("/");
     }, 500);
   }
 
   if (!currentUser) {
-    router.push("/")
+    router.push("/");
   }
 
   return (
     <div className="shadowy flex flex-col py-36 fixed h-full w-full max-w-[20rem] right-0 top-0 bg-bgPrimary border-l-bgSecondary border-l-2 [&_*]:w-fit">
-      <i
+      <button
+        title="Close menu"
         onClick={() => setOpenModal(false)}
         className="fa-solid fa-xmark absolute top-0 right-0 text-2xl p-5 cursor-pointer hover:text-bgAccent duration-150 "
-      ></i>
+      ></button>
 
-      <button
+      <Link
         className="m-auto mb-8 border-b-2 border-bgAccent px-5 hover:text-bgAccent duration-150"
-        type="button"
+        href={`/${currentUser.displayName}`}
       >
-        <Link href={`/${currentUser.displayName}`}>
-          @{currentUser.displayName}
-        </Link>
-      </button>
+        @{currentUser.displayName}
+      </Link>
 
       <div className="flex flex-col gap-3 text-lg m-auto h-full pr-16">
         <Link

@@ -6,6 +6,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screens: {
+        "870": "870px",
+      },
       colors: {
         textPrimary: 'rgb(var(--color-text-primary) / <alpha-value>)',
         textAccent: 'rgb(var(--color-text-accent) / <alpha-value>)',

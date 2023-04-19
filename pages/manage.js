@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/router";
 import PageSettings from "../components/settings/pageSettings/PageSettings";
-import Navbar from "../components/Navbar";
 import useFetchPortfolioData from "../hooks/fetchPortfolioData";
 import { useTheme } from "../context/ThemeContext";
-import LoaderAnimation from "../components/LoaderAnimation";
+import LoaderAnimation from "../components/ui/LoaderAnimation";
 import SettingsLayout from "../components/settings/SettingsLayout";
 
 export default function ManageSettingsPage() {

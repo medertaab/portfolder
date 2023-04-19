@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { useAuth } from "../context/AuthContext";
-import Router, { useRouter } from "next/router";
-import PageSettings from "../components/settings/pageSettings/PageSettings";
-import Navbar from "../components/Navbar";
-import useFetchPortfolioData from "../hooks/fetchPortfolioData";
-import { useTheme } from "../context/ThemeContext";
-import LoaderAnimation from "../components/LoaderAnimation";
-import SettingsLayout from "../components/settings/SettingsLayout";
-import AccountSettings from "../components/settings/accountSettings/AccountSettings"; 
-import UsernameSettings from "../components/settings/accountSettings/UsernameSettings";
-import EmailSettings from "../components/settings/accountSettings/EmailSettings";
-import PasswordSettings from "../components/settings/accountSettings/PasswordSettings";
-import DeleteAccount from "../components/settings/accountSettings/DeleteAccount";
+import React, { useState } from "react";
+import { useAuth } from "../../context/AuthContext";
+import { useRouter } from "next/router";
+import useFetchPortfolioData from "../../hooks/fetchPortfolioData";
+import { useTheme } from "../../context/ThemeContext";
+import LoaderAnimation from "../../components/ui/LoaderAnimation";
+import SettingsLayout from "../../components/settings/SettingsLayout";
+import AccountSettings from "../../components/settings/accountSettings/AccountSettings"; 
+import UsernameSettings from "../../components/settings/accountSettings/UsernameSettings";
+import EmailSettings from "../../components/settings/accountSettings/EmailSettings";
+import PasswordSettings from "../../components/settings/accountSettings/PasswordSettings";
+import DeleteAccount from "../../components/settings/accountSettings/DeleteAccount";
 
 export default function SettingsPage() {
   const { currentUser } = useAuth();

@@ -3,12 +3,11 @@ import { useRouter } from 'next/router';
 import { useAuth } from '../../../context/AuthContext'
 import { useForm } from "react-hook-form";
 import useUpdateData from '../../../hooks/useUpdateData';
-import LoaderAnimation from "../../LoaderAnimation"
+import LoaderAnimation from "../../ui/LoaderAnimation"
 import useFilterUsername from "../../../hooks/useFilterUsername";
+import Link from 'next/link';
 
 export default function UsernameSettings(props) {
-  const {setPage} = props
-  
   const router = useRouter()
   const { currentUser, updateUser } = useAuth()
   const { isUsernameTaken  } = useFilterUsername()
@@ -50,9 +49,9 @@ export default function UsernameSettings(props) {
 
   return (
     <div className="sm:p-10 p-3 py-6 [&_label]:font-semibold">
-      <button className="block py-2 text-2xl" onClick={() => setPage("main")}>
+      <Link href="/settings" className="block py-2 text-2xl">
         <i className="fa-solid fa-arrow-left"></i>
-      </button>
+      </Link>
 
       <form>
         <label for="usernameInput">Change username</label>

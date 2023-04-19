@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import MenuModal from "./MenuModal";
-import { useAuth } from "../context/AuthContext";
 import Link from "next/link";
-import { useTheme } from "../context/ThemeContext";
+import { useAuth } from "../../context/AuthContext";
+import { useTheme } from "../../context/ThemeContext";
 
 export default function Navbar() {
   const [openModal, setOpenModal] = useState(false);
@@ -21,6 +21,7 @@ export default function Navbar() {
       {/* Dark mode button */}
       <button
         onClick={toggleTheme}
+        title="Theme toggle"
         className="relative bg-textPrimary w-16 max-w-[48px] rounded-full h-full border-2 border-textPrimary ml-auto"
       >
         <div
@@ -39,6 +40,7 @@ export default function Navbar() {
         <button
           className="w-fit px-2 flex items-center"
           onClick={() => setOpenModal(true)}
+          title="Open menu"
         >
           <i className="fa-solid fa-bars text-2xl"></i>
         </button>

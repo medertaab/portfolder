@@ -3,7 +3,7 @@ import DisplayForm from "./DisplayForm";
 import SocialsForm from "./SocialsForm";
 import DescriptionForm from "./DescriptionForm";
 import ThemeForm from "./ThemeForm";
-import LoaderAnimation from "../../LoaderAnimation";
+import LoaderAnimation from "../../ui/LoaderAnimation";
 import useUpdateData from "../../../hooks/useUpdateData";
 import { useForm } from "react-hook-form";
 

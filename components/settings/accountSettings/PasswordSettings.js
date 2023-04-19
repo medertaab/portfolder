@@ -3,10 +3,10 @@ import { useAuth } from "../../../context/AuthContext";
 import { useForm } from "react-hook-form";
 import { updatePassword } from "firebase/auth";
 import { reauthenticateWithCredential, EmailAuthProvider } from "firebase/auth";
-import LoaderAnimation from "../../LoaderAnimation";
+import LoaderAnimation from "../../ui/LoaderAnimation";
+import Link from "next/link";
 
-export default function PasswordSettings(props) {
-  const {setPage} = props
+export default function PasswordSettings() {
   const { currentUser } = useAuth()
   const { register, handleSubmit, formState: { errors } } = useForm();
   
@@ -51,9 +51,9 @@ export default function PasswordSettings(props) {
 
   return (
     <div className="px-1 sm:p-10 p-3 py-6 [&_label]:font-semibold">
-      <button className="block py-2 text-2xl" onClick={() => setPage("main")}>
+      <Link href="/settings" className="block py-2 text-2xl">
         <i className="fa-solid fa-arrow-left"></i>
-      </button>
+      </Link>
 
       <form>
         <label for="oldPassword">Enter old password</label>

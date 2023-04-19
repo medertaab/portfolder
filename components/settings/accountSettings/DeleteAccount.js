@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
 import { useAuth } from '../../../context/AuthContext'
 import { useForm } from "react-hook-form";
-import LoaderAnimation from "../../LoaderAnimation"
+import LoaderAnimation from "../../ui/LoaderAnimation"
 import { deleteUser, reauthenticateWithCredential, EmailAuthProvider } from "firebase/auth";
-
 import { useRouter } from 'next/router'
+import Link from 'next/link';
 
-export default function DeleteAccount(props) {
-  const {setPage} = props
+export default function DeleteAccount() {
   const router = useRouter()
   const { currentUser } = useAuth()
   const { register, handleSubmit } = useForm();
@@ -49,10 +48,9 @@ export default function DeleteAccount(props) {
 
   return (
     <div className="sm:p-10 p-3 py-6 [&_label]:font-semibold">
-
-      <button className="block py-2 text-2xl" onClick={() => setPage("main")}>
+      <Link href="/settings" className="block py-2 text-2xl">
         <i className="fa-solid fa-arrow-left"></i>
-      </button>
+      </Link>
 
       <form>
         <p className="text-red-500 mb-4">This action is non-reversible and all your information will be permanently deleted. Are you sure you want to delete your account?</p>

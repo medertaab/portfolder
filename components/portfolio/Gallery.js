@@ -4,7 +4,7 @@ import AddImageModal from "./AddImageModal";
 import UpdateImageModal from "./UpdateImageModal";
 import FullImageModal from "./FullImageModal";
 import useFetchImages from "../../hooks/fetchImages";
-import LoaderAnimation from "../LoaderAnimation";
+import LoaderAnimation from '../ui/LoaderAnimation';
 import DeleteImageModal from "./DeleteImageModal";
 
 export default function Gallery(props) {

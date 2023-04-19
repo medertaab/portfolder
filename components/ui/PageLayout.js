@@ -2,7 +2,7 @@ import React from "react";
 import Head from "next/head";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
-import { useTheme } from "../context/ThemeContext";
+import { useTheme } from "../../context/ThemeContext";
 import { Figtree } from "next/font/google"
 const figtree = Figtree({ subsets: ["latin"]});
 
@@ -31,9 +31,9 @@ export default function PageLayout(props) {
         <meta name="description" content="Portfolder: Compact portfolio maker" />
       </Head>
       <Navbar />
-      <div className="grow flex items-center">
+      <main className="grow flex items-center">
         {children}
-      </div>
+      </main>
       <Footer />
       {fullHeightStyle}
     </div>
