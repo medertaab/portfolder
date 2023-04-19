@@ -32,7 +32,7 @@
 }
 
 .fade-out {
-  animation: fadeOutAnimation 250ms ease 4750ms;
+  animation: fadeOutAnimation 250ms ease 5750ms;
 }
 
 @keyframes fadeOutAnimation {

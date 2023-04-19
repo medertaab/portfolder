@@ -71,7 +71,7 @@ export default function Slide1() {
           <div className="bg-indigo-600 sm:h-28 h-52 col-span-2"></div>
         </div>
       </div>
-      <p className="w-full text-center mt-2">Include additional information to become more discoverable</p>
+      <p className="w-full text-center mt-2 sm:text-md text-sm">Customize page to become more discoverable</p>
     </div>
   );
 }

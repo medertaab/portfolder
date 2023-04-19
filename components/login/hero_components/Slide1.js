@@ -24,8 +24,8 @@ export default function Slide1() {
 
         {/* Gallery */}
         <div className="p-2 grid grid-cols-1 gap-2 justify-between my-1 [&>*]:rounded">
-          <div className="bg-violet-600 h-16"></div>
-          <div className="bg-bgAccent h-16 new-work-1"></div>
+          <div className="bg-violet-600 h-16 new-work-1"></div>
+          <div className="bg-bgAccent h-16 new-work-2"></div>
         </div>
 
         <div className="h-4 mt-[-0.25rem]"></div>
@@ -63,7 +63,7 @@ export default function Slide1() {
           <div className="bg-red-500 sm:h-28 h-52"></div>
         </div>
       </div>
-      <p className="w-full text-center mt-2">Easily set up your page to showcase your work</p>
+      <p className="w-full text-center mt-2 sm:text-md text-sm">Easily set up your page to showcase your work</p>
     </div>
   );
 }

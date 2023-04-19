@@ -11,10 +11,10 @@ export default function Slide1() {
           <div className="bg-bgPrimary rounded p-2 w-4/5 shadowy-2">
             <div className="w-1/2 aspect-square bg-rose-600 rounded m-auto"></div>
             <div className="h-4 border-[1px] border-textPrimary mt-2 m-auto rounded relative">
-              <span className="text-xs ml-1 opacity-80 absolute">https://...img.jpg</span>
+              <span className="text-[0.5rem] ml-1 opacity-80 absolute">https://...img.jpg</span>
             </div>
             <div className="h-4 border-[1px] border-textPrimary mt-2 m-auto rounded relative">
-              <span className="text-xs ml-1 opacity-80 absolute">Work Title</span>
+              <span className="text-[0.5rem] ml-1 opacity-80 absolute">Work Title</span>
             </div>
             <div className="m-auto flex justify-center mt-1">
               <div className="inline-block h-4 w-11 border-[1px] border-gray-500 rounded mt-2 m-1"></div>
@@ -96,7 +96,7 @@ export default function Slide1() {
           <div className="bg-red-500 sm:h-28 h-52"></div>
         </div>
       </div>
-      <p className="w-full text-center mt-2">Add by linking to your images - we don&apos;t store your files</p>
+      <p className="w-full text-center mt-2 sm:text-md text-sm">Add by linking to your images - we don&apos;t store your files</p>
     </div>
   );
 }
