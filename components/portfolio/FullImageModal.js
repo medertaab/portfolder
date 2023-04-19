@@ -15,16 +15,24 @@ export default function FullImageModal() {
 
   function handleNextClick(e) {
     e.stopPropagation()
+    setLoading(true)
     const nextImageIndex = Object.keys(images).indexOf(imageIndex) + 1
-    if (nextImageIndex >= Object.keys(images).length) return
+    if (nextImageIndex >= Object.keys(images).length) {
+      setLoading(false)
+      return
+    }
     const nextImageId = Object.keys(images)[nextImageIndex]
     setImageIndex(nextImageId)
   }
 
   function handlePrevClick(e) {
     e.stopPropagation()
+    setLoading(true)
     const prevImageIndex = Object.keys(images).indexOf(imageIndex) - 1
-    if (prevImageIndex < 0) return
+    if (prevImageIndex < 0) {
+      setLoading(false)
+      return
+    }
     const prevImageId = Object.keys(images)[prevImageIndex]
     setImageIndex(prevImageId)
   }
@@ -41,7 +49,7 @@ export default function FullImageModal() {
 
   return (
     <div
-      className="fixed z-40 inset-0 max-h-full max-w-full bg-bgPrimary bg-opacity-80 backdrop-blur-md flex flex-col items-center justify-center"
+      className="fixed z-50 inset-0 max-h-full max-w-full bg-bgPrimary bg-opacity-80 backdrop-blur-md flex flex-col items-center justify-center"
     >
       {/* Close modal button */}
       <Link
@@ -66,12 +74,12 @@ export default function FullImageModal() {
       <div className={`fade-in h-fit sm:h-3/4 flex items-center self-center`} onClick={(e) => e.stopPropagation()}>
         {loading && <LoaderAnimation />}
         <img
-          alt={image.title}
-          src={image.link}
-          className="fade-in h-full object-contain fade-in"
-          style={{display: loading ? "none" : "block"}}
-          onLoad={() => setLoading(false)}
-        />
+            alt={image.title}
+            src={image.link}
+            className="fade-in h-full object-contain fade-in"
+            style={{display: loading ? "none" : "block"}}
+            onLoad={() => setLoading(false)}
+          />
       </div>
       <h2 className="text-xl mt-4">{image.title}</h2>
     </div>
