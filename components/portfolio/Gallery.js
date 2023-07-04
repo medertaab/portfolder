@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Thumbnail from "./Thumbnail";
-import AddImageModal from "./AddImageModal";
-import UpdateImageModal from "./UpdateImageModal";
-import FullImageModal from "./FullImageModal";
+import AddImageModal from "./modals/AddImageModal";
+import UpdateImageModal from "./modals/UpdateImageModal";
+import FullImageModal from "./modals/FullImageModal";
+import DeleteImageModal from "./modals/DeleteImageModal";
 import useFetchImages from "../../hooks/fetchImages";
 import LoaderAnimation from '../ui/LoaderAnimation';
-import DeleteImageModal from "./DeleteImageModal";
 
 export default function Gallery(props) {
   const { username, pageOwner, grid } = props;

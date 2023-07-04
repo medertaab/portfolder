@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
-import LoaderAnimation from '../ui/LoaderAnimation';
+import LoaderAnimation from '../../ui/LoaderAnimation';
 import { doc, updateDoc, deleteField } from "firebase/firestore";
-import { db } from "../../firebase";
-import { useAuth } from '../../context/AuthContext';
+import { db } from '../../../firebase';
+import { useAuth } from '../../../context/AuthContext';
 
 export default function DeleteImageModal(props) {
   const {setMode, setImages, updatingNum} = props

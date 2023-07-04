@@ -54,7 +54,7 @@ export default function Thumbnail(props) {
         </figcaption>  
 
         <div className={`${grid === "static" ? "h-[350px]" : "h-[450px]"}`}>
-          <Image src={image.link} alt="" fill className={`w-full h-full object-cover`} onLoad={handleLoad}/>
+          <img src={image.link} alt="" className={`w-full h-full object-cover`} onLoad={handleLoad}></img>
         </div>
       </figure>
     </Link>

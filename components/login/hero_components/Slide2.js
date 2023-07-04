@@ -2,12 +2,12 @@ import React from "react";
 
 export default function Slide1() {
   return (
-    <div className="fade-in fade-out">
+    <div>
       {/* Mobile view */}
       <div className="relative border-2 border-bgAccent rounded w-2/5 p-2 m-auto sm:hidden block">
         
         {/* Modal */}
-        <div className="absolute inset-0 bg-textPrimary bg-opacity-0 h-full w-full z-10 flex justify-center items-center">
+        <div className="absolute inset-0 bg-textPrimary bg-opacity-0 h-full w-full z-10 flex justify-center items-center fade-in-modal">
           <div className="bg-bgPrimary rounded p-2 w-4/5 shadowy-2">
             <div className="w-1/2 aspect-square bg-rose-600 rounded m-auto"></div>
             <div className="h-4 border-[1px] border-textPrimary mt-2 m-auto rounded relative">
@@ -51,7 +51,7 @@ export default function Slide1() {
       <div className="relative border-2 border-bgAccent rounded w-full max-w-[800px] aspect-video p-5 sm:block hidden">
         
         {/* Modal */}
-        <div className="absolute inset-0 bg-textPrimary bg-opacity-0 h-full w-full z-10 flex justify-center items-center">
+        <div className="absolute inset-0 bg-textPrimary bg-opacity-0 h-full w-full z-10 flex justify-center items-center fade-in-modal">
           <div className="bg-bgPrimary h-56 w-56 rounded p-2 shadowy-2">
             <div className="w-1/2 aspect-square bg-rose-600 rounded m-auto"></div>
             <div className="h-6 border-[1px] border-textPrimary mt-2 m-auto rounded">
@@ -96,7 +96,7 @@ export default function Slide1() {
           <div className="bg-red-500 sm:h-28 h-52"></div>
         </div>
       </div>
-      <p className="w-full text-center mt-2 sm:text-md text-sm">Add by linking to your images - we don&apos;t store your files</p>
+      <p className="w-full text-center mt-2 mb-8 sm:text-md text-sm">Add by linking to your images - we don&apos;t store your files</p>
     </div>
   );
 }

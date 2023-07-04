@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Slide1() {
   return (
-    <div className="fade-in fade-out">
+    <div>
       {/* Mobile view */}
       <div className="relative border-2 border-bgAccent rounded w-2/5 p-2 m-auto sm:hidden block">
 
@@ -14,10 +14,10 @@ export default function Slide1() {
               <div className="w-10 h-3 bg-textPrimary opacity-20 m-auto rounded"></div>
               <div className="bg-textPrimary opacity-20 h-3 w-2/3 m-auto mt-1 rounded"></div>
               <div className="flex justify-center">
-                <div className="inline-block border-[1px] border-bgAccent bg-bgAccent h-4 w-12 rounded m-1"></div>
-                <div className="inline-block border-[1px] border-bgAccent bg-bgAccent h-4 w-12 rounded m-1"></div>
+                <div className="inline-block border-[1px] border-bgAccent bg-bgAccent h-4 w-12 rounded m-1 buttons-animation"></div>
+                <div className="inline-block border-[1px] border-bgAccent bg-bgAccent h-4 w-12 rounded m-1 buttons-animation"></div>
               </div>
-              <div className="flex justify-center gap-1">
+              <div className="flex justify-center gap-1 socials-animation">
                 <span className="block h-3 aspect-square rounded-full bg-textPrimary"></span>
                 <span className="block h-3 aspect-square rounded-full bg-textPrimary"></span>
                 <span className="block h-3 aspect-square rounded-full bg-textPrimary"></span>
@@ -46,10 +46,10 @@ export default function Slide1() {
               <div className="w-20 h-6 bg-textPrimary opacity-20 m-auto rounded"></div>
               <div className="bg-textPrimary opacity-20 h-8 mx-2 mt-2 rounded"></div>
               <div className="flex justify-center">
-                <div className="inline-block border-2 border-bgAccent bg-bgAccent h-6 w-16 rounded m-2"></div>
-                <div className="inline-block border-2 border-bgAccent bg-bgAccent h-6 w-16 rounded m-2"></div>
+                <div className="inline-block border-2 border-bgAccent bg-bgAccent buttons-animation h-6 w-16 rounded m-2"></div>
+                <div className="inline-block border-2 border-bgAccent bg-bgAccent buttons-animation h-6 w-16 rounded m-2"></div>
               </div>
-              <div className="flex justify-center gap-2">
+              <div className="flex justify-center gap-2 socials-animation">
                 <span className="block h-5 aspect-square rounded-full bg-textPrimary"></span>
                 <span className="block h-5 aspect-square rounded-full bg-textPrimary"></span>
                 <span className="block h-5 aspect-square rounded-full bg-textPrimary"></span>
@@ -71,7 +71,7 @@ export default function Slide1() {
           <div className="bg-indigo-600 sm:h-28 h-52 col-span-2"></div>
         </div>
       </div>
-      <p className="w-full text-center mt-2 sm:text-md text-sm">Customize page to become more discoverable</p>
+      <p className="w-full text-center mt-2 mb-8 sm:text-md text-sm">Customize page to become more discoverable</p>
     </div>
   );
 }

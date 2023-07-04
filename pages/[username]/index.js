@@ -2,7 +2,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import { useTheme } from "../../context/ThemeContext";
 import Head from "next/head";
-import Portfolio from "../../components/portfolio/Portfolio";
+import Portfolio from "../../components/portfolio";
 import { Figtree } from "next/font/google"
 const figtree = Figtree({ subsets: ["latin"]});
 

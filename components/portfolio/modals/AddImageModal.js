@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import LoaderAnimation from '../ui/LoaderAnimation';
+import LoaderAnimation from '../../ui/LoaderAnimation';
 import { doc, setDoc} from "firebase/firestore";
-import { db } from "../../firebase";
-import { useAuth } from "../../context/AuthContext";
+import { db } from "../../../firebase";
+import { useAuth } from "../../../context/AuthContext";
 import { useForm } from "react-hook-form";
-import useCheckImage from "../../hooks/useCheckImage";
+import useCheckImage from "../../../hooks/useCheckImage";
 
 export default function AddImageModal(props) {
   const { images, setImages, setMode } = props;

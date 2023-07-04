@@ -22,6 +22,10 @@
   animation: fadeInAnimation ease 250ms;
 }
 
+.fade-in-modal {
+  animation: fadeInAnimation ease 1000ms 500ms both;
+}
+
 @keyframes fadeInAnimation {
   0% {
     opacity: 0;
@@ -41,5 +45,21 @@
   }
   100% {
     opacity: 0;
+  }
+}
+
+.socials-animation {
+  animation: fadeInAnimation 1000ms ease 1500ms both;
+}
+
+.buttons-animation {
+  animation: buttonsAnimation 1000ms ease 500ms both;
+}
+
+@keyframes buttonsAnimation {
+  0% {
+    background-color: transparent;
+  } 100% {
+    background-color: rgb(244,93,72);
   }
 }

@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 export default function Slide1() {
-
   return (
-    <div className="fade-in fade-out">
+    <div>
       {/* Mobile view */}
       <div className="relative border-2 border-bgAccent rounded w-2/5 p-2 m-auto sm:hidden block">
         
@@ -59,11 +58,11 @@ export default function Slide1() {
           <div className="bg-violet-600 sm:h-28 sm:block hidden"></div>
           <div className="bg-yellow-500 sm:h-28 sm:block hidden"></div>
           <div className="bg-red-400 sm:h-28 h-52"></div>
-          <div className="bg-indigo-500 sm:h-28 h-52"></div>
-          <div className="bg-red-500 sm:h-28 h-52"></div>
+          <div className="bg-indigo-500 sm:h-28 h-52 new-work-1"></div>
+          <div className="bg-red-500 sm:h-28 h-52 new-work-2"></div>
         </div>
       </div>
-      <p className="w-full text-center mt-2 sm:text-md text-sm">Easily set up your page to showcase your work</p>
+      <p className="w-full text-center mt-2 mb-8 sm:text-md text-sm">Easily set up your page to showcase your work</p>
     </div>
   );
 }
