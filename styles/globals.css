@@ -11,21 +11,24 @@
     --color-text-primary: 34 37 37;
     --color-text-accent: 122 49 218;
     
-    --color-bg-primary: 248 245 242;
+    --color-bg-primary: 246 241 236;
     --color-bg-secondary: 230 230 230;
-    --color-text-shadow: rgb(248, 245, 242);
+    --color-text-shadow: 246 241 236;
     --color-element: rgb(34, 37, 37);
+    
+    --color-primary-light: 246 241 236;
+    --color-primary-dark: 34 37 37;
   }
 }
 
 .theme-dark {
-  --color-text-primary: 248 245 242;
+  --color-text-primary: 246 241 236;
   --color-text-accent: 122 49 218;
   
   --color-bg-primary: 31 31 32;
   --color-bg-secondary: 48 47 51;
   --color-text-shadow: rgb(31, 31, 32);
-  --color-element: rgb(248, 245, 242);
+  --color-element: 246 241 236;
 }
 
 .theme-orange {
@@ -33,7 +36,8 @@
 }
 
 .theme-purple {
-  --color-bg-accent: 122 49 218;
+  --color-bg-accent: 101 75 255;
+  --color-bg-accent-highlight: 118 93 255;
 }
 
 .theme-gray {

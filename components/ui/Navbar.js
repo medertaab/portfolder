@@ -10,26 +10,27 @@ export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <nav className="w-full h-10 sticky top-0 z-40 bg-bgPrimary flex items-center p-2 border-b-[1px] border-bgSecondary">
+    <nav className="w-full max-w-screen-2xl mx-auto h-12 sticky top-0 z-40 bg-bgPrimary flex items-center p-2 border-b-[1px] border-bgSecondary">
       <Link
-        className="sm:text-3xl text-xl grid place-content-center p-2 text-textPrimary"
+        className="sm:text-xl text-xl p-2 flex"
         href={currentUser ? `/${currentUser.displayName}` : "/"}
       >
-        🖼️
+        <img src="./icon.png" className="h-8"></img>
+        <h1 className="ml-3">portfolder</h1>
       </Link>
 
       {/* Dark mode button */}
       <button
         onClick={toggleTheme}
         title="Theme toggle"
-        className="relative bg-textPrimary w-16 max-w-[48px] rounded-full h-full border-2 border-textPrimary ml-auto"
+        className="relative bg-textPrimary w-14 max-w-[56px] rounded-full h-full border-2 border-textPrimary ml-auto"
       >
         <div
           className={`bg-bgPrimary z-10 h-full aspect-square rounded-full absolute top-0 ${
             theme === "light" ? "left" : "right"
           }-0 duration-150`}
         ></div>
-        <span className="absolute inset-0 max-w-[2.7rem] m-auto px-0.5 flex justify-between items-center text-lg">
+        <span className="absolute inset-0 max-w-[3.1rem] m-auto px-0.5 flex justify-between items-center text-lg">
           <i className={`ri-moon-clear-fill ml-[-2px] ${theme === 'light' ? "text-textPrimary" : "text-bgPrimary"}`}></i>
           <i className={`ri-sun-fill ${theme === 'dark' ? "text-textPrimary" : "text-bgPrimary"}`}></i>
         </span>

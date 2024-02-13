@@ -22,19 +22,24 @@ export default function PageLayout(props) {
     `}</style>
   );
 
+
   return (
     <div
-      className={`${figtree.className} theme-${theme} theme-orange flex flex-col fade-in bg-bgPrimary text-textPrimary`}
+      className={`${figtree.className} theme-${theme} theme-purple flex flex-col fade-in bg-bgPrimary text-textPrimary`}
     >
-       <Head>
-        <title>{props.title} | PortFolder</title>
+      <Head>
+        {props.title ? <title>{props.title} | PortFolder</title> : <title>PortFolder | Compact Portfolio Maker</title>}
         <meta name="description" content="Portfolder: Compact portfolio maker" />
       </Head>
+
       <Navbar />
-      <main className="grow flex items-center">
+
+      <main className="flex items-center max-w-screen-xl m-auto">
         {children}
       </main>
+
       <Footer />
+
       {fullHeightStyle}
     </div>
   );

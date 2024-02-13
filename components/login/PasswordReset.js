@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import SubmitButton from "./SubmitButton";
+import SubmitButton from "../ui/SubmitButton";
 import { useForm } from "react-hook-form";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 

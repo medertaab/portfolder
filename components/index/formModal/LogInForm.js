@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import SubmitButton from './SubmitButton'
-import { useAuth } from "../../context/AuthContext";
+import SubmitButton from '../../ui/SubmitButton'
+import { useAuth } from "../../../context/AuthContext";
 import { useForm } from "react-hook-form";
 
-export default function Login() {
+export default function LogInForm(props) {
+  const {setMode} = props
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -26,7 +27,7 @@ export default function Login() {
   }
 
   return (
-    <form className="flex flex-col w-full max-w-xs fade-in m-auto">
+    <form className="flex flex-col w-full max-w-xs fade-in m-auto text-textPrimary">
       <h2 className="font-bold text-2xl m-auto">Log in</h2>
 
       <label for="emailInput" className="max-w-fit text-left">
@@ -48,7 +49,7 @@ export default function Login() {
           },
           onChange: () => setError('')
         })}
-        className="outline-none bg-bgSecondary text-base p-2 w-full mb-5 border-b-2 border-bgAccent"
+        className="outline-none bg-bgSecondary text-base p-2 w-full mb-5 border-[1px] border-textPrimary rounded-lg"
       />
 
       <label for="passwordInput" className="text-left">
@@ -63,7 +64,7 @@ export default function Login() {
           maxLength: 1000,
           onChange: () => setError('')
         })}
-        className="outline-none bg-bgSecondary text-base p-2 w-full mb-5 border-b-2 border-bgAccent"
+        className="outline-none bg-bgSecondary text-base p-2 w-full mb-5 border-[1px] border-textPrimary rounded-lg"
       ></input>
 
       <SubmitButton
@@ -80,10 +81,17 @@ export default function Login() {
 
       <Link
         href="/passwordreset"
-        className="underline m-auto mt-4 hover:text-textAccent duration-100"
+        className="underline m-auto mt-4 hover:text-textAccent duration-100 opacity-60"
       >
         Forgot password?
       </Link>
+      <button
+        type="button"
+        onClick={() => setMode("signup")}
+        className="cursor-pointer underline hover:text-textAccent duration-100 opacity-60"
+      >
+        Don't have an account? Sign up!
+      </button>
     </form>
   );
 }
