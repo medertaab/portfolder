@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function PortfolioSkeleton() {
+export default function Skeleton() {
   const socialButton = (
     <button className="h-9 w-9 text-xl rounded-full mx-1 bg-textPrimary"></button>
   );

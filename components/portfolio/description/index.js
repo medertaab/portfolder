@@ -10,7 +10,7 @@ export default function Description(props) {
     return
   } else {
     return (
-      <article className="m-4 p-5 relative sm:m-auto sm:my-4 sm:max-w-xl border-2 border-bgAccent rounded grid sm:grid-flow-col sm:grid-cols-[2fr,_3fr]">
+      <article className="max-w-[40rem] min-h-52 m-4 p-5 relative z-20 sm:m-auto sm:mt-12 border-[1px] border-textPrimary rounded-2xl grid sm:grid-flow-col sm:grid-cols-[2fr,_3fr]">
         {pageOwner && (
           <Link
             className="text-xl absolute top-0 right-0 p-2 opacity-50 duration-150 cursor-pointer hover:opacity-100 hover:rotate-45"
@@ -40,6 +40,8 @@ export default function Description(props) {
             className={`text-left pl-5 italic opacity-50 ${!portfolioData.description.image && "col-span-2"}`}
           >(You can add some description about yourself in this bio section)</div>
         )}
+
+        {/* <img src="./gradient_eclipse1.svg" className="scale-75 absolute -right-[18%] -top-[10%] z-10"></img> */}
       </article>
     );
   }

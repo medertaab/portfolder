@@ -3,19 +3,19 @@
 @tailwind utilities;
 
 :root {
-  font-family: 'Figtree', sans-serif;
+  font-family: "Figtree", sans-serif;
 }
 
 @layer base {
   :root {
     --color-text-primary: 34 37 37;
     --color-text-accent: 122 49 218;
-    
+
     --color-bg-primary: 246 241 236;
     --color-bg-secondary: 230 230 230;
     --color-text-shadow: 246 241 236;
     --color-element: rgb(34, 37, 37);
-    
+
     --color-primary-light: 246 241 236;
     --color-primary-dark: 34 37 37;
   }
@@ -24,7 +24,7 @@
 .theme-dark {
   --color-text-primary: 246 241 236;
   --color-text-accent: 122 49 218;
-  
+
   --color-bg-primary: 31 31 32;
   --color-bg-secondary: 48 47 51;
   --color-text-shadow: rgb(31, 31, 32);
@@ -49,10 +49,7 @@
 }
 
 /* /////////////////////////// */
-.image-frame {
-  width: 10rem;
-  height: 14rem;
-}
+
 
 .h14 {
   height: 14rem;

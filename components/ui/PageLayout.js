@@ -32,7 +32,7 @@ export default function PageLayout(props) {
         <meta name="description" content="Portfolder: Compact portfolio maker" />
       </Head>
 
-      <Navbar />
+      <Navbar logo/>
 
       <main className="flex items-center max-w-screen-xl m-auto">
         {children}

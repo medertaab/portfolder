@@ -4,17 +4,18 @@ import FormModal from "./formModal";
 
 export default function IndexPage() {
   const modal = useRef();
-  const [mode, setMode] = useState("signup")
+  const [mode, setMode] = useState("signup");
 
   // Determine which modal to open
   function openModal(mode) {
-    setMode(mode)
+    setMode(mode);
     modal.current.showModal();
   }
 
   return (
     <div className="flex flex-col lg:flex-row items-center m-auto gap-16 p-8 lg:p-4 lg:gap-8">
-      <div className="flex flex-col gap-6 text-center lg:text-left">
+
+      <div className="flex flex-col gap-6 text-center lg:text-left lg:max-w-[50%]">
         <h2 className="text-6xl">Assemble a portfolio page - fast and easy</h2>
         <h3 className="text-xl">
           Just <span className="text-bgAccent">link your images</span> and they
@@ -37,9 +38,13 @@ export default function IndexPage() {
           </button>
         </div>
       </div>
-      <img className="h-full lg:w-1/2" src="/hero_image.svg"></img>
 
-      <FormModal modalRef={modal} mode={mode} setMode={setMode}/>
+      <div className="relative h-full lg:w-1/2 z-0">
+        <img src="/hero_image.svg"></img>
+        <img src="/gradient_eclipse1.svg" className="absolute -bottom-16 -right-20 scale-125 -z-10"></img>
+      </div>
+
+      <FormModal modalRef={modal} mode={mode} setMode={setMode} />
     </div>
   );
 }

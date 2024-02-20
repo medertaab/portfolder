@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import LoaderAnimation from '../../ui/LoaderAnimation';
+import LoaderAnimation from "../../../ui/LoaderAnimation"
 import { doc, setDoc} from "firebase/firestore";
-import { db } from "../../../firebase";
-import { useAuth } from "../../../context/AuthContext";
+import { db } from "../../../../firebase";
+import { useAuth } from "../../../../context/AuthContext";
 import { useForm } from "react-hook-form";
-import useCheckImage from "../../../hooks/useCheckImage";
+import useCheckImage from "../../../../hooks/useCheckImage";
 
-export default function AddImageModal(props) {
+export default function AddModal(props) {
   const { images, setImages, setAddingImage } = props;
   const [loading, setLoading] = useState(false);
   const [buttonContent, setButtonContent] = useState("Submit")
@@ -70,8 +70,8 @@ export default function AddImageModal(props) {
   }
 
   return (
-    <div
-      className="fixed z-30 top-[2.5rem] left-0 bg-textPrimary bg-opacity-40 backdrop-blur-sm h-full w-full flex flex-col justify-center items-center"
+    <dialog
+      className="rounded-3xl "
       onClick={() => setAddingImage(false)}
     >
       {/* Exit button */}
@@ -161,6 +161,6 @@ export default function AddImageModal(props) {
           </div>
         </form>
       </div>
-    </div>
+    </dialog>
   );
 }

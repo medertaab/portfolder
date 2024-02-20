@@ -35,10 +35,9 @@ export default function useCheckImage() {
 
   function imageBox(image) {
     return (
-      // <div className="m-auto mt-5 flex  h-56 w-[10rem]">
-      <div className="mt-4 mb-4 h14">
+      <div className="mt-4 mb-4 min-h-60">
         {isEmpty && !isValidLoading && (
-          <div className="image-frame border-2 rounded border-dashed border-textPrimary border-opacity-70 m-auto flex items-center">
+          <div className="h-full w-56 border-[1px] rounded border-dashed border-textPrimary border-opacity-70 m-auto flex items-center">
             <p className="m-auto">No image</p>
           </div>
         )}

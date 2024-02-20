@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 
 export default function SignUpForm(props) {
-  const {setMode} = props
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const { signup } = useAuth();

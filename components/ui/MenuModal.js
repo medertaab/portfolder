@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 
 export default function MenuModal(props) {
   const { currentUser, logout } = useAuth();
-  const { setOpenModal } = props;
+  const { setOpenModal, pageOwner, setAddingImage } = props;
   const router = useRouter();
 
   function logoutHandler() {
@@ -20,8 +20,13 @@ export default function MenuModal(props) {
     router.push("/");
   }
 
+  function openAddImage() {
+    setOpenModal(false)
+    setAddingImage(true)
+  }
+
   return (
-    <div className="shadowy flex flex-col py-36 fixed h-full w-full max-w-[20rem] right-0 top-0 bg-bgPrimary border-l-bgSecondary border-l-2 [&_*]:w-fit">
+    <div className="shadowy flex flex-col py-36 fixed h-full w-full max-w-[20rem] right-0 top-0 bg-bgPrimary border-l-bgSecondary border-l-2 [&_*]:w-fit items-center">
       <button
         title="Close menu"
         onClick={() => setOpenModal(false)}
@@ -29,13 +34,25 @@ export default function MenuModal(props) {
       ></button>
 
       <Link
-        className="m-auto mb-8 border-b-2 border-bgAccent px-5 hover:text-bgAccent duration-150"
+        className="m-auto border-b-2 border-bgAccent px-5 hover:text-bgAccent duration-150"
         href={`/${currentUser.displayName}`}
       >
         @{currentUser.displayName}
       </Link>
 
-      <div className="flex flex-col gap-3 text-lg m-auto h-full pr-16">
+      {pageOwner && (
+        <div className="sm:hidden">
+          <button
+            onClick={openAddImage}
+            type="button"
+            className="text-center h-8 mt-4 text-[0.9rem] text-primaryLight bg-bgAccent rounded-full min-w-32 m-auto"
+          >
+            Add work +
+          </button>
+        </div>
+      )}
+
+      <div className="flex flex-col gap-3 mt-12 text-lg m-auto h-full pr-16">
         <Link
           href={`/${currentUser.displayName}`}
           className="hover:text-bgAccent duration-150"

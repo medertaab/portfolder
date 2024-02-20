@@ -1,4 +1,3 @@
-import Head from "next/head";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/router";
 import PageLayout from "../components/ui/PageLayout";

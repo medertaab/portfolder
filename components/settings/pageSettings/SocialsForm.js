@@ -49,7 +49,7 @@ export default function SocialsForm(props) {
             id={`custom${i}-link`}
             placeholder="Custom URL"
             type="text"
-            {...register(`socials.custom[${i}].link`)}
+            {...register(`socials.custom[${i}].sitelink`)}
             className="focus:outline-none h-full grow"
           ></input>
         </div>
@@ -60,11 +60,11 @@ export default function SocialsForm(props) {
 
   function addCustomLink() {
     if (!getValues("socials.custom") || !getValues("socials.custom").length){
-      setValue(`socials.custom`, [{name: "", link: ""}])
+      setValue(`socials.custom`, [{name: "", sitelink: ""}])
     } else if (getValues("socials.custom").length === 3) {
       return
     } else {
-      setValue(`socials.custom`, [...getValues("socials.custom"), {name: "", link: ""}])
+      setValue(`socials.custom`, [...getValues("socials.custom"), {name: "", sitelink: ""}])
     }
   }
 
@@ -108,13 +108,13 @@ export default function SocialsForm(props) {
         return customLink(link, i)
       })}
 
-      {/* <button
+      <button
         type="button"
         className={`flex items-center border-2 border-bgAccent rounded p-2 pr-4 duration-150 ${watch("socials.custom")?.length === 3 ? "opacity-50 cursor-default hover:none" : "opacity-100 cursor-pointer hover:bg-bgAccent"}`}
         onClick={addCustomLink}
       >
         <i class="ri-add-line mr-1"></i>Add custom link
-      </button> */}
+      </button>
     </section>
   );
 }

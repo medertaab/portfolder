@@ -22,6 +22,9 @@ module.exports = {
         'spin-slow': 'spin 1.3s linear infinite',
       }
     },
+    fontFamily: {
+      'basic': ['system-ui']
+     }
   },
   plugins: [],
   darkMode: 'class'

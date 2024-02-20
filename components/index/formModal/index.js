@@ -6,12 +6,6 @@ import { exitModal } from "../../../utilities/exitModal";
 export default function FormModal(props) {
   const { modalRef, mode, setMode } = props;
 
-  // Determine which form to show
-  const modeKey = {
-    signup: <SignUpForm setMode={setMode} />,
-    login: <LogInForm setMode={setMode} />,
-  };
-
   return (
     <dialog
       ref={modalRef}
@@ -20,6 +14,7 @@ export default function FormModal(props) {
     >
       <div className="h-full flex flex-col">
         <button
+          type="button"
           title="Close log in pop-up window"
           onClick={() => modalRef.current.close()}
           className="fa-solid fa-xmark absolute top-0 right-0 text-2xl p-5 cursor-pointer hover:text-bgAccent duration-150 text-textPrimary"
