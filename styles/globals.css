@@ -18,6 +18,8 @@
 
     --color-primary-light: 246 241 236;
     --color-primary-dark: 34 37 37;
+
+    --color-golden: 255 223 57;
   }
 }
 
@@ -37,7 +39,6 @@
 
 .theme-purple {
   --color-bg-accent: 101 75 255;
-  --color-bg-accent-highlight: 118 93 255;
 }
 
 .theme-gray {
@@ -49,7 +50,6 @@
 }
 
 /* /////////////////////////// */
-
 
 .h14 {
   height: 14rem;
@@ -84,6 +84,14 @@
   animation: fadeInAnimation ease 1s;
 }
 
+.fade-in-delayed1 {
+  animation: fadeInAnimation 0.5s ease 0.25s forwards;
+}
+
+.fade-in-delayed2 {
+  animation: fadeInAnimation 0.5s ease 0.35s forwards;
+}
+
 @keyframes fadeInAnimation {
   0% {
     opacity: 0;
@@ -105,3 +113,4 @@
     opacity: 0;
   }
 }
+

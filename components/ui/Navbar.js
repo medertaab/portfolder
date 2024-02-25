@@ -76,6 +76,7 @@ export default function Navbar(props) {
           </button>
         )}
       </div>
+
       {openModal && (
         <MenuModal
           setOpenModal={setOpenModal}

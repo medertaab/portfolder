@@ -1,12 +1,12 @@
 import Link from "next/link";
 import React from "react";
-import { useAuth } from "../../../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 
-export default function AccountSettings() {
+export default function SettingsPage() {
   const { currentUser } = useAuth();
 
   return (
-    <div className="sm:p-10 p-3 py-6 [&_label]:font-semibold">
+    <div className="max-w-[40rem] m-auto sm:p-10 p-3 py-6 [&_label]:font-semibold m-auto">
 
       <label>Username</label>
       <div className="flex items-center pt-2">

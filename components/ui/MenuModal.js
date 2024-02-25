@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 
 export default function MenuModal(props) {
   const { currentUser, logout } = useAuth();
-  const { setOpenModal, pageOwner, setAddingImage } = props;
+  const { setOpenModal, pageOwner } = props;
   const router = useRouter();
 
   function logoutHandler() {
@@ -20,9 +20,9 @@ export default function MenuModal(props) {
     router.push("/");
   }
 
-  function openAddImage() {
+  function handleAddWorkButton() {
     setOpenModal(false)
-    setAddingImage(true)
+    router.push({ query: { username: router.query.username, action: "edit", type: "add" } });
   }
 
   return (
@@ -43,7 +43,7 @@ export default function MenuModal(props) {
       {pageOwner && (
         <div className="sm:hidden">
           <button
-            onClick={openAddImage}
+            onClick={handleAddWorkButton}
             type="button"
             className="text-center h-8 mt-4 text-[0.9rem] text-primaryLight bg-bgAccent rounded-full min-w-32 m-auto"
           >

@@ -2,9 +2,10 @@ import React, { useEffect, useState, useRef } from "react";
 import Thumbnail from "./thumbnail";
 import ImageModal from "./imageModal";
 import { useRouter } from "next/router";
-import AddModal from "./addModal";
 import { useSearchParams } from "next/navigation";
-import EditModal from "./editModal";
+import AddWorkModal from "./addWorkModal";
+import UpdateWorkModal from "./updateWorkModal";
+import DeleteWorkModal from "./deleteWorkModal";
 
 export default function Gallery(props) {
   const { pageOwner, portfolioData } = props;
@@ -14,6 +15,9 @@ export default function Gallery(props) {
 
   const searchParams = useSearchParams();
   const editing = searchParams.get("action") === "edit";
+  const adding = searchParams.get("type") === "add";
+  const updating = searchParams.get("type") === "update"
+  const deleting = searchParams.get("type") === "delete"
 
   function gridLayout() {
     if (portfolioData.settings.grid === "dynamic") {
@@ -44,13 +48,18 @@ export default function Gallery(props) {
   return (
     <>
       <ul className={gridLayout()}>{thumbnailList}</ul>
-      <ImageModal
+      {!editing && (
+        <ImageModal
         imageQuery={imageQuery}
         setImageQuery={setImageQuery}
         portfolioData={portfolioData}
         modalRef={modalRef}
+        pageOwner={pageOwner}
       />
-      {editing && <EditModal />}
+      )}
+      {adding && <AddWorkModal portfolioData={portfolioData}/>}
+      {updating && <UpdateWorkModal portfolioData={portfolioData}/>}
+      {deleting && <DeleteWorkModal portfolioData={portfolioData}/>}
     </>
   );
 }

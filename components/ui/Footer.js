@@ -10,7 +10,7 @@ export default function Footer() {
   const router = useRouter()
 
   return (
-    <footer className={`theme-${theme} mt-8 bg-bgPrimary text-textPrimary text-sm border-t-[1px] border-bgSecondary p-3 flex items-center justify-center gap-20`}>
+    <footer className={`theme-${theme} mt-auto bg-bgPrimary text-textPrimary text-sm border-t-[1px] border-bgSecondary p-3 flex items-center justify-center gap-20`}>
       {/* Sign up call for unregistered users */}
       <p className='opacity-30'>portfolder @ MT</p>
       {!currentUser && router.asPath !== "/login" && (

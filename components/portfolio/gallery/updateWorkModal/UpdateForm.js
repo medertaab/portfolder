@@ -1,22 +1,27 @@
 import React, { useEffect, useState } from "react";
-import LoaderAnimation from "../../../../ui/LoaderAnimation";
-import { doc, setDoc } from "firebase/firestore";
-import { db } from "../../../../../firebase";
-import { useAuth } from "../../../../../context/AuthContext";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../../../../firebase";
 import { useForm } from "react-hook-form";
-import useCheckImage from "../../../../../hooks/useCheckImage";
+import { useAuth } from "../../../../context/AuthContext";
+import useCheckImage from "../../../../hooks/useCheckImage";
+import LoaderAnimation from "../../../ui/LoaderAnimation";
+import { useRouter } from "next/router";
+import { useSearchParams } from "next/navigation";
 
-export default function AddImage(props) {
-  const { closeModal } = props;
+export default function UpdateForm(props) {
+  const { portfolioData, id, closeModal } = props;
+
   const [loading, setLoading] = useState(false);
-  const [buttonContent, setButtonContent] = useState("Submit");
   const [error, setError] = useState("");
+  const [buttonContent, setButtonContent] = useState("Submit");
+
   const { currentUser } = useAuth();
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
+    reset,
   } = useForm();
 
   const {
@@ -28,14 +33,17 @@ export default function AddImage(props) {
     imageBox,
   } = useCheckImage();
 
-  // Set image to empty on load
+  const router = useRouter();
+
+  // Set to image inputs on load
   useEffect(() => {
+    const imageData = portfolioData.images[router.query.id];
+    reset({ title: imageData.title, link: imageData.link });
     checkImage(watch("link"));
   }, []);
 
   // Image checking upon input change
   function handleImageChange() {
-    setError("");
     setIsValidLoading(true);
     setTimeout(() => {
       checkImage(watch("link"));
@@ -45,35 +53,30 @@ export default function AddImage(props) {
   function onSubmit(e) {
     e.preventDefault();
     setError("");
-    handleSubmit(handleAddImage)();
+    handleSubmit(handleUpdateImage)();
   }
 
-  async function handleAddImage(image) {
+  async function handleUpdateImage(image) {
     setLoading(true);
-    if (Object.keys(images).length > 49) return;
-    const newKey =
-      Object.keys(images).length === 0
-        ? 1
-        : Math.max(...Object.keys(images)) + 1;
-    setImages({ ...images, [newKey]: image });
     const userRef = doc(db, "users", currentUser.uid);
     try {
-      await setDoc(
+      setLoading(true);
+      await updateDoc(
         userRef,
         {
-          images: { [newKey]: image },
+          images: { [id]: image },
         },
         { merge: true }
       ).then(() => {
         // If success
         setButtonContent("✓");
         setTimeout(() => {
-          setAddingImage(false);
+          router.push("/");
         }, 1000);
       });
     } catch (error) {
       setLoading(false);
-      setError(error);
+      setError(error.message);
     } finally {
       setLoading(false);
     }
@@ -82,14 +85,16 @@ export default function AddImage(props) {
   return (
     <div
       onClick={(e) => e.stopPropagation()}
-      className="max-w-2xl max-h-screen sm:w-4/5 w-[90%] bg-bgPrimary p-3 rounded-3xl"
+      className="max-w-2xl max-h-screen sm:w-4/5 w-[90%] bg-bgPrimary p-3 rounded-3xl overflow-auto"
     >
       {/* Image preview */}
-      {imageBox(watch("link"))}
+      <div className="h-[20rem] max-w-[100%] m-auto p-4">
+        {imageBox(watch("link"))}
+      </div>
 
-      {/* Input form */}
       <form className="p-5 pt-0 w-full bg-bgPrimary text-base text-textPrimary grid content-center">
-        <span className="text-2xl m-auto">Add image</span>
+        <span className="text-2xl m-auto mt-5">Edit image</span>
+
         <label for="link" className="mt-2">
           Paste URL of image *
         </label>
@@ -131,31 +136,32 @@ export default function AddImage(props) {
 
         {/* BUTTONS */}
         <div className="flex justify-center items-center gap-2 mt-2">
-          {/* Active Submit button only if image is valid */}
           {isValid && !isEmpty && !isValidLoading && !error ? (
             <button
               type="submit"
               onClick={onSubmit}
-              className="w-24 h-11 rounded-full cursor-auto bg-bgAccent text-primaryLight opacity-100 duration-150"
+              className="w-24 h-11 rounded-full bg-bgAccent text-primaryLight opacity-100 duration-150 "
             >
               {loading ? <LoaderAnimation small /> : buttonContent}
             </button>
           ) : (
             <button
               type="button"
-              className="w-24 h-11 rounded-full cursor-auto bg-bgAccent text-primaryLight opacity-50"
+              className="w-24 h-11 rounded-full bg-bgAccent text-primaryLight opacity-50"
             >
               Submit
             </button>
           )}
 
-          <button
-            type="button"
-            onClick={closeModal}
-            className="w-24 h-11 rounded-full hover:bg-bgSecondary duration-150"
-          >
-            Cancel
-          </button>
+          <div className="flex justify-center items-center gap-2 ">
+            <button
+              type="button"
+              onClick={closeModal}
+              className="w-24 h-11 rounded-full hover:bg-bgSecondary duration-150"
+            >
+              Cancel
+            </button>
+          </div>
         </div>
       </form>
     </div>

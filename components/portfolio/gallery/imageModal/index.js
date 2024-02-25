@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import CloseButton from "./CloseButton";
 import NavigationButtons from "./NavigationButtons";
 
 export default function ImageModal(props) {
-  const { portfolioData, modalRef } = props;
+  const { portfolioData, modalRef, pageOwner } = props;
 
   const router = useRouter();
   const { work, id } = router.query;
@@ -30,13 +29,33 @@ export default function ImageModal(props) {
     closeModal();
   }
 
+  function handleUpdateWork() {
+    router.push({
+      pathname: router.pathname,
+      query: { ...router.query, action: "edit", type: "update" },
+    });
+  }
+
+  function handleDeleteWork() {
+    router.push({
+      pathname: router.pathname,
+      query: { ...router.query, action: "edit", type: "delete" },
+    });
+  }
+
   return (
     <dialog
       onClick={(e) => handleClickOutside(e)}
       ref={modalRef}
       className="relative w-full max-w-[100vw] max-h-[100vh] bg-transparent backdrop:bg-black backdrop:opacity-50"
     >
-      <CloseButton onClick={closeModal} />
+      <button
+        type="button"
+        onClick={closeModal}
+        className="absolute z-40 right-2 p-5 cursor-pointer "
+      >
+        <i className="fa-solid fa-xmark text-3xl text-primaryLight"></i>
+      </button>
 
       <div
         className="flex flex-col w-fit m-auto"
@@ -55,6 +74,24 @@ export default function ImageModal(props) {
           </>
         )}
       </div>
+
+      {pageOwner && (
+        <div className="flex gap-1 m-auto max-w-[900px] w-full text-primaryLight justify-end text-sm pr-4">
+          <button
+            type="button"
+            onClick={handleUpdateWork}
+            className="px-2 py-1 rounded-full hover:bg-white hover:bg-opacity-10 transition ease-out w-20"
+          >
+            <i class="fa-regular fa-pen-to-square"></i> Edit
+          </button>
+          <button 
+          type="button"
+          onClick={handleDeleteWork}
+          className="px-2 py-1 rounded-full hover:bg-white hover:bg-opacity-10 transition ease-out w-20">
+            <i class="fa-solid fa-trash"></i> Delete
+          </button>
+        </div>
+      )}
 
       <NavigationButtons portfolioData={portfolioData} router={router} />
     </dialog>

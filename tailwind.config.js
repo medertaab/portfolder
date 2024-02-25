@@ -17,6 +17,7 @@ module.exports = {
         bgAccent: 'rgb(var(--color-bg-accent) / <alpha-value>)',
         primaryLight: 'rgb(var(--color-primary-light) / <alpha-value>)',
         primaryDark: 'rgb(var(--color-primary-dark) / <alpha-value>)',
+        golden: 'rgb(var(--color-golden) / <alpha-value>)',
       },
       animation: {
         'spin-slow': 'spin 1.3s linear infinite',

@@ -13,13 +13,13 @@ export default function Thumbnail(props) {
   const router = useRouter()
 
   function openModal() {
-    document.body.style.overflow = "hidden";
     
     router.replace({
       query: {username: router.query.username, work: image.title, id: id}
-    }, undefined,
+    }, 
     { scroll: false })
     modalRef.current.showModal()
+    document.body.style.overflow = "hidden";
   }
 
   // Handle landscape images
@@ -44,14 +44,6 @@ export default function Thumbnail(props) {
           grid === "static" ? "aspect-square" : "h-full"
         } cursor-pointer ${landscape && "landscape"}`}
       >
-        {pageOwner && (
-          <i
-            className={`fa-solid fa-pen-to-square absolute right-0 p-2 text-2xl cursor-pointer opacity-${
-              hover ? 100 : 0
-            } hover:text-bgAccent z-20`}
-          ></i>
-        )}
-
         <figcaption
           className={`hidden sm:flex h-full w-full absolute z-10 bg-primaryDark bg-opacity-40 justify-center items-center ${
             hover ? "opacity-100" : "opacity-0"

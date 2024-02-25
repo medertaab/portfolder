@@ -52,7 +52,9 @@ export default function DisplayForm(props) {
       />
 
       {/* Profile picture preview */}
-      {imageBox(watch("mainData.icon"))}
+      <div className="h-[20rem] max-w-[100%] m-auto p-4 rounded-3xl [&_img]:rounded-3xl">
+        {imageBox(watch("mainData.icon"))}
+      </div>
 
       <div className="divider"></div>
 

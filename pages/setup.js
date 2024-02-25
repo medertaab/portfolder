@@ -1,8 +1,8 @@
 import React from "react";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/router";
-import FirstSetup from "../components/login/FirstSetup";
 import PageLayout from "../components/ui/PageLayout";
+import SetupPage from "../components/setup";
 
 export default function Setup() {
   const {currentUser} = useAuth()
@@ -15,7 +15,7 @@ export default function Setup() {
   } else {
     return (
       <PageLayout title="Welcome!">
-        <FirstSetup />
+        <SetupPage />
       </PageLayout>
     );
   }

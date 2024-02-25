@@ -50,9 +50,9 @@ export default function PasswordSettings() {
   }
 
   return (
-    <div className="px-1 sm:p-10 p-3 py-6 [&_label]:font-semibold">
-      <Link href="/settings" className="block py-2 text-2xl">
-        <i className="fa-solid fa-arrow-left"></i>
+    <div className="max-w-[40rem] m-auto px-1 sm:p-10 p-3 py-6 [&_label]:font-semibold">
+      <Link href="/settings" className="py-2 mb-8 flex items-center w-fit">
+        <i className="fa-solid fa-arrow-left mr-2 text-lg h-5"></i> Account settings
       </Link>
 
       <form>
@@ -81,7 +81,7 @@ export default function PasswordSettings() {
         <div className='flex items-center'>
           <button
             button="submit"
-            className="my-2 w-20 h-10 rounded border-2 border-bgAccent hover:bg-bgAccent duration-150"
+            className="w-24 h-11 mt-4 ml-auto rounded-full bg-bgAccent text-primaryLight"
             onClick={onSubmit}
           >
             {loading ? <LoaderAnimation small={true}/> : (didUpload ? <i className="text-lime-600 fa-solid fa-check"></i> : 'Submit')}

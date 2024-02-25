@@ -7,8 +7,8 @@ export default function useCheckImage() {
   const [isEmpty, setIsEmpty] = useState(false);
 
   useEffect(() => {
-    checkImage('')
-  }, [])
+    checkImage("");
+  }, []);
 
   async function checkImage(image) {
     setIsValidLoading(true);
@@ -35,9 +35,9 @@ export default function useCheckImage() {
 
   function imageBox(image) {
     return (
-      <div className="mt-4 mb-4 min-h-60">
+      <>
         {isEmpty && !isValidLoading && (
-          <div className="h-full w-56 border-[1px] rounded border-dashed border-textPrimary border-opacity-70 m-auto flex items-center">
+          <div className="h-full aspect-square border-[1px] rounded-xl border-dashed border-textPrimary border-opacity-70 m-auto flex items-center">
             <p className="m-auto">No image</p>
           </div>
         )}
@@ -47,16 +47,19 @@ export default function useCheckImage() {
         )}
 
         {isValidLoading && (
-          <div className="image-frame border-2 rounded border-dashed border-textPrimary border-opacity-70 m-auto flex items-center">
+          <div className="h-full aspect-square border-[1px] rounded-xl border-dashed border-textPrimary border-opacity-70 m-auto flex items-center">
             {<LoaderAnimation />}
           </div>
         )}
+
         {!isValid && !isValidLoading && !isEmpty && (
-          <div className="image-frame border-2 rounded border-dashed border-red-500 m-auto flex items-center">
-            <p className="text-center p-5">Could not get image :( </p>
+          <div className="h-full aspect-square border-[1px] rounded-xl border-dashed border-red-500 m-auto flex items-center">
+            <p className="text-center p-5 m-auto">
+              Could not get image :( Try another URL{" "}
+            </p>
           </div>
         )}
-      </div>
+      </>
     );
   }
 

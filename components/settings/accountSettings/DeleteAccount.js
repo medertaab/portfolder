@@ -47,9 +47,9 @@ export default function DeleteAccount() {
   }
 
   return (
-    <div className="sm:p-10 p-3 py-6 [&_label]:font-semibold">
-      <Link href="/settings" className="block py-2 text-2xl">
-        <i className="fa-solid fa-arrow-left"></i>
+    <div className="max-w-[40rem] m-auto sm:p-10 p-3 py-6 [&_label]:font-semibold">
+      <Link href="/settings" className="py-2 mb-8 flex items-center w-fit">
+        <i className="fa-solid fa-arrow-left mr-2 text-lg h-5"></i> Account settings
       </Link>
 
       <form>
@@ -66,7 +66,7 @@ export default function DeleteAccount() {
           <button
             id="username"
             button="submit"
-            className="my-2 min-w-[6rem] w-36 h-10 rounded border-2 border-bgAccent hover:bg-bgAccent duration-150"
+            className="w-44 h-11 mt-4 ml-auto rounded-full bg-bgAccent text-primaryLight"
             onClick={onSubmit}
           >
             {loading ? <LoaderAnimation small={true}/> : (success ? <i className="text-lime-600 fa-solid fa-check"></i> : 'Delete account')}
