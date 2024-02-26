@@ -2,7 +2,6 @@ import "../styles/globals.css";
 import "../styles/loader.css"
 import '../styles/thumbnail.css'
 import '../styles/gallery.css'
-import '../styles/hero.css'
 import { AuthProvider } from "../context/AuthContext";
 import { ThemeProvider } from "../context/ThemeContext";
 

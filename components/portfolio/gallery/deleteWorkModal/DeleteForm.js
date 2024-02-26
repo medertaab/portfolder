@@ -24,7 +24,7 @@ export default function DeletForm(props) {
         }
       ).then(() => {
         // If success
-        setButtonContent("✓")
+        setButtonContent(<i class="fa-solid fa-check"></i>)
         router.push("/")
       });
     } catch(error) {

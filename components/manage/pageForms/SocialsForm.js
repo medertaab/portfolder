@@ -108,13 +108,13 @@ export default function SocialsForm(props) {
         return customLink(link, i)
       })}
 
-      <button
+      {/* <button
         type="button"
         className={`flex items-center border-2 border-bgAccent rounded p-2 pr-4 duration-150 ${watch("socials.custom")?.length === 3 ? "opacity-50 cursor-default hover:none" : "opacity-100 cursor-pointer hover:bg-bgAccent"}`}
         onClick={addCustomLink}
       >
         <i class="ri-add-line mr-1"></i>Add custom link
-      </button>
+      </button> */}
     </section>
   );
 }

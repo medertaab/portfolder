@@ -12,6 +12,7 @@ export default function HeroImage() {
       viewBox="0 0 611 493"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className="w-full"
     >
       <rect
         x="0.5"

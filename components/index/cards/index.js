@@ -21,7 +21,7 @@ export default function Cards() {
   ];
 
   return (
-    <ul className="mt-16 flex h-48 max-w-[80%] m-auto flex-wrap justify-around gap-10">
+    <ul className="mt-16 flex min-h-48 max-w-[80%] m-auto flex-wrap justify-around gap-10">
       {cardsArray.map((data) => {
         return <li><Card data={data}/></li>;
       })}

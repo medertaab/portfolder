@@ -14,7 +14,9 @@ export default function Navbar(props) {
   const router = useRouter();
 
   function handleAddWorkButton() {
-    router.push({ query: { username: router.query.username, action: "edit", type: "add" } });
+    router.push({
+      query: { username: router.query.username, action: "edit", type: "add" },
+    });
   }
 
   return (
@@ -23,7 +25,7 @@ export default function Navbar(props) {
         className="sm:text-xl text-xl p-2 flex select-none"
         href={currentUser ? `/${currentUser.displayName}` : "/"}
       >
-        <img src="./icon.png" className="h-8"></img>
+        <img src="/icon.png" className="h-8"></img>
         {logo && <p className="ml-3">portfolder</p>}
       </Link>
 

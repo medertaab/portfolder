@@ -26,7 +26,7 @@ export default function MenuModal(props) {
   }
 
   return (
-    <div className="shadowy flex flex-col py-36 fixed h-full w-full max-w-[20rem] right-0 top-0 bg-bgPrimary border-l-bgSecondary border-l-2 [&_*]:w-fit items-center">
+    <div className="shadowy flex flex-col py-36 fixed h-full w-full max-w-full sm:max-w-[20rem] right-0 top-0 bg-bgPrimary border-l-bgSecondary border-l-2 [&_*]:w-fit items-center">
       <button
         title="Close menu"
         onClick={() => setOpenModal(false)}

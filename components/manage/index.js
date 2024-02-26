@@ -100,14 +100,14 @@ export default function ManagePage(props) {
         <button
           onClick={onSubmit}
           type="submit"
-          className="float-right ml-auto mt-5 border-2 border-bgAccent w-24 h-10 rounded text-lg hover:bg-bgAccent duration-150"
+          className="float-right ml-auto mt-5 w-24 h-11 rounded-full bg-bgAccent text-primaryLight"
         >
           {updateLoading ? (
             <LoaderAnimation small={true} />
           ) : didUpload ? (
-            <i className="text-lime-600 fa-solid fa-check"></i>
+            <i className="fa-solid fa-check"></i>
           ) : (
-            "Submit"
+            "Submit" 
           )}
         </button>
       </form>

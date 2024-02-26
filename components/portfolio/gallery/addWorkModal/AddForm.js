@@ -69,7 +69,7 @@ export default function AddForm(props) {
         { merge: true }
       ).then(() => {
         // If success
-        setButtonContent("✓");
+        setButtonContent(<i class="fa-solid fa-check"></i>);
         setTimeout(() => {
           document.body.style.overflow = "unset";
           router.push("/")
@@ -86,7 +86,7 @@ export default function AddForm(props) {
   return (
     <div
       onClick={(e) => e.stopPropagation()}
-      className="max-w-2xl max-h-screen sm:w-4/5 w-[90%] bg-bgPrimary p-3 rounded-3xl overflow-auto"
+      className="max-w-2xl max-h-screen sm:w-4/5 w-[90%] bg-bgPrimary p-3 rounded-3xl overflow-auto "
     >
       {/* Image preview */}
       <div className="h-[20rem] max-w-[100%] m-auto p-4">
@@ -94,10 +94,10 @@ export default function AddForm(props) {
       </div>
 
       {/* Input form */}
-      <form className="p-5 pt-0 w-full bg-bgPrimary text-base text-textPrimary grid content-center">
-        <span className="text-2xl m-auto mt-5">Add image</span>
+      <form className="p-5 pt-0 w-full bg-bgPrimary text-textPrimary grid content-center text-sm">
+        <span className="text-xl m-auto mt-5">Add image</span>
         
-        <label for="link" className="mt-2">
+        <label for="link" className="mt-2 mb-1">
           Paste URL of image *
         </label>
         {errors?.link?.message && (
@@ -114,7 +114,7 @@ export default function AddForm(props) {
           className="outline-none w-full m-auto mb-4 px-2 bg-bgSecondary p-2 rounded text-textPrimary border-[1px] border-textPrimary"
         ></input>
 
-        <label for="title" className="mt-2">
+        <label for="title" className="mt-2 mb-1">
           Title of work *
         </label>
         {errors?.title?.message && (

@@ -57,11 +57,7 @@ export default function SettingsLayout(props) {
               <i className="fa-solid fa-gear mr-2"></i> Account settings
             </Link>
           </li>
-          <li className="hover:text-bgAccent duration-150">
-            <Link href={`/${currentUser.displayName}`}>
-              <i className="fa-solid fa-house mr-2"></i> Your page
-            </Link>
-          </li>
+
           <li className="hover:text-bgAccent duration-150 mt-auto mb-4">
             <button onClick={() => logout()}>
               <i className="fa-solid fa-right-from-bracket mr-2"></i> Logout

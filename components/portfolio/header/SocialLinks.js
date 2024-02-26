@@ -16,7 +16,7 @@ export default function SocialLinks(props) {
   }
 
   return (
-    <div className="relative border-[1px] border-textPrimary rounded-2xl max-w-[40rem] m-auto flex flex-wrap gap-5 justify-center p-3 mx-2 mt-0 sm:mx-auto sm:mt-4">
+    <div className="relative border-[1px] border-textPrimary rounded-2xl max-w-[40rem] m-auto flex flex-wrap gap-5 justify-center p-3 px-12 pretty mx-2 mt-0 sm:mx-auto sm:mt-4">
       {/* Primary socials first */}
       {Object.keys(socials)
         .sort()

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 export default function NavigationButtons(props) {
   const { portfolioData, router } = props;
@@ -6,7 +6,6 @@ export default function NavigationButtons(props) {
   const { id } = router.query;
 
   function handleNext(e) {
-    e.stopPropagation();
     const currentImageIndex = Object.keys(portfolioData.images).indexOf(id);
     const nextImageIndex = currentImageIndex + 1;
     if (nextImageIndex >= Object.keys(portfolioData.images).length) {
@@ -24,7 +23,6 @@ export default function NavigationButtons(props) {
   }
 
   function handlePrev(e) {
-    e.stopPropagation();
     const currentImageIndex = Object.keys(portfolioData.images).indexOf(id);
     const prevImageIndex = currentImageIndex - 1;
     if (prevImageIndex < 0) {
@@ -41,8 +39,16 @@ export default function NavigationButtons(props) {
     );
   }
 
+  function handleKeyDown(e) {
+    if (e.key === "ArrowLeft") {
+      handlePrev();
+    } else if (e.key === "ArrowRight") {
+      handleNext();
+    }
+  }
+
   return (
-    <>
+    <div onKeyDown={handleKeyDown}>
       <button
         onClick={handlePrev}
         type="button"
@@ -57,6 +63,6 @@ export default function NavigationButtons(props) {
       >
         <i className="ri-arrow-right-s-line ml-[10%]"></i>
       </button>
-    </>
+    </div>
   );
 }

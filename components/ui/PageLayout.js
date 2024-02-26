@@ -25,7 +25,7 @@ export default function PageLayout(props) {
 
   return (
     <div
-      className={`${figtree.className} theme-${theme} theme-purple flex flex-col fade-in bg-bgPrimary text-textPrimary`}
+      className={`${figtree.className} theme-${theme} theme-purple flex flex-col fade-in bg-bgPrimary text-textPrimary h-full`}
     >
       <Head>
         {props.title ? <title>{props.title} | PortFolder</title> : <title>PortFolder | Compact Portfolio Maker</title>}
@@ -34,7 +34,7 @@ export default function PageLayout(props) {
 
       <Navbar logo/>
 
-      <main className="flex items-center max-w-screen-xl w-full m-auto bg-bgPrimary">
+      <main className="flex items-center max-w-screen-xl w-full m-auto bg-bgPrimary h-full">
         {children}
       </main>
 

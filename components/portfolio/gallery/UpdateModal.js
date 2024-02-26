@@ -59,7 +59,7 @@ export default function UpdateImageModal(props) {
         { merge: true }
       ).then(() => {
         // If success
-        setButtonContent("✓");
+        setButtonContent(<i class="fa-solid fa-check"></i>);
         setTimeout(() => {
           setMode("");
         }, 1000);

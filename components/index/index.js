@@ -17,16 +17,17 @@ export default function IndexPage() {
   }
 
   return (
-    <div className="m-auto gap-16 p-8 lg:p-4 lg:gap-8 h-full">
+    <div className="m-auto gap-16 p-8 lg:p-4 lg:gap-8">
       <div className="flex flex-col lg:flex-row items-center min-h-[80vh] h-full">
-        <div className="relative flex flex-col gap-6 text-center lg:text-left lg:max-w-[50%] z-0 h-full">
-          <h2 className="text-6xl">
+        <div className="relative flex flex-col gap-6 text-center lg:text-left lg:max-w-[50%] z-0 h-full mt-10 sm:mt-0">
+          <h2 className="text-4xl sm:text-6xl">
             Assemble a portfolio page - fast and easy
           </h2>
           <h3 className="text-xl relative">
-            Just <span className="text-bgAccent">link your images</span> and
+            Just <span className="text-bgAccent relative">link your images <Underline /></span> and
             they will appear on your page. That’s it!
-            <Underline />
+          
+
           </h3>
           <div className="flex gap-2 mt-2 mx-auto lg:mx-0">
             <button
@@ -47,7 +48,7 @@ export default function IndexPage() {
           <div className="absolute -top-[50%] -left-[5rem] size-[17rem] bg-gradient-to-br from-golden from-[25%] blur-[26px] to-transparent rounded-full -z-10 "></div>
         </div>
 
-        <div className="relative h-full lg:w-1/2 z-0 mt-10 lg:mt-0 [&>*:first-child]:scale-[87%]">
+        <div className="relative h-full lg:w-1/2 z-0 sm:mt-10 lg:mt-0 [&>*:first-child]:scale-[87%] max-w-full">
           <HeroImage />
           <Drawings />
           <div className="absolute -bottom-11 -right-10 size-[17rem] bg-gradient-to-br from-bgAccent from-[20%] blur-[26px] to-transparent rounded-full -z-10 rotate-180 "></div>

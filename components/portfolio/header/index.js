@@ -8,7 +8,7 @@ export default function Header(props) {
   const mainData = portfolioData.mainData;
 
   return (
-    <header className="w-full pt-2 mt-8">
+    <header className="w-full pt-2 sm:mt-8">
       <div className="relative max-w-[40rem] m-auto flex  flex-col-reverse items-center sm:flex-row sm:items-start">
 
         {/* Name, title and main links */}
@@ -65,7 +65,7 @@ export default function Header(props) {
               href={"/manage"}
               target="_blank"
               rel="noreferrer noopener"
-              className="inline-block text-center w-32 py-2 border-2 opacity-70 border-textPrimary text-textPrimary rounded-full transition hover:-translate-y-1 hover:opacity-100"
+              className="text-center w-32 py-2 border-2 opacity-70 border-textPrimary text-textPrimary rounded-full transition hover:-translate-y-1 hover:opacity-100 hidden sm:inline-block"
             >
               Edit profile
             </Link>

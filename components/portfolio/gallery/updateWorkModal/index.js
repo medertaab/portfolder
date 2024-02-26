@@ -27,7 +27,7 @@ export default function UpdateWorkModal(props) {
         <i className="fa-solid fa-xmark text-3xl"></i>
       </button>
 
-    <UpdateForm portfolioData={portfolioData} closeModal={closeModal}/>
+    <UpdateForm portfolioData={portfolioData} closeModal={closeModal} id={router.query.id}/>
     </div>
   )
 }

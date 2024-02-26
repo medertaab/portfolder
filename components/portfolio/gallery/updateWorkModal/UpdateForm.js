@@ -69,7 +69,7 @@ export default function UpdateForm(props) {
         { merge: true }
       ).then(() => {
         // If success
-        setButtonContent("✓");
+        setButtonContent(<i class="fa-solid fa-check"></i>);
         setTimeout(() => {
           router.push("/");
         }, 1000);
@@ -92,10 +92,10 @@ export default function UpdateForm(props) {
         {imageBox(watch("link"))}
       </div>
 
-      <form className="p-5 pt-0 w-full bg-bgPrimary text-base text-textPrimary grid content-center">
-        <span className="text-2xl m-auto mt-5">Edit image</span>
+      <form className="p-5 pt-0 w-full bg-bgPrimary text-sm text-textPrimary grid content-center">
+        <span className="text-xl m-auto mt-5">Edit image</span>
 
-        <label for="link" className="mt-2">
+        <label for="link" className="mt-2 mb-1">
           Paste URL of image *
         </label>
         {errors?.link?.message && (
@@ -112,7 +112,7 @@ export default function UpdateForm(props) {
           className="outline-none w-full m-auto mb-4 px-2 bg-bgSecondary p-2 rounded text-textPrimary border-[1px] border-textPrimary"
         ></input>
 
-        <label for="title" className="mt-2">
+        <label for="title" className="mt-2 mb-1">
           Title of work *
         </label>
         {errors?.title?.message && (

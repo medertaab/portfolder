@@ -6,6 +6,14 @@
   font-family: "Figtree", sans-serif;
 }
 
+
+#__next {
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
 @layer base {
   :root {
     --color-text-primary: 34 37 37;
@@ -111,6 +119,19 @@
   }
   100% {
     opacity: 0;
+  }
+}
+
+.animate-reveal {
+  animation: revealAnimation ease-in-out 0.5s forwards 0.5s;
+}
+
+@keyframes revealAnimation {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
   }
 }
 
