@@ -90,7 +90,7 @@ export default function LogInForm(props) {
         onClick={() => setMode("signup")}
         className="cursor-pointer underline hover:text-textAccent duration-100 opacity-60"
       >
-        Don't have an account? Sign up!
+        Don&#39;t have an account? Sign up!
       </button>
     </form>
   );
