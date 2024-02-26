@@ -10,8 +10,8 @@ export default function SettingsNavigation() {
 
   return (
     <ul className="relative sm:w-[90%] sm:max-w-2xl flex m-auto text-base sm:text-lg font-semibold [&_li]:text-center [&_li]:cursor-pointer">
-      {Object.keys(buttons).map((it) => {
-        return <SettingsButton type={it} title={buttons[it]} />;
+      {Object.keys(buttons).map((it, id) => {
+        return <SettingsButton type={it} title={buttons[it]} key={key}/>;
       })}
     </ul>
   );
