@@ -15,11 +15,12 @@ export default function SettingsButton(props) {
     );
   }
 
-  const { type, title } = props;
+  const { type, title, key } = props;
   return (
     <li
       onClick={() => updateForm(type)}
       className="p-2 hover:text-bgAccent duration-150 w-1/3"
+      key={key}
     >
       <button
         type="button"
