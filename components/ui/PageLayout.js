@@ -17,7 +17,7 @@ export default function PageLayout(props) {
       body > div:first-child,
       div#__next,
       div#__next > div {
-        min-height: 100%;
+        min-height: 100vh;
       }
     `}</style>
   );
@@ -34,7 +34,7 @@ export default function PageLayout(props) {
 
       <Navbar logo/>
 
-      <main className="flex items-center max-w-screen-xl w-full m-auto bg-bgPrimary h-full">
+      <main className="flex grow items-center max-w-screen-xl w-full m-auto bg-bgPrimary h-full">
         {children}
       </main>
 
