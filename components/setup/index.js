@@ -96,7 +96,7 @@ export default function SetupPage() {
     <div className="w-full max-w-[700px] py-4 flex flex-col items-center place-items-center justify-center gap-2 fade-in m-auto">
       <p className="text-3xl py-5 text-center">
         Welcome to Portfolder! 👋
-        <br /> Let's set up your page.
+        <br /> Let&#39;s set up your page.
       </p>
 
       <form className="flex flex-col w-full px-4 [&_input]:px-2 [&_input[type=text]]:h-10 [&_input[type=email]]:h-10 [&_input]:bg-bgSecondary [&_input]:w-full [&_input]:border-[1px] [&_input]:rounded [&_input]:border-gray-400 [&_input]:mt-1 [&_input:focus]:outline-none text-base">
