@@ -6,6 +6,9 @@
   font-family: "Figtree", sans-serif;
 }
 
+* {
+  scrollbar-gutter: stable;
+}
 
 #__next {
   height: 100%;
