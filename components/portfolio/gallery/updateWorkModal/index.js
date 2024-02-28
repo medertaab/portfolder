@@ -19,7 +19,7 @@ export default function UpdateWorkModal(props) {
   if (!possibleActions.includes(searchParams.get("type"))) return;
 
   return (
-    <div className="fixed z-30 top-[2.5rem] left-0 bg-textPrimary bg-opacity-50 h-full w-full flex flex-col justify-center items-center">
+    <div className="fixed z-30 top-[2.5rem] left-0 bg-black bg-opacity-50 h-full w-full flex flex-col justify-center items-center">
       <button
         onClick={closeModal}
         className="absolute top-5 z-30 right-0 p-5 cursor-pointer text-bgPrimary hover:text-bgAccent"

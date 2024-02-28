@@ -11,7 +11,7 @@ import useFetchPortfolioData from "../../hooks/fetchPortfolioData";
 
 export default function Portfolio(props) {
   const { username, publicMode } = props;
-  const { currentUser } = useAuth();
+  const { currentUser } = useAuth(); 
   const { theme, setTheme } = useTheme();
   const [pageOwner, setPageOwner] = useState(false);
   const [addingImage, setAddingImage] = useState(false);
@@ -24,10 +24,11 @@ export default function Portfolio(props) {
       setPageOwner(false);
       return;
     }
-
-    if (currentUser && username == currentUser.displayName) {
+    if (currentUser && username == currentUser.displayName.toLowerCase()) {
       setPageOwner(true);
+      console.log("CURRENT USER FOUND")
     } else {
+      console.log("MISSING CURRENT USER")
       return;
     }
   }, []);
@@ -51,7 +52,7 @@ export default function Portfolio(props) {
 
   return (
     <div
-      className={`theme-${theme} theme-${portfolioData?.settings.theme} flex-1 relative w-full max-w-screen-2xl min-h-screen flex flex-col m-auto bg-bgPrimary text-textPrimary duration-100 grid-flow-dense`}
+      className={`theme-${theme} theme-${portfolioData?.settings.theme} flex-1 relative w-full min-h-screen flex flex-col m-auto bg-bgPrimary text-textPrimary duration-100 grid-flow-dense`}
     >
       <Navbar
         pageOwner={pageOwner}
@@ -67,7 +68,7 @@ export default function Portfolio(props) {
       )}
 
       {portfolioData && (
-        <div className="fade-in-medium">
+        <div className="fade-in-medium w-full max-w-screen-2xl m-auto">
           <Header pageOwner={pageOwner} portfolioData={portfolioData} />
           <Gallery
             pageOwner={pageOwner}

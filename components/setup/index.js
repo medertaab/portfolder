@@ -26,6 +26,11 @@ export default function SetupPage() {
     setValue,
   } = useForm();
 
+
+  useEffect(() => {
+    if (errors) setLoading(false);
+  }, [error])
+
   // Handle "same as account email" checkbox
   useEffect(() => {
     if (emailRepeat) {
@@ -65,7 +70,7 @@ export default function SetupPage() {
         username: data.username.toLowerCase(),
         mainData: data.mainData,
         settings: {
-          theme: "orange",
+          theme: "purple",
           grid: "dynamic",
         },
         description: {},

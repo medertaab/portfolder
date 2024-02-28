@@ -18,6 +18,7 @@ module.exports = {
         primaryLight: 'rgb(var(--color-primary-light) / <alpha-value>)',
         primaryDark: 'rgb(var(--color-primary-dark) / <alpha-value>)',
         golden: 'rgb(var(--color-golden) / <alpha-value>)',
+        purple: 'rgb(var(--color-purple) / <alpha-value>)',
       },
       animation: {
         'spin-slow': 'spin 1.3s linear infinite',

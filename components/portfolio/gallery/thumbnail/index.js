@@ -13,11 +13,20 @@ export default function Thumbnail(props) {
   const router = useRouter()
 
   function openModal() {
-    
     router.replace({
       query: {username: router.query.username, work: image.title, id: id}
-    }, 
+    }, undefined, 
     { scroll: false })
+
+    // router.push({
+    //   pathname: router.pathname,
+    //   query: {username: router.query.username, work: image.title, id: id},
+    // }, undefined, { scroll: false})
+
+    // let currentUrl = window.location.href;
+    // let newUrl = `${currentUrl}?work=${image.title}&id=${id}`;
+    // window.history.pushState({ path: newUrl }, '', newUrl);
+
     modalRef.current.showModal()
     document.body.style.overflow = "hidden";
   }

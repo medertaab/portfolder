@@ -100,7 +100,7 @@ export default function ManagePage(props) {
         <button
           onClick={onSubmit}
           type="submit"
-          className="float-right ml-auto mt-5 w-24 h-11 rounded-full bg-bgAccent text-primaryLight"
+          className="float-right ml-auto mt-5 w-24 h-11 rounded-full bg-purple text-primaryLight"
         >
           {updateLoading ? (
             <LoaderAnimation small={true} />

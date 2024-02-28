@@ -5,6 +5,12 @@ export default function NavigationButtons(props) {
 
   const { id } = router.query;
 
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown)
+
+    return () => window.removeEventListener("keydown", handleKeyDown)
+  }, [])
+
   function handleNext(e) {
     const currentImageIndex = Object.keys(portfolioData.images).indexOf(id);
     const nextImageIndex = currentImageIndex + 1;
@@ -48,7 +54,7 @@ export default function NavigationButtons(props) {
   }
 
   return (
-    <div onKeyDown={handleKeyDown}>
+    <div>
       <button
         onClick={handlePrev}
         type="button"

@@ -40,7 +40,11 @@ export default function DeletForm(props) {
       onClick={(e) => e.stopPropagation()}
       className="max-w-2xl max-h-screen sm:w-4/5 w-[90%] bg-bgPrimary p-8 pb-6 rounded-3xl overflow-auto"
     >
-      <p className="">
+      <button className="mb-4" onClick={router.back}>
+        <i className="fa-solid fa-arrow-left"></i> Back
+      </button>
+
+      <p className="mt-4">
         Are you sure you want to delete the image? This cannot be undone
       </p>
 

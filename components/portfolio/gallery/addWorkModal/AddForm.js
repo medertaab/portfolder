@@ -88,6 +88,10 @@ export default function AddForm(props) {
       onClick={(e) => e.stopPropagation()}
       className="max-w-2xl max-h-screen sm:w-4/5 w-[90%] bg-bgPrimary p-3 rounded-3xl overflow-auto "
     >
+      <button className="mt-4 ml-4" onClick={router.back}>
+        <i className="fa-solid fa-arrow-left"></i> Back
+      </button>
+
       {/* Image preview */}
       <div className="h-[20rem] max-w-[100%] m-auto p-4">
       {imageBox(watch("link"))}

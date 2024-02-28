@@ -47,7 +47,7 @@ export default function ImageModal(props) {
     <dialog
       onClick={(e) => handleClickOutside(e)}
       ref={modalRef}
-      className="relative w-full max-w-[100vw] max-h-[100vh] bg-transparent backdrop:bg-black backdrop:opacity-50"
+      className=" w-full bg-transparent backdrop:bg-black backdrop:opacity-50"
     >
       <button
         type="button"
