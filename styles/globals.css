@@ -89,7 +89,7 @@
 }
 
 .fade-in {
-  animation: fadeInAnimation ease 0.5s;
+  animation: fadeInAnimation ease 0.5s forwards;
 }
 
 .fade-in-medium {
@@ -127,15 +127,27 @@
 }
 
 .animate-reveal {
-  animation: revealAnimation ease-in-out 0.5s forwards 0.5s;
+  clip-path: inset(0 100% 0 0);
+  animation: revealAnimation ease 0.5s forwards 0.5s;
 }
 
 @keyframes revealAnimation {
   0% {
-    width: 0%;
+    clip-path: inset(0 100% 0 0);
   }
   100% {
-    width: 100%;
+    clip-path: inset(0 0 0 0);
   }
 }
 
+.animate-spin {
+  animation: spin linear 5s forwards infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg)
+  } 100% {
+    transform: rotate(359deg);
+  }
+}

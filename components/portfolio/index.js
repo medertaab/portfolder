@@ -42,7 +42,7 @@ export default function Portfolio(props) {
   if (loading)
     return (
       <div
-        className={`theme-${theme} theme-${portfolioData?.settings.theme} flex-1 relative w-full max-w-screen-xl min-h-screen flex flex-col m-auto bg-bgPrimary text-textPrimary duration-100 grid-flow-dense`}
+        className={`theme-${theme} theme-${portfolioData?.settings.theme} flex-1 relative w-full min-h-screen flex flex-col m-auto bg-bgPrimary text-textPrimary duration-100 grid-flow-dense`}
       >
         <Navbar />
         <Skeleton />

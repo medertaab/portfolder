@@ -16,7 +16,6 @@ export default function Skeleton() {
 
               <div className="w-full flex gap-4 mt-3 text-[0.9rem] h-[2.5rem]">
                 <div className="inline-blocktext-center w-32 py-2 border-2 border-textPrimary bg-textPrimary text-bgPrimary rounded-full transition hover:-translate-y-1 h-full"></div>
-
                 <div className="inline-block text-center w-32 py-2 border-2 border-textPrimary bg-textPrimary text-bgPrimary rounded-full transition hover:-translate-y-1 h-full"></div>
               </div>
             </div>
@@ -24,7 +23,7 @@ export default function Skeleton() {
             <div className="size-[180px] rounded-[2rem] bg-textPrimary"></div>
           </div>
 
-          <div className="relative border-2 border-textPrimary rounded-2xl max-w-[40rem] m-auto flex flex-wrap gap-5 justify-center p-3 mx-2 mt-0 sm:mx-auto sm:mt-4 h-[3.2rem]">
+          <div className="relative border-[1px] border-textPrimary rounded-2xl max-w-[40rem] m-auto flex flex-wrap gap-5 justify-center p-3 mx-2 mt-0 sm:mx-auto sm:mt-4 h-[3.2rem]">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="fill-textPrimary h-8 absolute right-2 transform top-1/2 -translate-y-1/2"
@@ -36,12 +35,12 @@ export default function Skeleton() {
         </div>
 
         {/* Gallery */}
-        <div className="p-2 grid sm:grid-cols-[repeat(auto-fill,_minmax(250px,1fr))] grid-cols-1 sm:gap-4 gap-2 justify-between mt-12">
-          <div className="h-80 bg-textPrimary"></div>
-          <div className="h-80 bg-textPrimary"></div>
-          <div className="h-80 bg-textPrimary"></div>
-          <div className="h-80 bg-textPrimary"></div>
-          <div className="h-80 bg-textPrimary"></div>
+        <div className="max-w-screen-2xl m-auto fade-in mt-12 p-2 grid sm:grid-cols-[repeat(auto-fill,_minmax(350px,1fr))] grid-cols-1 gap-2 justify-between">
+          <div className="h-[450px] bg-textPrimary"></div>
+          <div className="h-[450px] bg-textPrimary"></div>
+          <div className="h-[450px] bg-textPrimary"></div>
+          <div className="h-[450px] bg-textPrimary"></div>
+          <div className="h-[450px] bg-textPrimary"></div>
         </div>
 
         {/* Description */}

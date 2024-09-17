@@ -2,7 +2,6 @@ import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/router";
 import PageLayout from "../components/ui/PageLayout";
 import IndexPage from "../components/index";
-
 export default function Home() {
   const { currentUser } = useAuth();
   const router = useRouter();

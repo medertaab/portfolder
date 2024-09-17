@@ -23,7 +23,7 @@ export default function Gallery(props) {
     if (portfolioData.settings.grid === "dynamic") {
       return "fade-in mt-12 p-2 grid sm:grid-cols-[repeat(auto-fill,_minmax(350px,1fr))] grid-cols-1 gap-2 justify-between auto-rows-min grid-flow-dense";
     } else if (portfolioData.settings.grid === "static") {
-      return "fade-in mt-12y p-2 grid sm:grid-cols-[repeat(auto-fill,_minmax(350px,1fr))] grid-cols-1 gap-2 justify-between";
+      return "fade-in mt-12 p-2 grid sm:grid-cols-[repeat(auto-fill,_minmax(350px,1fr))] grid-cols-1 gap-2 justify-between";
     }
   }
 

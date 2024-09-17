@@ -21,7 +21,7 @@ export default function Cards() {
   ];
 
   return (
-    <ul className="mt-16 flex min-h-48 max-w-[80%] m-auto flex-wrap justify-around gap-10">
+    <ul className="mt-16 flex min-h-48 max-w-[80%] m-auto flex-wrap justify-around gap-10 fade-in" style={{opacity: 0, animationDelay: "750ms"}}>
       {cardsArray.map((data, id) => {
         return <li key={id}><Card data={data} /></li>;
       })}

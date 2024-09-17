@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 
 export default function Description(props) {
   const { pageOwner, portfolioData } = props;
-  const [editHovered, setEditHovered] = useState(false);
 
-  if (!portfolioData.description || portfolioData.description === {}) {
+  if (!portfolioData.description || Object.keys(portfolioData.description).length === 0) {
     return;
   } else if (
     !portfolioData.description.text &&
@@ -21,15 +20,13 @@ export default function Description(props) {
     );
   } else {
     return (
-      <article className={`relative max-w-[50rem] min-h-52 mt-10 m-4 p-10 z-20 sm:m-auto sm:mt-12 border-[1px] border-textPrimary rounded-2xl grid sm:grid-flow-col sm:grid-cols-[2fr,_3fr] gap-8 ${editHovered && "bg-textPrimary bg-opacity-30"} transition ease-in-out`}>
+      <article className={`relative max-w-[50rem] min-h-52 mt-10 m-4 p-10 z-20 sm:m-auto sm:mt-12 border-[1px] border-textPrimary rounded-2xl grid sm:grid-flow-col sm:grid-cols-[2fr,_3fr] gap-8 transition ease-in-out`}>
         {pageOwner && (
           <Link
             href={"/manage?type=description"}
             target="_blank"
             rel="noreferrer noopener"
-            className="absolute right-1 top-1 sm:flex justify-center items-center text-center size-10 p-2  opacity-70 border-textPrimary text-textPrimary rounded-full transition hover:opacity-100 hover:text-bgPrimary hidden"
-            onMouseEnter={() => setEditHovered(true)}
-            onMouseLeave={() => setEditHovered(false)}
+            className="absolute right-1 top-1 sm:flex justify-center items-center text-center size-10 p-2  opacity-70 border-textPrimary text-textPrimary rounded-full transition hover:text-white hidden hover:bg-black hover:opacity-70"
           >
             <i class="fa-solid fa-pen-to-square"></i>
           </Link>
