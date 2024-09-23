@@ -12,6 +12,7 @@ export default function Navbar(props) {
   const { theme, toggleTheme } = useTheme();
 
   const router = useRouter();
+  // const isMainPage = router.pathname == "/";
 
   function handleAddWorkButton() {
     router.push({
@@ -20,13 +21,13 @@ export default function Navbar(props) {
   }
 
   return (
-    <nav className="w-full mx-auto h-fit sticky top-0 z-40 bg-bgPrimary border-bgSecondary border-b-[1px] p-2">
+    <nav className="w-full mx-auto h-12 sm:h-fit sticky top-0 z-40 bg-bgPrimary border-bgSecondary border-b-[1px] flex justify-center items-center px-2 sm:py-2">
       <div className="w-full max-w-screen-2xl m-auto flex items-center">
         <Link
           className="sm:text-xl text-xl p-2 flex select-none"
           href={currentUser?.displayName ? `/${currentUser.displayName}` : "/"}
         >
-          <img src="/icon.png" className="h-8"></img>
+          <img src="/icon.png" className="h-6 sm:h-8"></img>
           {logo && <p className="ml-3">portfolder</p>}
         </Link>
         <div className="flex ml-auto items-center gap-2">
@@ -41,12 +42,19 @@ export default function Navbar(props) {
               </button>
             </div>
           )}
+          {/* {!currentUser && !pageOwner && !isMainPage && (
+            <Link
+              href="/"
+              className="text-center flex justify-center items-center h-8 text-[0.9rem] text-primaryLight bg-bgAccent rounded-full w-36 hover:bg-opacity-80 duration-150"
+            >
+              Start your page
+            </Link>
+          )} */}
           {/* Dark mode button */}
           <button
             onClick={toggleTheme}
             title="Theme toggle"
-            className="relative bg-textPrimary w-14 max-w-[56px] rounded-full h-8 border-2 border-textPrimary"
-      
+            className="relative bg-textPrimary w-12 sm:w-14 max-w-[56px] rounded-full h-6 sm:h-8 border-2 border-textPrimary"
           >
             <div
               className={`bg-bgPrimary z-10 h-full aspect-square rounded-full absolute top-0 ${
