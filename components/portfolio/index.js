@@ -19,6 +19,8 @@ export default function Portfolio(props) {
   // Returns all public data for the user: {loading, error, portfolioData}
   const { portfolioData, loading, error } = useFetchPortfolioData(username);
 
+  console.log(portfolioData)
+  
   useEffect(() => {
     if (publicMode) {
       setPageOwner(false);

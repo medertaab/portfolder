@@ -1,0 +1,47 @@
+{
+  "socials": {
+      "youtube": "youtube",
+      "patreon": "patreon",
+      "instagram": "instagram",
+      "linkedin": "linkedin",
+      "facebook": "facebook",
+      "twitter": "twitter"
+  },
+  "settings": {
+      "theme": "purple",
+      "grid": "dynamic"
+  },
+  "images": {
+      "1": {
+          "title": "The Wanderer above the Mists",
+          "link": "https://caspardavidfriedrich.org/media//W/a/Wanderer_above_the_Sea_of_Fog.jpeg?width=600"
+      },
+      "2": {
+          "link": "https://caspardavidfriedrich.org/media//b/a/base_7169615.jpg?width=600",
+          "title": "Man and Woman Contemplating the Moon"
+      },
+      "3": {
+          "title": "Chalk Cliffs on Rügen",
+          "link": "https://caspardavidfriedrich.org/media//paintingsL/71682/chalk-cliffs-on-rugen-c-1818-r.jpg?width=600"
+      },
+      "4": {
+          "title": "Abend",
+          "link": "https://caspardavidfriedrich.org/media//b/a/base_15081901.jpg?width=600"
+      },
+      "5": {
+          "title": "Largeness",
+          "link": "https://caspardavidfriedrich.org/media//b/a/base_7169515.jpg?width=600"
+      },
+      "6": {
+          "title": "Rocky Ravine",
+          "link": "https://caspardavidfriedrich.org/media//paintingsL/71714/rocky-ravine-1822-23-reproduct.jpg?width=600"
+      }
+  },
+  "mainData": {
+      "title": "German Romantic landscape painter",
+      "name": "Caspar David Friedrich",
+      "resume": "google.com",
+      "icon": "https://upload.wikimedia.org/wikipedia/commons/a/ac/Gerhard_von_K%C3%BCgelgen_portrait_of_Friedrich.jpg",
+      "email": "example@gmail.com"
+  }
+}
