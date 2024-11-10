@@ -30,6 +30,10 @@ export default function PageLayout(props) {
       <Head>
         {props.title ? <title>{props.title} | PortFolder</title> : <title>PortFolder | Compact Portfolio Maker</title>}
         <meta name="description" content="Portfolder: Compact portfolio maker" />
+        <meta name="image" property="og:image" content="/icon.png" />
+        <meta name="keywords" content="Portfolio maker, Artist portfolio, Photographer portfolio, Online portfolio creator" />
+        <link rel="icon" href="/portfolder_favicon.ico" type="image/x-icon" />
+        <meta name="robots" content="index, follow" />
       </Head>
 
       <Navbar logo/>
